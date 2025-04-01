@@ -6,3 +6,4 @@
 
 ## Day 2
 - Installed Convex
+- Set up Convex Client Provider
