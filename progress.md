@@ -8,3 +8,6 @@
 - Installed Convex
 - Set up Convex Client Provider
 - Created Schema by Adding Tables
+
+## Day 3
+- Added Footer in Layout, made footer component
