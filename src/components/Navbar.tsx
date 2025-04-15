@@ -6,7 +6,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { SidebarTrigger } from './ui/sidebar';
 function Navbar() {
     return (
-    <nav className="flex items-center justify-between bg-background text-gray-200">
+    <nav className="flex items-center p-2 justify-between bg-background text-gray-200">
         {/* Left section */}
         <div className="flex items-center space-x-2">
             <button className="p-1 hover:bg-zinc-700 rounded">

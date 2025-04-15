@@ -18,6 +18,8 @@ import {
     SidebarMenuSub,
     SidebarRail,
 } from "@/components/ui/sidebar"
+import { Input } from "@/components/ui/input"
+
 
 // This is sample data.
 const data = {
@@ -66,6 +68,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar variant="floating" {...props}>
+            <div className="p-2"><Input className="focus:outline-none focus:border-none" type="search" placeholder="Search" /></div>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Files</SidebarGroupLabel>
