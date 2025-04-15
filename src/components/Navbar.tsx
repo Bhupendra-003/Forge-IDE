@@ -2,15 +2,17 @@ import React from 'react'
 import { MoreVertical, Search } from "lucide-react";
 import { LuShare2 } from "react-icons/lu";
 import { GiExpand } from "react-icons/gi";
-import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { SidebarTrigger } from './ui/sidebar';
 function Navbar() {
     return (
-    <nav className="flex items-center justify-between px-4 p-2 bg-zinc-900 text-gray-200">
+    <nav className="flex items-center justify-between bg-background text-gray-200">
         {/* Left section */}
         <div className="flex items-center space-x-2">
             <button className="p-1 hover:bg-zinc-700 rounded">
-                <TbLayoutSidebarLeftExpandFilled size={30} />       
+                {/* <TbLayoutSidebarLeftExpandFilled size={30} />        */}
+                <SidebarTrigger className="-ml-1" size="lg" />
+
             </button>
             <div className="flex items-center border-l border-zinc-700 pl-2 ml-1">
                 <span className="text-xl font-semibold">Devine</span>
@@ -19,7 +21,7 @@ function Navbar() {
 
         {/* Middle section - Search - Replace it with actual input */}
         <div className="flex-grow flex justify-center">
-            <div className="bg-zinc-800 rounded px-4 py-2 flex items-center w-72">
+            <div className="bg-sidebar rounded px-4 py-2 flex items-center w-72">
                 <Search size={16} className="text-zinc-400 mr-2" />
                 <span className="text-zinc-400 text-sm">Ask AI & Search</span>
                 <div className="ml-auto flex items-center">
