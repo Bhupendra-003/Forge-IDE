@@ -9,6 +9,8 @@ import { api } from '../../../../convex/_generated/api';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import HeaderProfileBtn from './HeaderProfileBtn';
+import ThemeSelector from './ThemeSelector';
+import LanguageSelector from './LanguageSelector';
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -48,6 +50,10 @@ async function Header() {
 
             {/* Right section */}
             <div className="flex items-center space-x-2">
+                <div>
+                    <ThemeSelector />
+                    <LanguageSelector hasAccess={convexUser?.isPro} />
+                </div>
                 {!convexUser?.isPro && (
                     <Link
                         href="/pricing"
