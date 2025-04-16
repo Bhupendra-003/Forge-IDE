@@ -1,25 +1,16 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+import { AppSidebar } from "@/app/(root)/_components/app-sidebar"
+
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar"
-import Navbar from "@/components/Navbar"
+import Header from "@/app/(root)/_components/Header"
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-
+import OutputPanel from "@/app/(root)/_components/OutputPanel"
 export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -28,7 +19,7 @@ export default function Page() {
           <AppSidebar /> {/* Your sidebar */}
           <SidebarInset className="flex flex-col flex-1">
 
-            <Navbar /> {/* Top navbar */}
+            <Header /> {/* Top navbar */}
 
             {/* Main content area */}
             <div className="flex flex-1 p-2">
@@ -55,7 +46,9 @@ export default function Page() {
 
                 <ResizablePanel minSize={10} defaultSize={20} className="rounded-sm bg-muted/50 p-2">
                   {/* Right resizable in Right panel content */}
-                  <div className="h-full w-full aspect-video">Right Top Panel</div>
+                  <div className="h-full w-full aspect-video">
+                    <OutputPanel />
+                  </div>
                 </ResizablePanel>
               </ResizablePanelGroup>  
             </div>
