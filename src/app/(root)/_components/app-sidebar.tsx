@@ -1,10 +1,7 @@
 "use client"
 import * as React from "react"
 import {
-  Blocks,
-  Trash2,
-  MessageCircleQuestion,
-  Calendar,
+  Trash2, 
   Search,
   Sparkles,
   Home,
@@ -22,19 +19,19 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import { SearchForm } from "@/components/search-form"
-import { NavFavorites } from "@/components/nav-favorites"
+import { NavFiles } from "@/components/nav-files"
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Bhupendra",
+    email: "b@gmail.com",
+    avatar: "/avatars/bhupi.png",
   },
   navMain: [
     {
-      title: "Search",
+      title: "Home",
       url: "#",
-      icon: Search,
+      icon: Home,
     },
     {
       title: "Ask AI",
@@ -42,95 +39,28 @@ const data = {
       icon: Sparkles,
     },
     {
-      title: "Home",
-      url: "#",
-      icon: Home,
-      isActive: true,
-    },
-    {
       title: "Inbox",
       url: "#",
       icon: Inbox,
-      badge: "10",
     },
   ],
   navSecondary: [
-    {
-      title: "Calendar",
-      url: "#",
-      icon: Calendar,
-    },
     {
       title: "Settings",
       url: "#",
       icon: Settings2,
     },
     {
-      title: "Templates",
-      url: "#",
-      icon: Blocks,
-    },
-    {
       title: "Trash",
       url: "#",
       icon: Trash2,
     },
-    {
-      title: "Help",
-      url: "#",
-      icon: MessageCircleQuestion,
-    },
   ],
-  favorites: [
+  files: [
     {
-      name: "Project Management & Task Tracking",
+      name: "main.py",
       url: "#",
       emoji: "",
-    },
-    {
-      name: "Family Recipe Collection & Meal Planning",
-      url: "#",
-      emoji: "🍳",
-    },
-    {
-      name: "Fitness Tracker & Workout Routines",
-      url: "#",
-      emoji: "💪",
-    },
-    {
-      name: "Book Notes & Reading List",
-      url: "#",
-      emoji: "📚",
-    },
-    {
-      name: "Sustainable Gardening Tips & Plant Care",
-      url: "#",
-      emoji: "🌱",
-    },
-    {
-      name: "Language Learning Progress & Resources",
-      url: "#",
-      emoji: "🗣️",
-    },
-    {
-      name: "Home Renovation Ideas & Budget Tracker",
-      url: "#",
-      emoji: "🏠",
-    },
-    {
-      name: "Personal Finance & Investment Portfolio",
-      url: "#",
-      emoji: "💰",
-    },
-    {
-      name: "Movie & TV Show Watchlist with Reviews",
-      url: "#",
-      emoji: "🎬",
-    },
-    {
-      name: "Daily Habit Tracker & Goal Setting",
-      url: "#",
-      emoji: "✅",
     },
   ],
 
@@ -144,10 +74,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     >
       <SidebarHeader>
         <SearchForm />
-        <NavMain items={data.navMain} />
+        <div className="mt-2"><NavMain items={data.navMain} /></div>
       </SidebarHeader>
       <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
+        <NavFiles files={data.files} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

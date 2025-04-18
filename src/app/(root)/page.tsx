@@ -22,7 +22,7 @@ export default function Page() {
           <SidebarInset className="flex flex-col flex-1">
 
             {/* Main content area */}
-            <div className="flex flex-1 p-2">
+            <div className="flex flex-1 px-2 pb-2">
               <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel minSize={10} defaultSize={30} className="rounded-sm">
                   <ResizablePanelGroup direction="vertical">

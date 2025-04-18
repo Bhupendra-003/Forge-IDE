@@ -1,11 +1,12 @@
 "use client"
 
 import {
-  ArrowUpRight,
-  Link,
   MoreHorizontal,
-  StarOff,
   Trash2,
+  Pencil,
+  Copy,
+  Download,
+  Play,
 } from "lucide-react"
 
 import {
@@ -25,10 +26,10 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-export function NavFavorites({
-  favorites,
+export function NavFiles({
+  files,
 }: {
-  favorites: {
+  files: {
     name: string
     url: string
     emoji: string
@@ -38,9 +39,9 @@ export function NavFavorites({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+      <SidebarGroupLabel>Files</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map((item) => (
+        {files.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
               <a href={item.url} title={item.name}>
@@ -61,17 +62,20 @@ export function NavFavorites({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <StarOff className="text-muted-foreground" />
-                  <span>Remove from Favorites</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link className="text-muted-foreground" />
-                  <span>Copy Link</span>
+                  <Pencil className="text-muted-foreground" />
+                  <span>Rename</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <ArrowUpRight className="text-muted-foreground" />
-                  <span>Open in New Tab</span>
+                  <Copy className="text-muted-foreground" />
+                  <span>Duplicate</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Download className="text-muted-foreground" />
+                  <span>Download</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Play className="text-muted-foreground" />
+                  <span>Run File</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
@@ -82,12 +86,6 @@ export function NavFavorites({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

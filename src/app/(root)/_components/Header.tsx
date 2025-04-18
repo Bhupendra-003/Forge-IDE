@@ -23,17 +23,17 @@ async function Header() {
     console.log({ convexUser })
 
     return (
-        <nav className="flex items-center p-2 pr-4 justify-between bg-background text-gray-200">
+        <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-gray-200">
             {/* Left section */}
             <div className="flex items-center space-x-2">
-                <SidebarTrigger className="-ml-1" size="lg" />
+                <SidebarTrigger className="-ml-1 scale-160" size="lg" />
                 <div className="flex items-center border-l border-zinc-700 pl-2 ml-1">
-                    <span className="text-xl font-semibold">Devine</span>
+                    <span className="text-2xl font-semibold">Devine</span>
                 </div>
             </div>
 
             {/* Middle section - Search */}
-            <div className="flex-grow flex justify-center">
+            <div className="absolute mx-auto left-[50%] -translate-x-1/2 flex justify-center">
                 <div className="bg-sidebar rounded px-4 py-2 flex items-center w-72">
                     <Search size={16} className="text-zinc-400 mr-2" />
                     <span className="text-zinc-400 text-sm">Ask AI & Search</span>
@@ -47,9 +47,9 @@ async function Header() {
 
             {/* Right section */}
             <div className="flex items-center space-x-2">
-                <div>
-                    <ThemeSelector />
+                <div className="flex items-center space-x-2">
                     <LanguageSelector hasAccess={convexUser?.isPro} />
+                    <ThemeSelector />
                 </div>
                 {!convexUser?.isPro && (
                     <Link
