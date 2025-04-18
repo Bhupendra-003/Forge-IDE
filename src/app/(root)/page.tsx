@@ -7,6 +7,7 @@ import {
 import Header from "@/app/(root)/_components/Header"
 import RunButton from "@/app/(root)/_components/RunButton"
 import OutputPanel from "@/app/(root)/_components/OutputPanel"
+import EditorPanel from "./_components/EditorPanel"
 
 export const iframeHeight = "800px"
 
@@ -28,11 +29,12 @@ export default function Page() {
                   <ResizablePanelGroup direction="vertical">
 
                     <ResizablePanel minSize={10} defaultSize={70} className="rounded-sm bg-muted/50">
-                      {/* Top resizable in Left panel content */}
+                      {/* Left resizable */}
                       <div className="h-full w-full aspect-video">
                         <div className="flex gap-2 w-full h-9 py-2 items-center bg-background-2 rounded-sm">
                           <div>Files</div>
                         </div>
+                        <EditorPanel />
                       </div>
                     </ResizablePanel>
 
@@ -40,7 +42,9 @@ export default function Page() {
 
                     <ResizablePanel minSize={10} defaultSize={20} className="rounded-sm bg-muted/50">
                       {/* Bottom resizable in Left panel content */}
-                      <div className="h-full w-full aspect-video">Left Bottom Panel</div>
+                      <div className="h-full w-full aspect-video">
+                        
+                      </div>
                     </ResizablePanel>
 
                   </ResizablePanelGroup>
