@@ -1,26 +1,25 @@
 import { AppSidebar } from "@/app/(root)/_components/app-sidebar"
-
+import { ResizablePanel, ResizableHandle, ResizablePanelGroup } from "@/components/ui/resizable"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import Header from "@/app/(root)/_components/Header"
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable"
-import OutputPanel from "@/app/(root)/_components/OutputPanel"
 import RunButton from "@/app/(root)/_components/RunButton"
+import OutputPanel from "@/app/(root)/_components/OutputPanel"
+
+export const iframeHeight = "800px"
+
+export const description = "A sidebar with a header and a search form."
+
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <SidebarProvider>
-        <div className="flex h-screen w-screen pt-2">
-          <AppSidebar /> {/* Your sidebar */}
+    <div className="[--header-height:calc(--spacing(14))]">
+      <SidebarProvider className="flex flex-col">
+        <Header />
+        <div className="flex flex-1">
+          <AppSidebar />
           <SidebarInset className="flex flex-col flex-1">
-
-            <Header /> {/* Top navbar */}
 
             {/* Main content area */}
             <div className="flex flex-1 p-2">
@@ -62,8 +61,6 @@ export default function Page() {
           </SidebarInset>
         </div>
       </SidebarProvider>
-
     </div>
   )
 }
-

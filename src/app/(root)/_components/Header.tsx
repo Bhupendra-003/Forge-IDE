@@ -26,10 +26,7 @@ async function Header() {
         <nav className="flex items-center p-2 pr-4 justify-between bg-background text-gray-200">
             {/* Left section */}
             <div className="flex items-center space-x-2">
-                <div className="p-1 hover:bg-zinc-700 rounded">
-                    <SidebarTrigger className="-ml-1" size="lg" />
-
-                </div>
+                <SidebarTrigger className="-ml-1" size="lg" />
                 <div className="flex items-center border-l border-zinc-700 pl-2 ml-1">
                     <span className="text-xl font-semibold">Devine</span>
                 </div>
