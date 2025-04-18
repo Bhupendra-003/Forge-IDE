@@ -28,6 +28,7 @@
     "json-server": "^1.0.0-beta.3",
     "ldrs": "^1.1.6",
     "lucide-react": "^0.488.0",
+    "monaco-editor": "^0.52.2",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

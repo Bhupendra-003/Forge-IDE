@@ -11,6 +11,7 @@ import { Sparkles } from 'lucide-react';
 import HeaderProfileBtn from './HeaderProfileBtn';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
+import RunButton from './RunButton';
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -33,17 +34,6 @@ async function Header() {
             </div>
 
             {/* Middle section - Search */}
-            <div className="absolute mx-auto left-[50%] -translate-x-1/2 flex justify-center">
-                <div className="bg-sidebar rounded px-4 py-2 flex items-center w-72">
-                    <Search size={16} className="text-zinc-400 mr-2" />
-                    <span className="text-zinc-400 text-sm">Ask AI & Search</span>
-                    <div className="ml-auto flex items-center">
-                        <span className="text-xs text-zinc-400 px-1">Ctrl</span>
-                        <span className="text-xs text-zinc-400 px-1">+</span>
-                        <span className="text-xs text-zinc-400 px-1">K</span>
-                    </div>
-                </div>
-            </div>
 
             {/* Right section */}
             <div className="flex items-center space-x-2">

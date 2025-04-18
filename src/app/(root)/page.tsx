@@ -22,7 +22,7 @@ export default function Page() {
           <SidebarInset className="flex flex-col flex-1">
 
             {/* Main content area */}
-            <div className="flex flex-1 px-2 pb-2">
+          <div className="flex flex-1 px-2 pb-2">
               <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel minSize={10} defaultSize={30} className="rounded-sm">
                   <ResizablePanelGroup direction="vertical">
@@ -30,9 +30,8 @@ export default function Page() {
                     <ResizablePanel minSize={10} defaultSize={70} className="rounded-sm bg-muted/50">
                       {/* Top resizable in Left panel content */}
                       <div className="h-full w-full aspect-video">
-                        <div className="flex gap-2 w-full h-9 py-2 items-center justify-between bg-background-2 rounded-sm">
+                        <div className="flex gap-2 w-full h-9 py-2 items-center bg-background-2 rounded-sm">
                           <div>Files</div>
-                          <div><RunButton /></div>
                         </div>
                       </div>
                     </ResizablePanel>
