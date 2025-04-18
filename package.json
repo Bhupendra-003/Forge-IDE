@@ -20,7 +20,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.21.0",
-    "framer-motion": "^12.7.2",
+    "framer-motion": "^12.7.4",
     "json-server": "^1.0.0-beta.3",
     "ldrs": "^1.1.6",
     "lucide-react": "^0.488.0",
