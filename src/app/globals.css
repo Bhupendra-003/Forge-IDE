@@ -130,3 +130,21 @@
     @apply bg-background text-foreground;
   }
 }
+/* styles/globals.css */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: var(--color-muted);
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+}
+
+.dark .scrollbar-custom::-webkit-scrollbar-track {
+  background: var(--color-input);
+}
+.dark .scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--color-popover);
+}

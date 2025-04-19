@@ -7,13 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
 
-const Settings: React.FC = () => {
+const Settings = () => {
     const [fontSize, setFontSize] = React.useState(14);
 
     return (
-        <div className="max-w-3xl overflow-scroll mx-auto p-6 space-y-6">
-            <h1 className="text-2xl font-bold">Editor Settings</h1>
-            <Card>
+        <div className="max-h-[700px] overflow-y-scroll scrollbar-custom">
+                <Card>
                 <CardContent className="space-y-6 pt-6">
                     <div className="flex items-center justify-between">
                         <Label>Minimap</Label>

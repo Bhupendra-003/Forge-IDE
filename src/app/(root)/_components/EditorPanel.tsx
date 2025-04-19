@@ -1,19 +1,14 @@
 "use client";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
-import ShareSnippetDialog from "./ShareSnippetDialog";
 import useMounted from "@/hooks/useMounted";
-import EditorPanelSkeleton from "./EditorPanelSkeleton";
+import { EditorPanelSkeleton } from "@/components/EditorPanelSkeleton";
 
 function EditorPanel() {
     const clerk = useClerk();
-    const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
     const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
 
     const mounted = useMounted();
@@ -42,22 +37,22 @@ function EditorPanel() {
     if (!mounted) return null;
 
     return (
-        <div className="relative">
-                <div className="overflow-hidden">
+        <div className="relative h-full">
+                <div className="overflow-hidden h-full">
                     {clerk.loaded && (
                         <Editor
-                            height="600px"
+                            height="100%"
                             language={LANGUAGE_CONFIG[language].monacoLanguage}
                             onChange={handleEditorChange}
                             theme={theme}
                             beforeMount={defineMonacoThemes}
                             onMount={(editor) => setEditor(editor)}
                             options={{
-                                minimap: { enabled: false },
+                                minimap: { enabled: true },
                                 fontSize,
                                 automaticLayout: true,
                                 scrollBeyondLastLine: false,
-                                padding: { top: 16, bottom: 16 },
+                                padding: { top: 35, bottom: 0 },
                                 renderWhitespace: "selection",
                                 fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',
                                 fontLigatures: true,

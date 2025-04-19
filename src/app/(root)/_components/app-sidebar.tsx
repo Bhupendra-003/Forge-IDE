@@ -1,12 +1,12 @@
 "use client"
 import * as React from "react"
 import {
-  Trash2, 
+  Trash2,
   Search,
   Sparkles,
   Home,
   Inbox,
-  Settings2,  
+  Settings2,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -44,18 +44,6 @@ const data = {
       icon: Inbox,
     },
   ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-    },
-    {
-      title: "Trash",
-      url: "#",
-      icon: Trash2,
-    },
-  ],
   files: [
     {
       name: "main.py",
@@ -78,11 +66,50 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavFiles files={data.files} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
+        <DialogDemo />
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
+  )
+}
+
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import Settings from "./Settings"
+
+export function DialogDemo() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2" variant="ghost">
+          <Settings2 size={20} />
+          Settings
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[900px] bg-popover">
+        <DialogHeader>
+          <DialogTitle>
+            Settings
+          </DialogTitle>
+          <DialogDescription>
+            Tweak the Code Editor Settings here.
+          </DialogDescription>
+        </DialogHeader>
+        <Settings />
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
