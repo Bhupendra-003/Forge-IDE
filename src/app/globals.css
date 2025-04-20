@@ -104,7 +104,7 @@
   --accent: oklch(0.274 0.006 286.033);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 5%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.541 0.281 293.009);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -148,3 +148,8 @@
 .dark .scrollbar-custom::-webkit-scrollbar-thumb {
   background-color: var(--color-popover);
 }
+/* .border{
+  @apply border;
+  border-color: var(--color-border  );
+  border-width: 1px;
+} */
