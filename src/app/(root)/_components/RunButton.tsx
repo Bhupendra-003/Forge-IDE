@@ -4,14 +4,20 @@ import { Button } from '@/components/ui/button'
 import { Squircle } from 'ldrs/react'
 import { FaPlay } from "react-icons/fa";
 import 'ldrs/react/Squircle.css'
+import { useCodeEditorStore } from '@/store/useCodeEditorStore';
+import { useUser } from '@clerk/nextjs';
 
 function RunButton() {
-    const [isRunning, setIsRunning] = React.useState(false)
+    // const { user } = useUser();
+    const { isRunning, runCode, executionResult } = useCodeEditorStore();
+    const handleRun = async () => {
+        await runCode();
 
+    };
     return (
         <div className="flex items-center rounded-full justify-center bg-primary w-fit">
             <Button 
-                onClick={() => setIsRunning(!isRunning)} 
+                onClick={handleRun}
                 className="text-white font-semibold text-lg flex items-center gap-3 py-2"
             >
                 {/* Icon wrapper with fixed size */}

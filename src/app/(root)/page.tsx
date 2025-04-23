@@ -27,8 +27,8 @@ export default function Page() {
 
                     <ResizablePanel minSize={10} defaultSize={70} className="rounded-sm bg-muted/50">
                       {/* Left resizable */}
-                      <div className="h-full w-full aspect-video">
-                        <div className="flex gap-2 w-full h-10 border items-center bg-background-2 rounded-sm">
+                      <div className="h-full w-full aspect-video"> {/* Container */}
+                        <div className="flex gap-2  w-full h-10 border items-center bg-background-2 rounded-sm"> {/* Header */}
                           <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
                             <IoLogoPython size={24} />
                             <p className="text-lg font-sans">palindrome.py</p>
@@ -43,8 +43,8 @@ export default function Page() {
 
                     <ResizablePanel minSize={10} defaultSize={20} className="rounded-sm bg-muted/50">
                       {/* Bottom resizable in Left panel content */}
-                      <div className="h-full w-full aspect-video">
-                        <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
+                      <div className="h-full w-full aspect-video"> {/* Container */}
+                        <div className="w-full  h-10 flex bg-background-2 border border-b-0 items-center justify-between"> {/* Header */}
                           <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
                             <p className="text-lg font-sans">Output</p>
                             <div className="ml-2 w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"><RxCross2 size={18} /></div>
@@ -57,9 +57,9 @@ export default function Page() {
                   </ResizablePanelGroup>
                 </ResizablePanel>
 
-                <ResizableHandle className="mx-1 w-0 bg-gray-300 dark:bg-gray-700" />
+                <ResizableHandle className="mx-1 w-2 bg-gray-300 dark:bg-background-2 rounded-full" />
 
-                <ResizablePanel minSize={10} defaultSize={20} className="rounded-sm bg-muted/50">
+                <ResizablePanel minSize={10} defaultSize={50} className="rounded-sm bg-muted/50">
                   {/* Right resizable in Right panel content */}
                   <div className="h-full w-full aspect-video">
                     <OutputPanel />

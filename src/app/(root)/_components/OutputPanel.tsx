@@ -13,8 +13,7 @@ import 'ldrs/react/Ring.css'
 function OutputPanel() {
     const { output, error, isRunning } = useCodeEditorStore();
     const [isCopied, setIsCopied] = useState(false);
-    // const content = error || output;
-    const content = false;
+    const content = error || output;
 
     const handleCopy = () => {
         if (content) navigator.clipboard.writeText(content);
@@ -46,19 +45,10 @@ function OutputPanel() {
                     </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                    <div className='flex bg-zinc-800 p-2 scale-90 hover:bg-[#2e2e2e] rounded-md h-full w-fit items-center gap-2'>
-                        <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
-                    </div>
-                    <p className="text-zinc-200 font-sans text-sm">54ms on 10:41:26, 07/25</p>
-                </div>
-            </div>
-
-            {/* Output content */}
-            <div className="w-full p-4 relative h-[calc(100%-80px)]">
                 {content && (
                     <button
                         onClick={handleCopy}
-                        className="flex absolute top-2 right-2 items-center gap-1.5 px-2.5 py-1.5 text-xs text-zinc-300 hover:text-foreground rounded-lg transition-all">
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm hover:text-white rounded-lg transition-all">
                         {isCopied ? (
                             <>
                                 <CheckCircle className="w-3.5 h-3.5" />
@@ -72,12 +62,30 @@ function OutputPanel() {
                         )}
                     </button>
                 )}
+                    <div className='flex bg-zinc-800 flex-shrink-0 p-2 scale-90 hover:bg-[#2e2e2e] rounded-md h-full w-fit items-center gap-2'>
+                        <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
+                    </div>
+                    <p className="text-zinc-200 flex-shrink-0 font-sans text-sm">{new Date().toLocaleString()}</p>
+                </div>
+            </div>
+
+            {/* Output content */}
+            <div className="w-full p-4 relative h-[calc(100%-80px)]">
+
                 {content ? (
-                    <div></div>
+                    error ? <>
+                    <div className="w-full h-full gap-2">
+                        <pre className="whitespace-pre-wrap text-red-400 text-lg">{error}</pre>
+                    </div>
+                    </> : <>
+                    <div className="w-full text-lg h-full gap-2">
+                        <pre className="whitespace-pre-wrap text-white">{output}</pre>
+                    </div>
+                    </>
                 ) : (
                     <div className='w-full h-full flex items-center justify-center gap-2'>
-<span><FaCode size={24} /></span>
-<span>Run your code to see output here</span>
+                        <span><FaCode size={24} /></span>
+                        <span>Run your code to see output here</span>
                     </div>
                 )}
             </div>
