@@ -1,7 +1,6 @@
 import React from 'react'
-import { MoreVertical, Search } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import { LuShare2 } from "react-icons/lu";
-import { GiExpand } from "react-icons/gi";
 import { SidebarTrigger } from '../../../components/ui/sidebar';
 import { ConvexHttpClient } from 'convex/browser';
 import { currentUser } from '@clerk/nextjs/server';
@@ -12,11 +11,11 @@ import HeaderProfileBtn from './HeaderProfileBtn';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
+import { LuSun } from "react-icons/lu";
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
     const user = await currentUser()
-
     const convexUser = await convex.query(api.users.getUser, {
         userId: user?.id!,
     });
@@ -58,7 +57,7 @@ async function Header() {
                     </Link>
                 )}
                 <div className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-full">
-                    <GiExpand size={18} />
+                    <LuSun size={18} />
                 </div>
                 <div className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-full">
                     <LuShare2 size={18} />

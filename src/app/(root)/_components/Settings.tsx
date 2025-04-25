@@ -6,30 +6,41 @@ import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
+import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Settings = () => {
-    const [fontSize, setFontSize] = React.useState(14);
-
+    const { fontSize, setFontSize } = useCodeEditorStore();
     return (
         <div className="max-h-[700px] overflow-y-scroll scrollbar-custom">
-                <Card>
+            <Card>
                 <CardContent className="space-y-6 pt-6">
                     <div className="flex items-center justify-between">
                         <Label>Minimap</Label>
                         <Switch defaultChecked={false} />
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="flex items-center justify-between">
                         <Label htmlFor="fontSize">Font Size</Label>
-                        <Slider
-                            id="fontSize"
-                            min={10}
-                            max={24}
-                            step={1}
-                            value={[fontSize]}
-                            onValueChange={([val]) => setFontSize(val)}
-                        />
-                        <div className="text-sm text-muted-foreground">{fontSize}px</div>
+                        <Select value={fontSize.toString()} onValueChange={val => setFontSize(Number(val))}>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Font Size" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="14">14</SelectItem>
+                                <SelectItem value="16">16</SelectItem>
+                                <SelectItem value="18">18</SelectItem>
+                                <SelectItem value="20">20</SelectItem>
+                                <SelectItem value="22">22</SelectItem>
+                                <SelectItem value="24">24</SelectItem>
+                                <SelectItem value="26">26</SelectItem>
+                                <SelectItem value="28">28</SelectItem>
+                                <SelectItem value="30">30</SelectItem>
+                                <SelectItem value="32">32</SelectItem>
+                                <SelectItem value="34">34</SelectItem>
+                                <SelectItem value="36">36</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     <div className="flex items-center justify-between">

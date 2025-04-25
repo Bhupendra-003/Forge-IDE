@@ -48,11 +48,13 @@ function EditorPanel() {
                             beforeMount={defineMonacoThemes}
                             onMount={(editor) => setEditor(editor)}
                             options={{
-                                minimap: { enabled: true },
+                                minimap: { enabled: false },
                                 fontSize,
+                                lineNumbersMinChars: 2,
+                                glyphMargin: false,
                                 automaticLayout: true,
                                 scrollBeyondLastLine: false,
-                                padding: { top: 35, bottom: 0 },
+                                padding: { top: 10, bottom: 0 },
                                 renderWhitespace: "selection",
                                 fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',
                                 fontLigatures: true,

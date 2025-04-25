@@ -53,7 +53,6 @@ export default function Page() {
                         <OutputPanel />
                       </div>
                     </ResizablePanel>
-
                   </ResizablePanelGroup>
                 </ResizablePanel>
 
