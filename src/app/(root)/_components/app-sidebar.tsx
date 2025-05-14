@@ -2,16 +2,12 @@
 import * as React from "react"
 import {
   Trash2,
-  Search,
   Sparkles,
-  Home,
   Inbox,
   Settings2,
   Code,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -30,7 +26,7 @@ function CustomNavMain({
   items: {
     title: string
     url: string
-    icon: React.ComponentType
+    icon: React.ComponentType<{ size?: number }>
     isActive?: boolean
     onClick?: () => void
   }[]
@@ -45,7 +41,7 @@ function CustomNavMain({
             item.isActive ? "bg-muted" : ""
           }`}
         >
-          <item.icon size={20} />
+          <item.icon size={20}/>
           <span className="text-[16px]">{item.title}</span>
         </button>
       ))}
@@ -60,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     user: {
       name: "Bhupendra",
       email: "b@gmail.com",
-      avatar: "/avatars/bhupi.png",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
     navMain: [
       {

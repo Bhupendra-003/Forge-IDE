@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAIWindowStore } from '@/store/useAIWindowStore';
 import { IoSparklesSharp } from 'react-icons/io5';
 import { RxCross2 } from "react-icons/rx";
@@ -13,22 +13,82 @@ function AIWindow() {
   const [messages, setMessages] = useState<{ role: 'user' | 'ai'; content: string }[]>([
     { role: 'ai', content: 'Hello! I\'m Devine AI. How can I help you with your code today?' }
   ]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendMessage = () => {
+  // Load chat history from localStorage on component mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('ai-chat-history');
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  }, []);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('ai-chat-history', JSON.stringify(messages));
+  }, [messages]);
+
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
-    
+
     // Add user message
-    setMessages(prev => [...prev, { role: 'user', content: inputValue }]);
-    
-    // Simulate AI response (in a real app, this would call an API)
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: 'ai', 
-        content: `I received your message: "${inputValue}". This is a placeholder response. In a real implementation, this would connect to an AI service.` 
+    const userMessage = { role: 'user' as const, content: inputValue };
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      // Call AI service - replace with your actual API endpoint
+      const response = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage],
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('API response not OK:', response.status, response.statusText);
+        throw new Error(`Failed to get AI response: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('AI response data:', data);
+
+      // Check if we have a valid response
+      if (!data.response) {
+        console.error('Empty or invalid response from API:', data);
+        throw new Error('Received empty response from AI service');
+      }
+
+      // Add AI response to messages
+      setMessages(prev => [...prev, {
+        role: 'ai',
+        content: data.response
       }]);
-    }, 1000);
-    
-    setInputValue('');
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+
+      // Provide a more helpful error message to the user
+      let errorMessage = 'Sorry, I encountered an error processing your request.';
+
+      if (error instanceof Error) {
+        if (error.message.includes('empty response')) {
+          errorMessage = 'I received an empty response from the Gemini API. This might be due to content filtering or an issue with the API key. Please try a different query or check your API configuration.';
+        } else {
+          errorMessage = `Error: ${error.message}. Please try again with a different query or check the console for more details.`;
+        }
+      }
+
+      setMessages(prev => [...prev, {
+        role: 'ai',
+        content: errorMessage
+      }]);
+    } finally {
+      setIsLoading(false);
+      setInputValue('');
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -39,15 +99,15 @@ function AIWindow() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col font-mono">
+    <div className="w-full h-full flex flex-col">
       {/* Header */}
       <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-        <div className='w-fit h-full flex pt-1 border-t-2 items-center gap-2 px-3 bg-muted/50'>
+        <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
           <Bot size={20} />
-          <p className="text-lg font-mono">Devine AI</p>
+          <p className="text-lg font-sans">Devine AI</p>
         </div>
         <div className="flex items-center pr-2">
-          <button 
+          <button
             onClick={closeAIWindow}
             className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
           >
@@ -57,38 +117,38 @@ function AIWindow() {
       </div>
 
       {/* Chat area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30 font-mono">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
         {messages.map((message, index) => (
-          <div 
-            key={index} 
-            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+          <div
+            key={index}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'w-full'}`}
           >
-            <div className={`flex gap-3 max-w-[80%] ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-              {message.role === 'ai' ? (
+            {message.role === 'user' ? (
+              // User message with avatar
+              <div className="flex gap-3 max-w-[80%] flex-row-reverse">
                 <Avatar className="h-8 w-8 border">
-                  <AvatarImage src="/avatars/ai-avatar.png" alt="AI" />
-                  <AvatarFallback>
-                    <Bot size={16} />
-                  </AvatarFallback>
-                </Avatar>
-              ) : (
-                <Avatar className="h-8 w-8 border">
-                  <AvatarImage src="/avatars/bhupi.png" alt="User" />
+                  <AvatarImage src="" alt="User" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
-              )}
-              <div 
-                className={`p-3 rounded-lg ${
-                  message.role === 'user' 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'bg-muted border'
-                }`}
-              >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                <div className="p-3 rounded-lg bg-muted text-primary-foreground">
+                  <p className="text-sm whitespace-pre-wrap font-mono">{message.content}</p>
+                </div>
               </div>
-            </div>
+            ) : (
+              // AI message - full width, no avatar
+              <div className="w-full p-3 rounded-lg bg-transparent">
+                <p className="text-sm whitespace-pre-wrap font-mono">{message.content}</p>
+              </div>
+            )}
           </div>
         ))}
+        {isLoading && (
+          <div className="flex w-full">
+            <div className="w-full p-3 rounded-lg bg-muted border">
+              <p className="text-sm">Thinking...</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Input area */}
@@ -99,13 +159,15 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask Devine AI about your code..."
-            className="flex-1 focus:ring-0 focus:outline-none min-h-[40px] max-h-[120px] p-2 rounded-md border bg-muted/30 resize-none"
-            rows={1}
+            className="flex-1 font-mono focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none"
+            rows={10}
+            disabled={isLoading}
           />
-          <Button 
+          <Button
             onClick={handleSendMessage}
-            size="icon" 
-            className="h-10 w-10 rounded-full"
+            size="icon"
+            className="h-10 w-10 rounded-full mt-auto"
+            disabled={isLoading || !inputValue.trim()}
           >
             <Send className="h-5 w-5" />
           </Button>
