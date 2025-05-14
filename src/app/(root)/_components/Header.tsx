@@ -16,12 +16,21 @@ import ThemeProvider from './ThemeProvider';
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-    const user = await currentUser()
-    const convexUser = await convex.query(api.users.getUser, {
-        userId: user?.id!,
-    });
-
-    console.log({ convexUser })
+    const user = await currentUser();
+    
+    // Default value for when user is not signed in
+    let convexUser = { isPro: false };
+    
+    // Only query Convex if user is signed in
+    if (user?.id) {
+        try {
+            convexUser = await convex.query(api.users.getUser, {
+                userId: user.id,
+            });
+        } catch (error) {
+            console.error("Error fetching user:", error);
+        }
+    }
 
     return (
         <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">

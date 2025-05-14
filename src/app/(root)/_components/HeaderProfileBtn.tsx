@@ -16,9 +16,11 @@ function HeaderProfileBtn() {
             </UserButton>
 
             <SignedOut>
-                <button className="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded">
-                    <SignInButton />
-                </button>
+                <SignInButton mode="modal">
+                    <button className="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded">
+                        Sign In
+                    </button>
+                </SignInButton>
             </SignedOut>
         </>
     );

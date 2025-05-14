@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useCodeEditorStore } from '@/store/useCodeEditorStore'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { IoSparklesSharp } from 'react-icons/io5';
@@ -11,9 +11,20 @@ import { FaCode } from "react-icons/fa";
 import 'ldrs/react/Ring.css'
 
 function OutputPanel() {
-    const { output, error, isRunning } = useCodeEditorStore();
+    const { output, error, isRunning, executionResult } = useCodeEditorStore();
     const [isCopied, setIsCopied] = useState(false);
+    const [currentTime, setCurrentTime] = useState('');
     const content = error || output;
+    const prevExecutionResultRef = useRef(executionResult);
+
+    // Update time when execution result changes (code is run)
+    useEffect(() => {
+        // Only update time when executionResult changes and is not null
+        if (executionResult && executionResult !== prevExecutionResultRef.current) {
+            setCurrentTime(new Date().toLocaleString());
+            prevExecutionResultRef.current = executionResult;
+        }
+    }, [executionResult]);
 
     const handleCopy = () => {
         if (content) navigator.clipboard.writeText(content);
@@ -65,7 +76,7 @@ function OutputPanel() {
                     <div className='flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2'>
                         <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
                     </div>
-                    <p className="text-foreground flex-shrink-0 font-sans text-sm">{new Date().toLocaleString()}</p>
+                    <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
                 </div>
             </div>
 
