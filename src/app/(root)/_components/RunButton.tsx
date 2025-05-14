@@ -5,7 +5,7 @@ import { Squircle } from 'ldrs/react'
 import { FaPlay } from "react-icons/fa";
 import 'ldrs/react/Squircle.css'
 import { useCodeEditorStore } from '@/store/useCodeEditorStore';
-import { useUser } from '@clerk/nextjs';
+// import { useUser } from '@clerk/nextjs';
 
 function RunButton() {
     // const { user } = useUser();
@@ -16,7 +16,7 @@ function RunButton() {
     };
     return (
         <div className="flex items-center h-10 rounded justify-center bg-primary w-fit">
-            <Button 
+            <Button
                 onClick={handleRun}
                 className="text-white font-semibold text-lg flex items-center gap-3 py-2"
             >
@@ -38,7 +38,7 @@ function RunButton() {
                 <p>Run Code</p>
             </Button>
         </div>
-    )       
+    )
 }
 
 export default RunButton
