@@ -12,6 +12,7 @@ import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
 import { LuSun } from "react-icons/lu";
+import ThemeProvider from './ThemeProvider';    
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -23,12 +24,12 @@ async function Header() {
     console.log({ convexUser })
 
     return (
-        <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-gray-200">
+        <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">
             {/* Left section */}
             <div className="flex items-center space-x-2">
                 <SidebarTrigger className="-ml-1 scale-160" size="lg" />
                 <div className="flex items-center border-l border-zinc-700 pl-2 ml-1">
-                    <span className="text-2xl font-semibold">Devine</span>
+                    <span className="text-2xl font-semibold text-foreground">Devine</span>
                 </div>
             </div>
 
@@ -51,18 +52,20 @@ async function Header() {
                 transition-all duration-300"
                     >
                         <Sparkles className="w-4 h-4 text-purple-500 hover:text-purple-300" />
-                        <span className="text-sm font-medium text-purple-500/90 hover:text-purple-300">
+                        <span className="text-sm font-medium text-purple-500/90 ">
                             Pro
                         </span>
                     </Link>
                 )}
-                <div className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-full">
-                    <LuSun size={18} />
-                </div>
-                <div className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-full">
+                <ThemeProvider>
+                    <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
+                        <LuSun size={18} />
+                    </div>
+                </ThemeProvider>
+                <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                     <LuShare2 size={18} />
                 </div>
-                <div className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-full">
+                <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                     <MoreVertical size={18} />
                 </div>
                 <HeaderProfileBtn />

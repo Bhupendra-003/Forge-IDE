@@ -27,7 +27,7 @@ function ThemeSelector() {
     return (
         <div>
             <Select value={theme} onValueChange={handleSelectChange}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] border">
                     <SelectValue placeholder="Theme" />
                 </SelectTrigger>
                 <SelectContent>

@@ -15,7 +15,7 @@ function RunButton() {
 
     };
     return (
-        <div className="flex items-center rounded-full justify-center bg-primary w-fit">
+        <div className="flex items-center h-10 rounded justify-center bg-primary w-fit">
             <Button 
                 onClick={handleRun}
                 className="text-white font-semibold text-lg flex items-center gap-3 py-2"

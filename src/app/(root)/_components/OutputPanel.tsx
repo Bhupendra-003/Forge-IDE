@@ -25,8 +25,8 @@ function OutputPanel() {
 
             <div className="w-full h-12 px-2 flex border items-center justify-between">
                 <div className='flex items-center gap-2'>
-                    <div className='w-8 h-8 bg-zinc-900 rounded-full border flex items-center justify-center '>
-                        <IoMdCheckmarkCircleOutline size={24} color="#0aff4d" />
+                    <div className='w-8 h-8 bg-muted rounded-full border flex items-center justify-center '>
+                        <IoMdCheckmarkCircleOutline size={24} color="var(--color-check)" />
                     </div>
                     <p>{">"}</p>
                     <div className='flex items-center gap-2'><IoLogoPython size={24} />
@@ -39,7 +39,7 @@ function OutputPanel() {
                                 stroke="3"
                                 bgOpacity="0"
                                 speed="2"
-                                color="white"
+                                color="var(--foreground)"
                             />
                         )}
                     </div>
@@ -48,7 +48,7 @@ function OutputPanel() {
                 {content && (
                     <button
                         onClick={handleCopy}
-                        className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm hover:text-white rounded-lg transition-all">
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg transition-all">
                         {isCopied ? (
                             <>
                                 <CheckCircle className="w-3.5 h-3.5" />
@@ -62,10 +62,10 @@ function OutputPanel() {
                         )}
                     </button>
                 )}
-                    <div className='flex bg-zinc-800 flex-shrink-0 p-2 scale-90 hover:bg-[#2e2e2e] rounded-md h-full w-fit items-center gap-2'>
+                    <div className='flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2'>
                         <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
                     </div>
-                    <p className="text-zinc-200 flex-shrink-0 font-sans text-sm">{new Date().toLocaleString()}</p>
+                    <p className="text-foreground flex-shrink-0 font-sans text-sm">{new Date().toLocaleString()}</p>
                 </div>
             </div>
 
@@ -75,11 +75,11 @@ function OutputPanel() {
                 {content ? (
                     error ? <>
                     <div className="w-full h-full gap-2">
-                        <pre className="whitespace-pre-wrap text-red-400 text-lg">{error}</pre>
+                        <pre className="whitespace-pre-wrap text-destructive text-lg">{error}</pre>
                     </div>
                     </> : <>
                     <div className="w-full text-lg h-full gap-2">
-                        <pre className="whitespace-pre-wrap text-white">{output}</pre>
+                        <pre className="whitespace-pre-wrap text-foreground">{output}</pre>
                     </div>
                     </>
                 ) : (

@@ -19,7 +19,7 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
     return (
         <div>
             <Select value={language} onValueChange={handleLanguageSelect}>
-                <SelectTrigger className="w-[150px]">
+                <SelectTrigger className="w-[150px] border">
                     <SelectValue placeholder="Language" />
                 </SelectTrigger>
                 <SelectContent>
