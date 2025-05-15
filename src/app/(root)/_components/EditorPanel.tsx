@@ -28,6 +28,8 @@ function EditorPanel() {
         if (value) localStorage.setItem(`editor-code-${language}`, value);
     };
 
+    // Font size change handler - used by Settings component
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleFontSizeChange = (newSize: number) => {
         const size = Math.min(Math.max(newSize, 12), 24);
         setFontSize(size);

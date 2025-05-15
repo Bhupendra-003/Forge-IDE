@@ -1,4 +1,5 @@
 import * as monaco from "monaco-editor";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Monaco } from "@monaco-editor/react";
 import { Id } from "../../convex/_generated/dataModel";
 

@@ -27,6 +27,7 @@ function OutputPanel() {
             // Make sure the output panel is visible when code is run
             if (window) {
                 // Import and use the store directly to avoid circular dependencies
+                // eslint-disable-next-line @typescript-eslint/no-require-imports
                 const { openOutputPanel } = require('@/store/useOutputPanelStore').useOutputPanelStore.getState();
                 openOutputPanel();
             }

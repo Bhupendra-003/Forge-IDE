@@ -12,15 +12,15 @@ import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
 import { LuSun } from "react-icons/lu";
-import ThemeProvider from './ThemeProvider';    
+import ThemeProvider from './ThemeProvider';
 
 async function Header() {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
     const user = await currentUser();
-    
+
     // Default value for when user is not signed in
     let convexUser = { isPro: false };
-    
+
     // Only query Convex if user is signed in
     if (user?.id) {
         try {
@@ -50,14 +50,14 @@ async function Header() {
             {/* Right section */}
             <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-2">
-                    <LanguageSelector hasAccess={convexUser?.isPro} />
+                    <LanguageSelector />
                     <ThemeSelector />
                 </div>
                 {!convexUser?.isPro && (
                     <Link
                         href="/pricing"
-                        className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-purple-500/20 hover:border-purple-500/40 bg-gradient-to-r from-purple-500/10 
-                to-purple-500/10 hover:from-purple-500/20 hover:to-purple-500/20 
+                        className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-purple-500/20 hover:border-purple-500/40 bg-gradient-to-r from-purple-500/10
+                to-purple-500/10 hover:from-purple-500/20 hover:to-purple-500/20
                 transition-all duration-300"
                     >
                         <Sparkles className="w-4 h-4 text-purple-500 hover:text-purple-300" />

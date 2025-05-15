@@ -10,7 +10,7 @@ import { useOutputPanelStore } from '@/store/useOutputPanelStore';
 
 function RunButton() {
     // const { user } = useUser();
-    const { isRunning, runCode, executionResult } = useCodeEditorStore();
+    const { isRunning, runCode } = useCodeEditorStore();
     const { openOutputPanel } = useOutputPanelStore();
     const handleRun = async () => {
         openOutputPanel();

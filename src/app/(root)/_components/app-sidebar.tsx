@@ -1,7 +1,6 @@
 "use client"
 import * as React from "react"
 import {
-  Trash2,
   Sparkles,
   Inbox,
   Settings2,

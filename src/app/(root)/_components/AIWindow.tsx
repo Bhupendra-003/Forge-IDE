@@ -10,8 +10,23 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Ripples } from 'ldrs/react'
-import 'ldrs/react/Ripples.css'
+// Custom ThinkingDots component for loading animation
+const ThinkingDots = () => {
+  const [dots, setDots] = useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots(prev => {
+        if (prev.length >= 3) return '';
+        return prev + '.';
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <span>{dots}</span>;
+};
 
 // Code block component with copy button
 const CodeBlock = ({ language, value }: { language: string, value: string }) => {
@@ -63,7 +78,6 @@ function AIWindow() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [streamingMessage, setStreamingMessage] = useState('');
-  const [isStreaming, setIsStreaming] = useState(false);
   const textareaRef = useRef(null)
   const chatEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -88,7 +102,6 @@ function AIWindow() {
 
   // Function to handle cleanup when streaming is done or aborted
   const cleanupStreaming = () => {
-    setIsStreaming(false);
     setIsLoading(false);
     if (abortControllerRef.current) {
       abortControllerRef.current = null;
@@ -116,6 +129,7 @@ function AIWindow() {
     return () => {
       abortStreaming();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Function to clear chat history
@@ -155,7 +169,6 @@ function AIWindow() {
     const userMessage = { role: 'user' as const, content: userContent };
     setMessages(prev => [...prev, { role: 'user', content: inputValue }]); // Show only the user's question in the UI
     setIsLoading(true);
-    setIsStreaming(true);
     setStreamingMessage(''); // Reset streaming message
 
     try {
@@ -188,7 +201,7 @@ function AIWindow() {
 
       // Process the stream
       let accumulatedResponse = '';
-      let decoder = new TextDecoder();
+      const decoder = new TextDecoder();
 
       while (true) {
         const { done, value } = await reader.read();
@@ -334,16 +347,16 @@ function AIWindow() {
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
-                      p: ({ node, ...props }) => <p className="mb-4 " {...props} />,
-                      h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mb-4 mt-6" {...props} />,
-                      h2: ({ node, ...props }) => <h2 className="text-xl font-bold mb-3 mt-5" {...props} />,
-                      h3: ({ node, ...props }) => <h3 className="text-lg font-bold mb-2 mt-4" {...props} />,
-                      h4: ({ node, ...props }) => <h4 className="font-bold mb-2 mt-3" {...props} />,
-                      ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4 space-y-2" {...props} />,
-                      ol: ({ node, ...props }) => <ol className="list-decimal pl-6 mb-4 space-y-2" {...props} />,
-                      li: ({ node, ...props }) => <li className="mb-1" {...props} />,
-                      blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4" {...props} />,
-                      code: ({ node, className, children, ...props }) => {
+                      p: ({ ...props }) => <p className="mb-4 " {...props} />,
+                      h1: ({ ...props }) => <h1 className="text-2xl font-bold mb-4 mt-6" {...props} />,
+                      h2: ({ ...props }) => <h2 className="text-xl font-bold mb-3 mt-5" {...props} />,
+                      h3: ({ ...props }) => <h3 className="text-lg font-bold mb-2 mt-4" {...props} />,
+                      h4: ({ ...props }) => <h4 className="font-bold mb-2 mt-3" {...props} />,
+                      ul: ({ ...props }) => <ul className="list-disc pl-6 mb-4 space-y-2" {...props} />,
+                      ol: ({ ...props }) => <ol className="list-decimal pl-6 mb-4 space-y-2" {...props} />,
+                      li: ({ ...props }) => <li className="mb-1" {...props} />,
+                      blockquote: ({ ...props }) => <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4" {...props} />,
+                      code: ({ className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || '');
                         const language = match ? match[1] : '';
                         const isInline = !match;
@@ -370,15 +383,14 @@ function AIWindow() {
         {isLoading && !streamingMessage && (
           <div className="flex w-full">
             <div className="w-full p-3 rounded-lg bg-muted/20 border">
-              <p className="text-[1.1rem] font-mono">Thinking...</p>
+              <p className="text-[1.1rem] font-mono">
+                Thinking<ThinkingDots />
+              </p>
             </div>
           </div>
         )}
         {/* Invisible div for auto-scrolling */}
         <div ref={chatEndRef} />
-        {isStreaming && (
-              <Ripples size="40" color="var(--color-primary)" />
-        )}
       </div>
 
       {/* Input area */}

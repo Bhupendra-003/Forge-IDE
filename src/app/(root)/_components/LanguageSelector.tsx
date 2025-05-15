@@ -2,10 +2,9 @@
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { LANGUAGE_CONFIG } from "../_constants";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { LockIcon } from "lucide-react";
+// Removed unused imports
 
-
-function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
+function LanguageSelector() {
 
     const { language, setLanguage } = useCodeEditorStore();
 
@@ -25,21 +24,22 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
                 <SelectContent>
                     {Object.values(LANGUAGE_CONFIG).map((lang, index) => {
                         return ((
-                            <SelectItem 
-                                key={index} 
+                            <SelectItem
+                                key={index}
                                 value={lang.id}
                                 className="flex items-center justify-between"
                                 onClick={() => handleLanguageSelect(lang.id)}
                             >
                                 <div className="flex gap-3 items-center">
                                     <div className="w-5 h-5 object-contain overflow-hidden">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img className="w-full h-full object-contain"
                                             src={lang.logoPath}
                                             alt="logo" />
                                     </div>
                                     <span>{lang.label}</span>
                                 </div>
-                                
+
                             </SelectItem>
                         ))
                     })}
