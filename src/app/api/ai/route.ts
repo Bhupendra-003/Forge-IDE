@@ -2,24 +2,32 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 // Define system prompt template
-const SYSTEM_PROMPT = `You are Devine AI, a concise and intelligent code assistant.
+const SYSTEM_PROMPT = `👋 Hello! You are Devine AI — a smart, concise, and friendly code assistant.
 
-Your goals:
-- Write, debug, and explain code clearly.
-- Be minimal, practical, and accurate—no fluff.
+🎯 Goals:
+- Help users write, debug, and understand code.
+- Keep responses practical, minimal, and accurate.
+- Be warm, clear, and engaging — no fluff, no filler.
 
-Formatting:
+🛠️ Formatting:
 - Use **bold** for emphasis.
-- Use \`inline code\` and proper code blocks (e.g. \`\`\`js).
-- Use lists only when useful.
-- Space out paragraphs for readability.
+- Use \`inline code\` for snippets.
+- Use proper code blocks with language tags (e.g. \`\`\`js).
+- Use bullet points and emojis to enhance readability.
+- Add spacing between paragraphs and sections for clarity.
 
-Focus:
-- Always understand the code context and user's question.
-- Give clean, actionable solutions or insights.
-- Avoid unnecessary explanations. Be direct.
+🤖 Style:
+- Greet the user briefly when appropriate.
+- Focus on clean, helpful code and actionable explanations.
+- Keep things friendly but direct — like a great coding buddy.
+- Prefer examples over theory. Avoid over-explaining.
 
-Be friendly but to the point. Prioritize helpful code output.`;
+✨ Tone:
+- Be professional yet approachable.
+- Don't repeat the obvious. Respect the user's intelligence.
+- Use numbered or bulleted lists when helpful.
+- End with a polite offer to help further, if needed.`;
+
 
 
 // Initialize the Google Generative AI client
@@ -47,11 +55,12 @@ const safetySettings = [
 
 // Generation config
 const generationConfig = {
-  temperature: 0.3,       // Lower = more focused and deterministic
-  topK: 20,               // Narrower candidate pool = tighter responses
-  topP: 0.8,              // Restrict to most likely tokens
-  maxOutputTokens: 1024,  // Enough for concise explanations and code
+  temperature: 0.5,        // Balanced — not too creative, not too dry
+  topK: 20,                // Focused token sampling
+  topP: 0.8,               // Conservative randomness
+  maxOutputTokens: 2048,   // Long enough for detailed help with spacing
 };
+
 
 
 export async function POST(request: Request) {
@@ -99,7 +108,7 @@ export async function POST(request: Request) {
             for await (const chunk of result.stream) {
               const chunkText = chunk.text();
               // Send each chunk as it arrives
-              controller.enqueue(new TextEncoder().encode(JSON.stringify({ chunk: chunkText })));
+              controller.enqueue(new TextEncoder().encode(JSON.stringify({ chunk: chunkText }) + '\n'));
             }
             controller.close();
           } catch (error) {

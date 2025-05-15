@@ -5,14 +5,16 @@ import { Squircle } from 'ldrs/react'
 import { FaPlay } from "react-icons/fa";
 import 'ldrs/react/Squircle.css'
 import { useCodeEditorStore } from '@/store/useCodeEditorStore';
+import { useOutputPanelStore } from '@/store/useOutputPanelStore';
 // import { useUser } from '@clerk/nextjs';
 
 function RunButton() {
     // const { user } = useUser();
     const { isRunning, runCode, executionResult } = useCodeEditorStore();
+    const { openOutputPanel } = useOutputPanelStore();
     const handleRun = async () => {
+        openOutputPanel();
         await runCode();
-
     };
     return (
         <div className="flex items-center h-10 rounded justify-center bg-primary w-fit">

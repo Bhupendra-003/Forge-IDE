@@ -6,6 +6,7 @@ import {
   Inbox,
   Settings2,
   Code,
+  Terminal,
 } from "lucide-react"
 
 import { NavUser } from "@/components/nav-user"
@@ -18,6 +19,7 @@ import {
 import { SearchForm } from "@/components/search-form"
 import { NavFiles } from "@/components/nav-files"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
+import { useOutputPanelStore } from "@/store/useOutputPanelStore"
 
 // Custom NavMain component that supports click handlers
 function CustomNavMain({
@@ -51,6 +53,7 @@ function CustomNavMain({
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { toggleAIWindow } = useAIWindowStore();
+  const { isVisible: isOutputPanelVisible, toggleOutputPanel } = useOutputPanelStore();
 
   const data = {
     user: {
@@ -70,6 +73,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "#",
         icon: Sparkles,
         onClick: toggleAIWindow,
+      },
+      {
+        title: "Output",
+        url: "#",
+        icon: Terminal,
+        isActive: isOutputPanelVisible,
+        onClick: toggleOutputPanel,
       },
       {
         title: "Inbox",
@@ -138,7 +148,7 @@ export function DialogDemo() {
         </DialogHeader>
         <Settings />
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <p>The changes are automatically saved.</p>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -12,9 +12,13 @@ import AIWindow from "./_components/AIWindow"
 import { RxCross2 } from "react-icons/rx"
 import { IoLogoPython } from "react-icons/io5"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
+import { useOutputPanelStore } from "@/store/useOutputPanelStore"
+import { Button } from "@/components/ui/button"
+import { Code } from "lucide-react"
 
 export default function Page() {
   const { isOpen: isAIWindowOpen } = useAIWindowStore();
+  const { isVisible: isOutputPanelVisible, closeOutputPanel } = useOutputPanelStore();
 
   return (
     <div className="[--header-height:calc(--spacing(14))]">
@@ -30,7 +34,7 @@ export default function Page() {
                 {/* Left panel with editor and output */}
                 <ResizablePanel
                   minSize={10}
-                  defaultSize={isAIWindowOpen ? 50 : 80}
+                  defaultSize={isAIWindowOpen || isOutputPanelVisible ? 50 : 100}
                   className="rounded-sm"
                 >
                   <ResizablePanelGroup direction="vertical">
@@ -43,12 +47,9 @@ export default function Page() {
                       {/* Editor container */}
                       <div className="h-full w-full aspect-video">
                         <div className="flex gap-2 w-full h-10 border items-center bg-background-2 rounded-sm">
-                          <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
-                            <IoLogoPython size={24} />
-                            <p className="text-lg font-sans">palindrome.py</p>
-                            <div className="ml-2 w-6 h-6 flex items-center justify-center hover:bg-input rounded-full">
-                              <RxCross2 size={18} />
-                            </div>
+                          <div className='w-fit h-full flex p-1 pr-8 border-t-2 border-t-primary items-center gap-4 px-3 bg-muted/50'>
+                            <Code size={24} />
+                            <p className="text-lg font-sans">Editor</p>
                           </div>
                         </div>
                         <EditorPanel />
@@ -56,7 +57,7 @@ export default function Page() {
                     </ResizablePanel>
 
                     {/* Output panel - only shown at bottom when AI window is open */}
-                    {isAIWindowOpen && (
+                    {isAIWindowOpen && isOutputPanelVisible && (
                       <>
                         <ResizableHandle className="w-full my-1 bg-black" />
                         <ResizablePanel minSize={10} defaultSize={30} className="rounded-sm bg-muted/50">
@@ -64,9 +65,16 @@ export default function Page() {
                             <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
                               <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
                                 <p className="text-lg font-sans">Output</p>
-                                <div className="ml-2 w-6 h-6 flex items-center justify-center hover:bg-input rounded-full">
+                              </div>
+                              <div className="flex items-center pr-2">
+                                <Button
+                                  onClick={closeOutputPanel}
+                                  size="icon"
+                                  variant="ghost"
+                                  className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+                                >
                                   <RxCross2 size={18} />
-                                </div>
+                                </Button>
                               </div>
                             </div>
                             <OutputPanel />
@@ -77,29 +85,43 @@ export default function Page() {
                   </ResizablePanelGroup>
                 </ResizablePanel>
 
+
                 {/* Right panel - AI Window or Output panel depending on state */}
-                <ResizableHandle className="mx-1 w-2 bg-gray-300 dark:bg-background-2 rounded-full" />
-                <ResizablePanel minSize={10} defaultSize={isAIWindowOpen ? 50 : 20} className="rounded-sm bg-muted/50">
-                  {isAIWindowOpen ? (
-                    // AI Window
-                    <div className="h-full w-full aspect-video">
-                      <AIWindow />
-                    </div>
-                  ) : (
-                    // Output panel (when AI window is not open)
-                    <div className="h-full w-full aspect-video">
-                      <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-                        <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
-                          <p className="text-lg font-sans">Output</p>
-                          <div className="ml-2 w-6 h-6 flex items-center justify-center hover:bg-input rounded-full">
-                            <RxCross2 size={18} />
-                          </div>
+                {(isAIWindowOpen || isOutputPanelVisible) && (
+                  <>
+                    <ResizableHandle className="mx-1 w-2 bg-gray-300 dark:bg-background-2 rounded-full" />
+                    <ResizablePanel minSize={10} defaultSize={50} className="rounded-sm bg-muted/50">
+                      {isAIWindowOpen ? (
+                        // AI Window
+                        <div className="h-full w-full aspect-video">
+                          <AIWindow />
                         </div>
-                      </div>
-                      <OutputPanel />
-                    </div>
-                  )}
-                </ResizablePanel>
+                      ) : (
+                        // Output panel (when AI window is not open)
+                        isOutputPanelVisible && (
+                          <div className="h-full w-full aspect-video">
+                            <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
+                              <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
+                                <p className="text-lg font-sans">Output</p>
+                              </div>
+                              <div className="flex items-center pr-2">
+                                <Button
+                                  onClick={closeOutputPanel}
+                                  size="icon"
+                                  variant="ghost"
+                                  className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+                                >
+                                  <RxCross2 size={18} />
+                                </Button>
+                              </div>
+                            </div>
+                            <OutputPanel />
+                          </div>
+                        )
+                      )}
+                    </ResizablePanel>
+                  </>
+                )}
               </ResizablePanelGroup>
             </div>
 

@@ -23,6 +23,13 @@ function OutputPanel() {
         if (executionResult && executionResult !== prevExecutionResultRef.current) {
             setCurrentTime(new Date().toLocaleString());
             prevExecutionResultRef.current = executionResult;
+
+            // Make sure the output panel is visible when code is run
+            if (window) {
+                // Import and use the store directly to avoid circular dependencies
+                const { openOutputPanel } = require('@/store/useOutputPanelStore').useOutputPanelStore.getState();
+                openOutputPanel();
+            }
         }
     }, [executionResult]);
 

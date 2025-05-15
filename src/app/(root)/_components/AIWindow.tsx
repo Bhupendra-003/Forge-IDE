@@ -5,14 +5,14 @@ import { useCodeEditorStore } from '@/store/useCodeEditorStore';
 import { RxCross2 } from "react-icons/rx";
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Bot, Send, Copy, Check } from 'lucide-react';
+import { Bot, Send, Copy, Check, Trash2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Quantum } from 'ldrs/react'
-import 'ldrs/react/Quantum.css'
-import { docco, monokai } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Ripples } from 'ldrs/react'
+import 'ldrs/react/Ripples.css'
+
 // Code block component with copy button
 const CodeBlock = ({ language, value }: { language: string, value: string }) => {
   const [copied, setCopied] = useState(false);
@@ -23,6 +23,7 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Default values shown
   return (
     <div className="relative group">
       <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -36,15 +37,15 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
         </Button>
       </div>
       <SyntaxHighlighter
-        language={language || 'javascript '}
-        style={monokai}
+        language={language || 'javascript'}
+        style={dracula}
         className="!rounded-md !mt-0"
         customStyle={{
           padding: '1rem',
           borderRadius: '0.375rem',
           marginBottom: '1rem',
-          fontSize: '1.3rem',
-          lineHeight: '1.2',
+          fontSize: '1.2rem',  // Increased font size for code blocks
+          lineHeight: '1.6',
         }}
       >
         {value}
@@ -117,6 +118,20 @@ function AIWindow() {
     };
   }, []);
 
+  // Function to clear chat history
+  const clearChat = () => {
+    // Clear messages from state
+    setMessages([
+      { role: 'ai', content: 'Chat history cleared. How can I help you with your code today?' }
+    ]);
+
+    // Clear from localStorage
+    localStorage.removeItem('ai-chat-history');
+
+    // Abort any ongoing streaming
+    abortStreaming();
+  };
+
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
@@ -187,11 +202,19 @@ function AIWindow() {
           const jsonChunks = chunk
             .split('\n')
             .filter(line => line.trim())
-            .map(line => JSON.parse(line));
+            .map(line => {
+              try {
+                return JSON.parse(line);
+              } catch (e) {
+                console.error('Error parsing JSON line:', e, line);
+                return null;
+              }
+            })
+            .filter(item => item !== null);
 
           // Process each JSON chunk
           for (const jsonChunk of jsonChunks) {
-            if (jsonChunk.chunk) {
+            if (jsonChunk && jsonChunk.chunk) {
               accumulatedResponse += jsonChunk.chunk;
 
               // Update the streaming message
@@ -265,13 +288,24 @@ function AIWindow() {
           <Bot size={20} />
           <p className="text-lg font-sans">Devine AI</p>
         </div>
-        <div className="flex items-center pr-2">
-          <button
+        <div className="flex items-center gap-2 pr-2">
+          <Button
+            onClick={clearChat}
+            size="icon"
+            variant="ghost"
+            className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+            title="Clear chat history"
+          >
+            <Trash2 size={16} />
+          </Button>
+          <Button
             onClick={closeAIWindow}
+            size="icon"
+            variant="ghost"
             className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
           >
             <RxCross2 size={18} />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -290,7 +324,7 @@ function AIWindow() {
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
                 <div className="p-3 rounded-lg bg-muted text-primary-foreground">
-                  <p className="text-sm whitespace-pre-wrap font-mono">{message.content}</p>
+                  <p className="text-[1.1rem] whitespace-pre-wrap font-mono">{message.content}</p>
                 </div>
               </div>
             ) : (
@@ -315,7 +349,7 @@ function AIWindow() {
                         const isInline = !match;
 
                         return isInline ? (
-                          <code className="bg-[#2c2c2c] text-zinc-100 border-1 rounded px-1 py-0.3 font-mono text-[1.3rem]" {...props}>
+                          <code className="bg-[#3a2d5f] text-zinc-100 border-1 rounded px-1 py-0.3 font-mono text-[1.3rem]" {...props}>
                             {children}
                           </code>
                         ) : (
@@ -327,7 +361,7 @@ function AIWindow() {
                     {message.content}
                   </ReactMarkdown>
                 </div>
-                <p className="text-sm font-mono">
+                <p className="font-mono">
                 </p>
               </div>
             )}
@@ -336,19 +370,15 @@ function AIWindow() {
         {isLoading && !streamingMessage && (
           <div className="flex w-full">
             <div className="w-full p-3 rounded-lg bg-muted/20 border">
-              <p className="text-sm font-mono">Thinking...</p>
+              <p className="text-[1.1rem] font-mono">Thinking...</p>
             </div>
           </div>
         )}
         {/* Invisible div for auto-scrolling */}
         <div ref={chatEndRef} />
-        {isStreaming &&
-          <Quantum
-            size="25"
-            speed="1.75"
-            color="var(--foreground)"
-          />
-        }
+        {isStreaming && (
+              <Ripples size="40" color="var(--color-primary)" />
+        )}
       </div>
 
       {/* Input area */}
@@ -360,7 +390,7 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="flex-1 font-mono focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none overflow-y-auto"
+            className="flex-1 font-mono text-lg focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none overflow-y-auto"
             rows={1}
             disabled={isLoading}
           />
