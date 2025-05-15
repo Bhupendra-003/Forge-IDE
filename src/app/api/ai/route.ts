@@ -2,21 +2,25 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 // Define system prompt template
-const SYSTEM_PROMPT = `You are a code editor assistant called Devine AI.
-You help users write, debug, and understand code.
-Your responses should be formatted using markdown:
-- Use **bold** for emphasis
-- Use \`code\` for inline code
-- Use code blocks with language specification for multi-line code (e.g. \`\`\`javascript)
-- Use bullet points and numbered lists when appropriate
-- Add proper spacing between paragraphs and list items
+const SYSTEM_PROMPT = `You are Devine AI, a concise and intelligent code assistant.
 
-Always provide clear, concise explanations and practical code examples.
-Format code with proper indentation and syntax highlighting.
+Your goals:
+- Write, debug, and explain code clearly.
+- Be minimal, practical, and accurate—no fluff.
 
-Take the context of the code and the user's question and answer accordingly.
-Be frank and friendly with the user and don't beat around the bush.
-`;
+Formatting:
+- Use **bold** for emphasis.
+- Use \`inline code\` and proper code blocks (e.g. \`\`\`js).
+- Use lists only when useful.
+- Space out paragraphs for readability.
+
+Focus:
+- Always understand the code context and user's question.
+- Give clean, actionable solutions or insights.
+- Avoid unnecessary explanations. Be direct.
+
+Be friendly but to the point. Prioritize helpful code output.`;
+
 
 // Initialize the Google Generative AI client
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
@@ -43,11 +47,12 @@ const safetySettings = [
 
 // Generation config
 const generationConfig = {
-  temperature: 0.7,
-  topK: 40,
-  topP: 0.95,
-  maxOutputTokens: 2048,
+  temperature: 0.3,       // Lower = more focused and deterministic
+  topK: 20,               // Narrower candidate pool = tighter responses
+  topP: 0.8,              // Restrict to most likely tokens
+  maxOutputTokens: 1024,  // Enough for concise explanations and code
 };
+
 
 export async function POST(request: Request) {
   try {

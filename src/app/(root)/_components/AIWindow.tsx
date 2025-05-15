@@ -10,6 +10,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Quantum } from 'ldrs/react'
+import 'ldrs/react/Quantum.css'
+import { docco, monokai } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 // Code block component with copy button
 const CodeBlock = ({ language, value }: { language: string, value: string }) => {
   const [copied, setCopied] = useState(false);
@@ -33,15 +36,15 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
         </Button>
       </div>
       <SyntaxHighlighter
-        language={language || 'text'}
-        style={vscDarkPlus}
-        className="!bg-gray-800 !rounded-md !mt-0"
+        language={language || 'javascript '}
+        style={monokai}
+        className="!rounded-md !mt-0"
         customStyle={{
           padding: '1rem',
           borderRadius: '0.375rem',
           marginBottom: '1rem',
-          fontSize: '0.875rem',
-          lineHeight: '1.5',
+          fontSize: '1.3rem',
+          lineHeight: '1.2',
         }}
       >
         {value}
@@ -60,6 +63,7 @@ function AIWindow() {
   const [isLoading, setIsLoading] = useState(false);
   const [streamingMessage, setStreamingMessage] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const textareaRef = useRef(null)
   const chatEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -97,6 +101,14 @@ function AIWindow() {
       cleanupStreaming();
     }
   };
+
+  useEffect(() => {
+    const textarea = textareaRef.current as HTMLTextAreaElement | null;
+    if (textarea) {
+      textarea.style.height = 'auto' // Reset to shrink if needed
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`
+    }
+  }, [inputValue])
 
   // Effect to clean up streaming on component unmount
   useEffect(() => {
@@ -284,7 +296,7 @@ function AIWindow() {
             ) : (
               // AI message - full width, no avatar, with markdown support
               <div className="w-full p-3 rounded-lg bg-transparent">
-                <div className="text-sm text-zinc-200 prose prose-sm dark:prose-invert max-w-none font-mono">
+                <div className="text-[1.3rem] text-zinc-200 prose prose-sm dark:prose-invert max-w-none font-sans">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -303,7 +315,7 @@ function AIWindow() {
                         const isInline = !match;
 
                         return isInline ? (
-                          <code className="bg-[#2c2c2c] text-zinc-100 border-1 rounded px-1 py-0.3 font-mono text-sm" {...props}>
+                          <code className="bg-[#2c2c2c] text-zinc-100 border-1 rounded px-1 py-0.3 font-mono text-[1.3rem]" {...props}>
                             {children}
                           </code>
                         ) : (
@@ -315,6 +327,8 @@ function AIWindow() {
                     {message.content}
                   </ReactMarkdown>
                 </div>
+                <p className="text-sm font-mono">
+                </p>
               </div>
             )}
           </div>
@@ -328,18 +342,26 @@ function AIWindow() {
         )}
         {/* Invisible div for auto-scrolling */}
         <div ref={chatEndRef} />
+        {isStreaming &&
+          <Quantum
+            size="25"
+            speed="1.75"
+            color="var(--foreground)"
+          />
+        }
       </div>
 
       {/* Input area */}
       <div className="p-4 border-t bg-background">
         <div className="flex items-center gap-2">
           <textarea
+            ref={textareaRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask Devine AI about your code..."
-            className="flex-1 font-mono focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none"
-            rows={10}
+            placeholder="Ask your AI about your code..."
+            className="flex-1 font-mono focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none overflow-y-auto"
+            rows={1}
             disabled={isLoading}
           />
           <Button
