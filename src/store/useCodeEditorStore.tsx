@@ -68,6 +68,27 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
             });
         },
 
+        resetCode: () => {
+            const { language, editor } = get();
+            if (editor) {
+                // Get default code for current language
+                const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
+
+                // Set editor value to default code
+                editor.setValue(defaultCode);
+
+                // Remove saved code from localStorage
+                localStorage.removeItem(`editor-code-${language}`);
+
+                // Clear output and error
+                set({
+                    output: "",
+                    error: null,
+                    executionResult: null
+                });
+            }
+        },
+
         runCode: async () => {
             const { language, getCode } = get();
             const code = getCode();

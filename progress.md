@@ -16,7 +16,7 @@
 # Todo
 - ```Important``` Add ability to provide input to the stream.
 - ```Important``` Add functionality to Ask AI Button
-- Add reset button which will reset the code to default
+- ✅ Add reset button which will reset the code to default
 - Make Footer in Sidebar Responsive.
 - Remove mock files and filename
 - Change name to ForgeIDE ( Optional )

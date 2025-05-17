@@ -42,8 +42,8 @@ async function Header() {
                 </div>
             </div>
 
-            {/* Middle section - Search */}
-            <div className="ml-[25vw]">
+            {/* Middle section - Code Controls */}
+            <div className="ml-[25vw] flex items-center">
                 <RunButton />
             </div>
 

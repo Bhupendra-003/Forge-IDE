@@ -55,6 +55,7 @@ export interface CodeEditorState {
     setTheme: (theme: string) => void;
     setFontSize: (fontSize: number) => void;
     runCode: () => Promise<void>;
+    resetCode: () => void;
 }
 
 export interface Snippet {

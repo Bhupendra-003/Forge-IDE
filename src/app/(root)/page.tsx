@@ -14,11 +14,13 @@ import { RxCross2 } from "react-icons/rx"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
 import { useOutputPanelStore } from "@/store/useOutputPanelStore"
 import { Button } from "@/components/ui/button"
-import { Code } from "lucide-react"
+import { Code, RotateCcw } from "lucide-react"
+import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 
 export default function Page() {
   const { isOpen: isAIWindowOpen } = useAIWindowStore();
   const { isVisible: isOutputPanelVisible, closeOutputPanel } = useOutputPanelStore();
+  const { resetCode } = useCodeEditorStore();
 
   return (
     <div className="[--header-height:calc(--spacing(14))]">
@@ -50,6 +52,9 @@ export default function Page() {
                           <div className='w-fit h-full flex p-1 pr-8 border-t-2 border-t-primary items-center gap-4 px-3 bg-muted/50'>
                             <Code size={24} />
                             <p className="text-lg font-sans">Editor</p>
+                          </div>
+                          <div onClick={resetCode} className="bg-background ml-auto hover:bg-muted  p-2 rounded-sm">
+                            <RotateCcw  size={20} />
                           </div>
                         </div>
                         <EditorPanel />
