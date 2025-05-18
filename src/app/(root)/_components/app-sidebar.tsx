@@ -2,23 +2,27 @@
 import * as React from "react"
 import {
   Sparkles,
-  Inbox,
   Settings2,
   Code,
   Terminal,
+  MessageCircle
 } from "lucide-react"
 
-import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  useSidebar,
 } from "@/components/ui/sidebar"
-import { SearchForm } from "@/components/search-form"
 import { NavFiles } from "@/components/nav-files"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
 import { useOutputPanelStore } from "@/store/useOutputPanelStore"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 // Custom NavMain component that supports click handlers
 function CustomNavMain({
@@ -32,19 +36,31 @@ function CustomNavMain({
     onClick?: () => void
   }[]
 }) {
+  const { state, isMobile } = useSidebar();
+  const isCollapsed = state === "collapsed";
+
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 text-nowrap">
       {items.map((item) => (
-        <button
-          key={item.title}
-          onClick={item.onClick}
-          className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2 ${
-            item.isActive ? "bg-muted" : ""
-          }`}
-        >
-          <item.icon size={20}/>
-          <span className="text-[16px]">{item.title}</span>
-        </button>
+        <Tooltip key={item.title}>
+          <TooltipTrigger asChild>
+            <button
+              onClick={item.onClick}
+              className={`w-full justify-${isCollapsed ? "center" : "start"} h-8 flex gap-2 items-center border-none outline-none text-foreground rounded-md hover:bg-muted p-2 ${item.isActive ? "bg-muted" : ""
+                }`}
+            >
+              <item.icon size={isCollapsed ? 18 : 14} />
+              {!isCollapsed && <span className="text-[16px]">{item.title}</span>}
+            </button>
+          </TooltipTrigger>
+          <TooltipContent
+            side="right"
+            align="center"
+            hidden={!isCollapsed || isMobile}
+          >
+            {item.title}
+          </TooltipContent>
+        </Tooltip>
       ))}
     </div>
   );
@@ -65,7 +81,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Editor",
         url: "#",
         icon: Code,
-        onClick: () => {},
+        onClick: () => { },
       },
       {
         title: "Devine AI",
@@ -81,35 +97,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         onClick: toggleOutputPanel,
       },
       {
-        title: "Inbox",
+        title: "Chat",
         url: "#",
-        icon: Inbox,
-        onClick: () => {},
+        icon: MessageCircle,
+        onClick: () => { },
       },
     ],
-    files: [
+    checkpoints: [
       {
-        name: "main.py",
-        url: "#",
+        name: "cp1",
         emoji: "",
       },
     ],
   }
   return (
     <Sidebar
-      className="rounded top-(--header-height) h-[calc(100svh-var(--header-height))]!"
+      collapsible="icon"
+      className="rounded-md top-(--header-height) h-[calc(100svh-var(--header-height))]!"
       {...props}
     >
       <SidebarHeader>
-        <SearchForm />
         <div className="mt-2"><CustomNavMain items={data.navMain} /></div>
       </SidebarHeader>
       <SidebarContent>
-        <NavFiles files={data.files} />
+        <NavFiles files={data.checkpoints} />
       </SidebarContent>
       <SidebarFooter>
         <DialogDemo />
-        <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
   )
@@ -128,14 +142,31 @@ import {
 import Settings from "./Settings"
 
 export function DialogDemo() {
+  const { state, isMobile } = useSidebar();
+  const isCollapsed = state === "collapsed";
+
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2" variant="ghost">
-          <Settings2 size={20} />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DialogTrigger asChild>
+            <Button
+              className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2`}
+              variant="ghost"
+            >
+              <Settings2 size={isCollapsed ? 18 : 20} />
+              {!isCollapsed && "Settings"}
+            </Button>
+          </DialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent
+          side="right"
+          align="center"
+          hidden={!isCollapsed || isMobile}
+        >
           Settings
-        </Button>
-      </DialogTrigger>
+        </TooltipContent>
+      </Tooltip>
       <DialogContent className="sm:max-w-[900px] bg-popover">
         <DialogHeader>
           <DialogTitle>

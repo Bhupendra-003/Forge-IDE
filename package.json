@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.31.4",
     "@clerk/nextjs": "^6.12.12",
     "@google/generative-ai": "^0.24.1",
     "@monaco-editor/react": "^4.7.0",

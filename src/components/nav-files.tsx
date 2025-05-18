@@ -31,7 +31,6 @@ export function NavFiles({
 }: {
   files: {
     name: string
-    url: string
     emoji: string
   }[]
 }) {
@@ -44,7 +43,7 @@ export function NavFiles({
         {files.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url} title={item.name}>
+              <a title={item.name}>
                 <span>{item.emoji}</span>
                 <span>{item.name}</span>
               </a>
@@ -71,7 +70,7 @@ export function NavFiles({
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Download className="text-muted-foreground" />
-                  <span>Download</span>
+                  <span>Download Code</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Play className="text-muted-foreground" />

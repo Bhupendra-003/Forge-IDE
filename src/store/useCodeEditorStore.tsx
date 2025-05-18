@@ -8,12 +8,12 @@ const getInitialState = () => {
     if (typeof window === 'undefined') {
         return {
             language: 'javascript',
-            fontSize: 14,
+            fontSize: 22,
             theme: 'vs-dark',
         }
     }
     const savedLanguage = localStorage.getItem('editor-language') || 'javascript';
-    const savedFontSize = localStorage.getItem('editor-fontSize') || '14';
+    const savedFontSize = localStorage.getItem('editor-fontSize') || '22';
     const savedTheme = localStorage.getItem('editor-theme') || 'vs-dark';
     return {
         language: savedLanguage,
