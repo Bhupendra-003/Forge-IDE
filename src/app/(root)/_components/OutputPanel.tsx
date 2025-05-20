@@ -3,19 +3,25 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useCodeEditorStore } from '@/store/useCodeEditorStore'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { IoSparklesSharp } from 'react-icons/io5';
-import { IoLogoPython } from "react-icons/io5";
-import { CheckCircle } from "lucide-react";
-import { Copy } from "lucide-react";
+import { IoLogoPython, IoLogoJavascript } from "react-icons/io5";
+import { SiTypescript, SiGo, SiRust, SiCplusplus, SiRuby, SiSwift } from "react-icons/si";
+import { RiJavaLine } from "react-icons/ri";
+import { TbBrandCSharp } from "react-icons/tb";
+import { CheckCircle, Copy } from "lucide-react";
 import { Ring } from 'ldrs/react'
 import { FaCode } from "react-icons/fa";
 import 'ldrs/react/Ring.css'
+import { useAIMessageStore } from '@/store/useAIMessageStore';
+import useMounted from '@/hooks/useMounted';
 
 function OutputPanel() {
-    const { output, error, isRunning, executionResult } = useCodeEditorStore();
+    const { output, error, isRunning, executionResult, language } = useCodeEditorStore();
+    const sendMessage = useAIMessageStore(state => state.sendMessage);
     const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
     const content = error || output;
     const prevExecutionResultRef = useRef(executionResult);
+    const mounted = useMounted();
 
     // Update time when execution result changes (code is run)
     useEffect(() => {
@@ -25,12 +31,10 @@ function OutputPanel() {
             prevExecutionResultRef.current = executionResult;
 
             // Make sure the output panel is visible when code is run
-            if (window) {
-                // Import and use the store directly to avoid circular dependencies
-                // eslint-disable-next-line @typescript-eslint/no-require-imports
-                const { openOutputPanel } = require('@/store/useOutputPanelStore').useOutputPanelStore.getState();
-                openOutputPanel();
-            }
+            // Import and use the store directly to avoid circular dependencies
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
+            const { openOutputPanel } = require('@/store/useOutputPanelStore').useOutputPanelStore.getState();
+            openOutputPanel();
         }
     }, [executionResult]);
 
@@ -48,8 +52,62 @@ function OutputPanel() {
                         <IoMdCheckmarkCircleOutline size={24} color="var(--color-check)" />
                     </div>
                     <p>{">"}</p>
-                    <div className='flex items-center gap-2'><IoLogoPython size={24} />
-                        <p className="text-lg font-sans">palindrome.py</p>
+                    <div className='flex items-center gap-2'>
+                        {/* Only render language-specific content when mounted to prevent hydration errors */}
+                        {mounted ? (
+                            <>
+                                {/* Language icon based on current language */}
+                                {(() => {
+                                    switch (language) {
+                                        case 'javascript':
+                                            return <IoLogoJavascript size={24} />;
+                                        case 'typescript':
+                                            return <SiTypescript size={24} />;
+                                        case 'python':
+                                            return <IoLogoPython size={24} />;
+                                        case 'java':
+                                            return <RiJavaLine size={24} />;
+                                        case 'go':
+                                            return <SiGo size={24} />;
+                                        case 'rust':
+                                            return <SiRust size={24} />;
+                                        case 'cpp':
+                                            return <SiCplusplus size={24} />;
+                                        case 'csharp':
+                                            return <TbBrandCSharp size={24} />;
+                                        case 'ruby':
+                                            return <SiRuby size={24} />;
+                                        case 'swift':
+                                            return <SiSwift size={24} />;
+                                        default:
+                                            return <FaCode size={24} />;
+                                    }
+                                })()}
+                                <p className="text-lg font-sans">
+                                    {(() => {
+                                        // Get file name based on language
+                                        const fileExtensions: Record<string, string> = {
+                                            javascript: 'main.js',
+                                            typescript: 'main.ts',
+                                            python: 'main.py',
+                                            java: 'Main.java',
+                                            go: 'main.go',
+                                            rust: 'main.rs',
+                                            cpp: 'main.cpp',
+                                            csharp: 'Program.cs',
+                                            ruby: 'main.rb',
+                                            swift: 'main.swift'
+                                        };
+                                        return fileExtensions[language] || 'main.txt';
+                                    })()}
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <FaCode size={24} />
+                                <p className="text-lg font-sans">Code</p>
+                            </>
+                        )}
                     </div>
                     <div className="ml-2 mt-2">
                         {isRunning && (
@@ -81,10 +139,24 @@ function OutputPanel() {
                         )}
                     </button>
                 )}
-                    <div className='flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2'>
+                    <button
+                        onClick={() => {
+                            if (content) {
+                                const instruction = error
+                                    ? "Help me fix this error in my code:"
+                                    : "Explain this output from my code:";
+                                console.log("Sending to AI:", { content, instruction, language });
+                                sendMessage(content, instruction);
+                            }
+                        }}
+                        disabled={!content}
+                        className='flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed'
+                    >
                         <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
-                    </div>
-                    <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
+                    </button>
+                    {mounted && currentTime && (
+                        <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
+                    )}
                 </div>
             </div>
 

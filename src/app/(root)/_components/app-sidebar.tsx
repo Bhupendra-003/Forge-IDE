@@ -3,9 +3,9 @@ import * as React from "react"
 import {
   Sparkles,
   Settings2,
-  Code,
   Terminal,
-  MessageCircle
+  MessageCircle,
+  File
 } from "lucide-react"
 
 import {
@@ -78,10 +78,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     navMain: [
       {
-        title: "Editor",
+        title: "Files",
         url: "#",
-        icon: Code,
+        icon: File,
         onClick: () => { },
+        items: [
+          {
+            title: "New File",
+            language: "javascript",
+            onClick: () => { },
+          }
+        ]
       },
       {
         title: "Devine AI",

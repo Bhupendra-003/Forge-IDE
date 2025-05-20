@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { useAIWindowStore } from '@/store/useAIWindowStore';
-import { useCodeEditorStore } from '@/store/useCodeEditorStore';
 import { RxCross2 } from "react-icons/rx";
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -10,6 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useAIMessageStore } from '@/store/useAIMessageStore';
 // Custom ThinkingDots component for loading animation
 const ThinkingDots = () => {
   const [dots, setDots] = useState('');
@@ -69,221 +69,38 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
   );
 };
 
+
 function AIWindow() {
   const { closeAIWindow } = useAIWindowStore();
-  const { getCode, language } = useCodeEditorStore();
   const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState<{ role: 'user' | 'ai'; content: string }[]>([
-    { role: 'ai', content: 'Hello! I\'m Devine AI. How can I help you with your code today?' }
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [streamingMessage, setStreamingMessage] = useState('');
-  const textareaRef = useRef(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Load chat history from localStorage on component mount
-  useEffect(() => {
-    const savedMessages = localStorage.getItem('ai-chat-history');
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    }
-  }, []);
-
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('ai-chat-history', JSON.stringify(messages));
-  }, [messages]);
+  // Use our AI message store
+  const messages = useAIMessageStore(state => state.messages);
+  const isLoading = useAIMessageStore(state => state.isLoading);
+  const streamingMessage = useAIMessageStore(state => state.streamingMessage);
+  const sendMessage = useAIMessageStore(state => state.sendMessage);
+  const clearChat = useAIMessageStore(state => state.clearChat);
 
   // Auto-scroll to bottom when messages change or when streaming
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, streamingMessage]);
 
-  // Function to handle cleanup when streaming is done or aborted
-  const cleanupStreaming = () => {
-    setIsLoading(false);
-    if (abortControllerRef.current) {
-      abortControllerRef.current = null;
-    }
-  };
-
-  // Function to abort ongoing streaming
-  const abortStreaming = () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-      cleanupStreaming();
-    }
-  };
-
+  // Auto-resize textarea based on content
   useEffect(() => {
-    const textarea = textareaRef.current as HTMLTextAreaElement | null;
+    const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = 'auto' // Reset to shrink if needed
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`
+      textarea.style.height = 'auto'; // Reset to shrink if needed
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
     }
-  }, [inputValue])
-
-  // Effect to clean up streaming on component unmount
-  useEffect(() => {
-    return () => {
-      abortStreaming();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Function to clear chat history
-  const clearChat = () => {
-    // Clear messages from state
-    setMessages([
-      { role: 'ai', content: 'Chat history cleared. How can I help you with your code today?' }
-    ]);
-
-    // Clear from localStorage
-    localStorage.removeItem('ai-chat-history');
-
-    // Abort any ongoing streaming
-    abortStreaming();
-  };
+  }, [inputValue]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
-
-    // Abort any ongoing streaming
-    abortStreaming();
-
-    // Create a new abort controller for this request
-    abortControllerRef.current = new AbortController();
-    const signal = abortControllerRef.current.signal;
-
-    // Get code from editor if available
-    const currentCode = getCode();
-
-    // Add code context to the message if there's code in the editor
-    let userContent = inputValue;
-    if (currentCode && currentCode.trim()) {
-      userContent = `${inputValue}\n\nHere's the code in my editor (${language}):\n\`\`\`${language}\n${currentCode}\n\`\`\``;
-    }
-
-    // Add user message
-    const userMessage = { role: 'user' as const, content: userContent };
-    setMessages(prev => [...prev, { role: 'user', content: inputValue }]); // Show only the user's question in the UI
-    setIsLoading(true);
-    setStreamingMessage(''); // Reset streaming message
-
-    try {
-      // Call AI service with streaming enabled
-      const response = await fetch('/api/ai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage],
-          stream: true,
-        }),
-        signal,
-      });
-
-      if (!response.ok) {
-        console.error('API response not OK:', response.status, response.statusText);
-        throw new Error(`Failed to get AI response: ${response.status} ${response.statusText}`);
-      }
-
-      // Handle streaming response
-      const reader = response.body?.getReader();
-      if (!reader) {
-        throw new Error('Response body is not readable');
-      }
-
-      // Create a placeholder for the AI message
-      setMessages(prev => [...prev, { role: 'ai', content: '' }]);
-
-      // Process the stream
-      let accumulatedResponse = '';
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        // Decode the chunk
-        const chunk = decoder.decode(value, { stream: true });
-
-        try {
-          // Parse the chunk as JSON
-          const jsonChunks = chunk
-            .split('\n')
-            .filter(line => line.trim())
-            .map(line => {
-              try {
-                return JSON.parse(line);
-              } catch (e) {
-                console.error('Error parsing JSON line:', e, line);
-                return null;
-              }
-            })
-            .filter(item => item !== null);
-
-          // Process each JSON chunk
-          for (const jsonChunk of jsonChunks) {
-            if (jsonChunk && jsonChunk.chunk) {
-              accumulatedResponse += jsonChunk.chunk;
-
-              // Update the streaming message
-              setStreamingMessage(accumulatedResponse);
-
-              // Update the last message in the messages array
-              setMessages(prev => {
-                const newMessages = [...prev];
-                newMessages[newMessages.length - 1] = {
-                  role: 'ai',
-                  content: accumulatedResponse
-                };
-                return newMessages;
-              });
-            }
-          }
-        } catch (e) {
-          console.error('Error parsing chunk:', e, chunk);
-        }
-      }
-
-    } catch (err) {
-      const error = err as Error;
-      // Only handle error if it's not an abort error
-      if (error.name !== 'AbortError') {
-        console.error('Error getting AI response:', error);
-
-        // Provide a more helpful error message to the user
-        let errorMessage = 'Sorry, I encountered an error processing your request.';
-
-        if (error instanceof Error) {
-          if (error.message.includes('empty response')) {
-            errorMessage = 'I received an empty response from the Gemini API. This might be due to content filtering or an issue with the API key. Please try a different query or check your API configuration.';
-          } else {
-            errorMessage = `Error: ${error.message}. Please try again with a different query or check the console for more details.`;
-          }
-        }
-
-        setMessages(prev => {
-          // If we already added a placeholder AI message, update it
-          if (prev[prev.length - 1].role === 'ai') {
-            const newMessages = [...prev];
-            newMessages[newMessages.length - 1] = {
-              role: 'ai',
-              content: errorMessage
-            };
-            return newMessages;
-          }
-          // Otherwise add a new AI message
-          return [...prev, { role: 'ai', content: errorMessage }];
-        });
-      }
-    } finally {
-      cleanupStreaming();
-      setInputValue('');
-    }
+    await sendMessage(inputValue);
+    setInputValue('');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -324,7 +141,7 @@ function AIWindow() {
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
-        {messages.map((message, index) => (
+        {messages.map((message: { role: 'user' | 'ai'; content: string }, index: number) => (
           <div
             key={index}
             className={`flex ${message.role === 'user' ? 'justify-end' : 'w-full'}`}

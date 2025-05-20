@@ -59,7 +59,6 @@ const generationConfig = {
 };
 
 
-
 export async function POST(request: Request) {
   try {
     const { messages, stream = true } = await request.json();
@@ -139,3 +138,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

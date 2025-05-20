@@ -12,14 +12,38 @@
 ## Day 3
 - Added Footer in Layout, made footer component
 
+.......
+
+## Day 7
+- Added AI Component
+- AI Component is able to stream data
+- AI can take the context of the code.
+
+## Day 8
+- Formatted AI Response.
+- Improved AI System Prompt
+
+## Day 9
+-  Add reset button which will reset the code to default
+-  Make Footer in Sidebar Responsive.
+-  Remove mock files and filename
+
+## Day 10
+-  remove search form from sidebar
+-  edit inbox in sidebar
+-  make sidebar icons small
 
 # Todo
 - ```Important``` Add ability to provide input to the stream.
 - ```Important``` Add functionality to Ask AI Button
-- ✅ Add reset button which will reset the code to default
-- Make Footer in Sidebar Responsive.
-- Remove mock files and filename
+- Convert file system to checkpoint
 - Change name to ForgeIDE ( Optional )
-- remove search form from sidebar
-- edit inbox in sidebar
-- make sidebar icons small
+- Add Button to get Time Complexity.
+
+- ✅ Add reset button which will reset the code to default
+- ✅ Make Footer in Sidebar Responsive.
+- ✅ Remove mock files and filename
+- ✅ remove search form from sidebar
+- ✅ edit inbox in sidebar
+- ✅ make sidebar icons small
+
