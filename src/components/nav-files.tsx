@@ -25,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 
 export function NavFiles({
   files,
@@ -35,6 +36,7 @@ export function NavFiles({
   }[]
 }) {
   const { isMobile } = useSidebar()
+  const { setCurrentFile } = useCodeEditorStore()
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -43,10 +45,14 @@ export function NavFiles({
         {files.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a title={item.name}>
+              <button
+                title={item.name}
+                onClick={() => setCurrentFile(item.name)}
+                className="w-full flex items-center gap-2 text-left"
+              >
                 <span>{item.emoji}</span>
                 <span>{item.name}</span>
-              </a>
+              </button>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -72,7 +78,7 @@ export function NavFiles({
                   <Download className="text-muted-foreground" />
                   <span>Download Code</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setCurrentFile(item.name)}>
                   <Play className="text-muted-foreground" />
                   <span>Run File</span>
                 </DropdownMenuItem>

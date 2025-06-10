@@ -80,11 +80,15 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                 // Remove saved code from localStorage
                 localStorage.removeItem(`editor-code-${language}`);
 
+                // Clear current file since we're resetting to default code
+                localStorage.removeItem("editor-current-file");
+
                 // Clear output and error
                 set({
                     output: "",
                     error: null,
-                    executionResult: null
+                    executionResult: null,
+                    currentFile: null
                 });
             }
         },

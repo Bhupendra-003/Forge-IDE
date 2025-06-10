@@ -7,7 +7,7 @@ import { IoLogoPython, IoLogoJavascript } from "react-icons/io5";
 import { SiTypescript, SiGo, SiRust, SiCplusplus, SiRuby, SiSwift } from "react-icons/si";
 import { RiJavaLine } from "react-icons/ri";
 import { TbBrandCSharp } from "react-icons/tb";
-import { CheckCircle, Copy } from "lucide-react";
+import { CheckCircle, Copy, XCircle } from "lucide-react";
 import { Ring } from 'ldrs/react'
 import { FaCode } from "react-icons/fa";
 import 'ldrs/react/Ring.css'
@@ -15,7 +15,7 @@ import { useAIMessageStore } from '@/store/useAIMessageStore';
 import useMounted from '@/hooks/useMounted';
 
 function OutputPanel() {
-    const { output, error, isRunning, executionResult, language } = useCodeEditorStore();
+    const { output, error, isRunning, executionResult, language, currentFile } = useCodeEditorStore();
     const sendMessage = useAIMessageStore(state => state.sendMessage);
     const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
@@ -49,7 +49,11 @@ function OutputPanel() {
             <div className="w-full h-12 px-2 flex border items-center justify-between">
                 <div className='flex items-center gap-2'>
                     <div className='w-8 h-8 bg-muted rounded-full border flex items-center justify-center '>
-                        <IoMdCheckmarkCircleOutline size={24} color="var(--color-check)" />
+                        {error ? (
+                            <XCircle size={24} color="var(--color-destructive)" />
+                        ) : (
+                            <IoMdCheckmarkCircleOutline size={24} color={output ? "var(--color-success)" : "var(--color-foreground)"} />
+                        )}
                     </div>
                     <p>{">"}</p>
                     <div className='flex items-center gap-2'>
@@ -85,7 +89,11 @@ function OutputPanel() {
                                 })()}
                                 <p className="text-lg font-sans">
                                     {(() => {
-                                        // Get file name based on language
+                                        // Get current file name from the store
+                                        // If we have a current file name, use it, otherwise fall back to language-based name
+                                        if (currentFile) return currentFile;
+
+                                        // Fall back to language-based naming
                                         const fileExtensions: Record<string, string> = {
                                             javascript: 'main.js',
                                             typescript: 'main.ts',

@@ -48,12 +48,14 @@ export interface CodeEditorState {
     fontSize: number;
     editor: monaco.editor.IStandaloneCodeEditor | null;
     executionResult: ExecutionResult | null;
+    currentFile: string | null;
 
     setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
     getCode: () => string;
     setLanguage: (language: string) => void;
     setTheme: (theme: string) => void;
     setFontSize: (fontSize: number) => void;
+    setCurrentFile: (fileName: string | null) => void;
     runCode: () => Promise<void>;
     resetCode: () => void;
 }
