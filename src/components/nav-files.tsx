@@ -1,14 +1,13 @@
 "use client"
 
+import React, { useState } from "react"
 import {
   MoreHorizontal,
   Trash2,
   Pencil,
-  Copy,
   Download,
   Play,
 } from "lucide-react"
-import { useState } from "react"
 
 import {
   DropdownMenu,

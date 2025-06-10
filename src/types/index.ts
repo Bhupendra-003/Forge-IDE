@@ -51,7 +51,9 @@ export interface Checkpoint {
 export interface CheckpointState {
     checkpoints: Checkpoint[];
     isCreating: boolean;
+    isHydrated: boolean;
 
+    hydrate: () => void;
     createCheckpoint: (name: string, code: string, language: string) => void;
     loadCheckpoint: (id: string) => void;
     renameCheckpoint: (id: string, newName: string) => void;

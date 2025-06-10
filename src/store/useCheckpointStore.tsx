@@ -50,6 +50,13 @@ export const useCheckpointStore = create<CheckpointState>((set, get) => ({
     isCreating: false,
     isHydrated: false,
 
+    hydrate: () => {
+        if (typeof window !== 'undefined' && !get().isHydrated) {
+            const storedCheckpoints = getStoredCheckpoints();
+            set({ checkpoints: storedCheckpoints, isHydrated: true });
+        }
+    },
+
     createCheckpoint: (name: string, code: string, language: string) => {
         const newCheckpoint: Checkpoint = {
             id: generateId(),

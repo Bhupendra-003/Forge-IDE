@@ -19,6 +19,8 @@ import { NavFiles } from "@/components/nav-files"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
 import { useOutputPanelStore } from "@/store/useOutputPanelStore"
 import { useCheckpointStore } from "@/store/useCheckpointStore"
+import { useHydration } from "@/hooks/useHydration"
+import { useEffect } from "react"
 import {
   Tooltip,
   TooltipContent,
@@ -70,7 +72,14 @@ function CustomNavMain({
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { toggleAIWindow } = useAIWindowStore();
   const { isVisible: isOutputPanelVisible, toggleOutputPanel } = useOutputPanelStore();
-  const { checkpoints } = useCheckpointStore();
+  const { checkpoints, hydrate } = useCheckpointStore();
+  const isHydrated = useHydration();
+
+  useEffect(() => {
+    if (isHydrated) {
+      hydrate();
+    }
+  }, [isHydrated, hydrate]);
 
   const data = {
     user: {
@@ -113,6 +122,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
     ],
   }
+
+  // Don't render checkpoints until hydrated to prevent hydration mismatch
+  const checkpointsToRender = isHydrated ? checkpoints : [];
+
   return (
     <Sidebar
       collapsible="icon"
@@ -123,7 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div className="mt-2"><CustomNavMain items={data.navMain} /></div>
       </SidebarHeader>
       <SidebarContent>
-        <NavFiles files={checkpoints} />
+        <NavFiles files={checkpointsToRender} />
       </SidebarContent>
       <SidebarFooter>
         <DialogDemo />
