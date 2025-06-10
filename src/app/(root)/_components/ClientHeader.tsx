@@ -9,6 +9,7 @@ import HeaderProfileBtn from './HeaderProfileBtn';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
+import CheckpointButton from './CheckpointButton';
 import { LuSun } from "react-icons/lu";
 import ThemeProvider from './ThemeProvider';
 
@@ -27,9 +28,10 @@ function ClientHeader() {
                 </div>
             </div>
 
-            {/* Middle section - Search */}
-            <div className="ml-[25vw]">
+            {/* Middle section - Code Controls */}
+            <div className="ml-[25vw] flex items-center gap-3">
                 <RunButton />
+                <CheckpointButton />
             </div>
 
             {/* Right section */}

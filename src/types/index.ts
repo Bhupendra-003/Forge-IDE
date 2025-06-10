@@ -39,6 +39,27 @@ export interface ExecutionResult {
     error: string | null;
 }
 
+export interface Checkpoint {
+    id: string;
+    name: string;
+    code: string;
+    language: string;
+    timestamp: number;
+    emoji: string;
+}
+
+export interface CheckpointState {
+    checkpoints: Checkpoint[];
+    isCreating: boolean;
+
+    createCheckpoint: (name: string, code: string, language: string) => void;
+    loadCheckpoint: (id: string) => void;
+    renameCheckpoint: (id: string, newName: string) => void;
+    deleteCheckpoint: (id: string) => void;
+    downloadCheckpoint: (id: string) => void;
+    getCheckpoint: (id: string) => Checkpoint | undefined;
+}
+
 export interface CodeEditorState {
     language: string;
     output: string;

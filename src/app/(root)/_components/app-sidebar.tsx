@@ -18,6 +18,7 @@ import {
 import { NavFiles } from "@/components/nav-files"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
 import { useOutputPanelStore } from "@/store/useOutputPanelStore"
+import { useCheckpointStore } from "@/store/useCheckpointStore"
 import {
   Tooltip,
   TooltipContent,
@@ -69,6 +70,7 @@ function CustomNavMain({
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { toggleAIWindow } = useAIWindowStore();
   const { isVisible: isOutputPanelVisible, toggleOutputPanel } = useOutputPanelStore();
+  const { checkpoints } = useCheckpointStore();
 
   const data = {
     user: {
@@ -110,12 +112,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         onClick: () => { },
       },
     ],
-    checkpoints: [
-      {
-        name: "cp1",
-        emoji: "",
-      },
-    ],
   }
   return (
     <Sidebar
@@ -127,7 +123,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div className="mt-2"><CustomNavMain items={data.navMain} /></div>
       </SidebarHeader>
       <SidebarContent>
-        <NavFiles files={data.checkpoints} />
+        <NavFiles files={checkpoints} />
       </SidebarContent>
       <SidebarFooter>
         <DialogDemo />
@@ -158,7 +154,7 @@ export function DialogDemo() {
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
             <Button
-              className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-foreground rounded-md hover:bg-muted p-2`}
+              className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2`}
               variant="ghost"
             >
               <Settings2 size={isCollapsed ? 18 : 20} />

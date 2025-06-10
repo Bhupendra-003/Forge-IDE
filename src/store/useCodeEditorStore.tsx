@@ -31,6 +31,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         error: null,
         editor: null as monaco.editor.IStandaloneCodeEditor | null,
         executionResult: null,
+        currentFile: typeof window !== 'undefined' ? localStorage.getItem('editor-current-file') : null,
 
         getCode: () => get().editor?.getValue() || '',
 
@@ -50,6 +51,17 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         setFontSize: (fontSize: number) => {
             localStorage.setItem("editor-font-size", fontSize.toString());
             set({ fontSize });
+        },
+
+        setCurrentFile: (fileName: string | null) => {
+            if (typeof window !== 'undefined') {
+                if (fileName) {
+                    localStorage.setItem('editor-current-file', fileName);
+                } else {
+                    localStorage.removeItem('editor-current-file');
+                }
+            }
+            set({ currentFile: fileName });
         },
 
         setLanguage: (language: string) => {
