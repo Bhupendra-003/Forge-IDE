@@ -17,7 +17,7 @@ function HeaderProfileBtn() {
 
             <SignedOut>
                 <SignInButton mode="modal">
-                    <button className="bg-white hover:bg-gray-100 scale-90 text-black py-2 px-4 ">
+                    <button className="bg-white rounded hover:bg-gray-100 scale-90 text-black py-2 px-4 ">
                         Sign In
                     </button>
                 </SignInButton>

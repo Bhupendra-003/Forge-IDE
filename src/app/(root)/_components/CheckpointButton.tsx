@@ -34,7 +34,7 @@ function CheckpointButton() {
                     <div className="w-2 mr-1 flex items-center justify-center">
                         <Bookmark size={16} />
                     </div>
-                    <p>Checkpoint</p>
+                    <p>Create Checkpoint</p>
                 </Button>
             </div>
 
