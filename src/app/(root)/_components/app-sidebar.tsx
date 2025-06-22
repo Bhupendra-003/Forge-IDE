@@ -114,12 +114,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: isOutputPanelVisible,
         onClick: toggleOutputPanel,
       },
-      {
-        title: "Chat",
-        url: "#",
-        icon: MessageCircle,
-        onClick: () => { },
-      },
     ],
   }
 
