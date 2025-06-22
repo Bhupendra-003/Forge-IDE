@@ -40,7 +40,7 @@ function ClientHeader() {
                     <LanguageSelector />
                     <ThemeSelector />
                 </div>
-                {!isPro && (
+                {/* {!isPro && (
                     <Link
                         href="/pricing"
                         className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-purple-500/20 hover:border-purple-500/40 bg-gradient-to-r from-purple-500/10
@@ -52,18 +52,18 @@ function ClientHeader() {
                             Pro
                         </span>
                     </Link>
-                )}
+                )} */}
                 <ThemeProvider>
                     <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                         <LuSun size={18} />
                     </div>
                 </ThemeProvider>
-                <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
+                {/* <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                     <LuShare2 size={18} />
                 </div>
                 <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                     <MoreVertical size={18} />
-                </div>
+                </div> */}
                 <HeaderProfileBtn />
             </div>
         </nav>
