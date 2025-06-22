@@ -1,10 +1,10 @@
 "use client";
 import React from 'react';
-import { MoreVertical } from "lucide-react";
-import { LuShare2 } from "react-icons/lu";
+// import { MoreVertical } from "lucide-react";
+// import { LuShare2 } from "react-icons/lu";
 import { SidebarTrigger } from '../../../components/ui/sidebar';
-import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
+// import Link from 'next/link';
+// import { Sparkles } from 'lucide-react';
 import HeaderProfileBtn from './HeaderProfileBtn';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
@@ -16,7 +16,7 @@ import ThemeProvider from './ThemeProvider';
 function ClientHeader() {
     // We'll use a simplified version without server-side data
     // In a real app, you would fetch user data client-side or use a context provider
-    const isPro = false;
+    // const isPro = false;
 
     return (
         <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">
