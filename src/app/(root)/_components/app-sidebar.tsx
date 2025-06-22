@@ -4,7 +4,7 @@ import {
   Sparkles,
   Settings2,
   Terminal,
-  MessageCircle,
+  // MessageCircle,
   File
 } from "lucide-react"
 
