@@ -46,4 +46,4 @@
 - ✅ remove search form from sidebar
 - ✅ edit inbox in sidebar
 - ✅ make sidebar icons small
-
+- User might face difficulty finding where the language change options are.
