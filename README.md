@@ -213,7 +213,7 @@ We welcome contributions from developers of all skill levels! Here's how you can
 
 ## 🚧 Project Status
 Heads up!
-Devine is currently under active development.
+Devine is currently under **active development**.
 New features and improvements are dropping faster than your internet during a Zoom call.
 Contributions, ideas, and bug reports are super welcome while we level this thing up! 🛠️🔥
 ## 📝 License
