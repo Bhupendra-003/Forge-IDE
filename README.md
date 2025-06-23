@@ -211,6 +211,11 @@ We welcome contributions from developers of all skill levels! Here's how you can
 
 **Let's connect!** Feel free to reach out if you'd like to contribute regularly or collaborate on new features.
 
+## 🚧 Project Status
+Heads up!
+Devine is currently under active development.
+New features and improvements are dropping faster than your internet during a Zoom call.
+Contributions, ideas, and bug reports are super welcome while we level this thing up! 🛠️🔥
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -232,9 +237,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+
 <div align="center">
 
 **Built with ❤️ by developers, for developers**
+
 
 ⭐ **Star this repo if you find it helpful!** ⭐
 
