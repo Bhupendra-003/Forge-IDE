@@ -23,9 +23,14 @@ function ClientHeader() {
             {/* Left section */}
             <div className="flex items-center space-x-2">
                 <SidebarTrigger className="-ml-1 scale-160" size="lg" />
-                <div className="flex items-center border-l border-zinc-700 pl-2 ml-1">
-                    <span className="text-2xl font-semibold text-foreground">Devine</span>
+                <div className="relative h-10 w-34 border-l border-zinc-700 pl-2 ml-1 overflow-hidden">
+                    <img
+                        src="logo.png"
+                        alt="Logo"
+                        className="absolute  top-1/2 left-4/7 -translate-x-1/2 -translate-y-1/2"
+                    />
                 </div>
+
             </div>
 
             {/* Middle section - Code Controls */}
