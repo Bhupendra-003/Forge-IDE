@@ -21,7 +21,7 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
         pistonRuntime: { language: "javascript", version: "18.15.0" },
         monacoLanguage: "javascript",
         defaultCode: `// JavaScript Playground
-console.log("Hello Devine");`,
+console.log("Hello Forge");`,
     },
     typescript: {
         id: "typescript",
@@ -30,7 +30,7 @@ console.log("Hello Devine");`,
         pistonRuntime: { language: "typescript", version: "5.0.3" },
         monacoLanguage: "typescript",
         defaultCode: `// TypeScript Playground
-console.log("Hello Devine");`,
+console.log("Hello Forge");`,
     },
     python: {
         id: "python",
@@ -39,7 +39,7 @@ console.log("Hello Devine");`,
         pistonRuntime: { language: "python", version: "3.10.0" },
         monacoLanguage: "python",
         defaultCode: `# Python Playground
-print("Hello Devine")`,
+print("Hello Forge")`,
     },
     java: {
         id: "java",
@@ -49,7 +49,7 @@ print("Hello Devine")`,
         monacoLanguage: "java",
         defaultCode: `public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello Devine");
+        System.out.println("Hello Forge");
     }
 }`,
     },
@@ -64,7 +64,7 @@ print("Hello Devine")`,
 import "fmt"
 
 func main() {
-    fmt.Println("Hello Devine")
+    fmt.Println("Hello Forge")
 }`,
     },
     rust: {
@@ -74,7 +74,7 @@ func main() {
         pistonRuntime: { language: "rust", version: "1.68.2" },
         monacoLanguage: "rust",
         defaultCode: `fn main() {
-    println!("Hello Devine");
+    println!("Hello Forge");
 }`,
     },
     cpp: {
@@ -86,7 +86,7 @@ func main() {
         defaultCode: `#include <iostream>
 
 int main() {
-    std::cout << "Hello Devine" << std::endl;
+    std::cout << "Hello Forge" << std::endl;
     return 0;
 }`,
     },
@@ -100,7 +100,7 @@ int main() {
 
 class Program {
     static void Main() {
-        Console.WriteLine("Hello Devine");
+        Console.WriteLine("Hello Forge");
     }
 }`,
     },
@@ -110,7 +110,7 @@ class Program {
         logoPath: "/ruby.png",
         pistonRuntime: { language: "ruby", version: "3.0.1" },
         monacoLanguage: "ruby",
-        defaultCode: `puts "Hello Devine"`,
+        defaultCode: `puts "Hello Forge"`,
     },
     swift: {
         id: "swift",
@@ -118,7 +118,7 @@ class Program {
         logoPath: "/swift.png",
         pistonRuntime: { language: "swift", version: "5.3.3" },
         monacoLanguage: "swift",
-        defaultCode: `print("Hello Devine")`,
+        defaultCode: `print("Hello Forge")`,
     },
 };
 

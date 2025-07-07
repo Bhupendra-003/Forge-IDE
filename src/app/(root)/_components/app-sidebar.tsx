@@ -102,7 +102,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ]
       },
       {
-        title: "Devine AI",
+        title: "Forge AI",
         url: "#",
         icon: Sparkles,
         onClick: toggleAIWindow,

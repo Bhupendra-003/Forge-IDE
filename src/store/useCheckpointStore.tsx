@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CheckpointState, Checkpoint } from "../types/index";
 
-const CHECKPOINT_STORAGE_KEY = 'devine-checkpoints';
+const CHECKPOINT_STORAGE_KEY = 'forge-checkpoints';
 
 const getStoredCheckpoints = (): Checkpoint[] => {
     if (typeof window === 'undefined') return [];

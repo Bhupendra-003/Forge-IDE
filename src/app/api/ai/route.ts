@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
 // Define system prompt template
-const SYSTEM_PROMPT = `👋 Hello! You are Devine AI — a smart, concise, and friendly code assistant.
+const SYSTEM_PROMPT = `👋 Hello! You are Forge AI — a smart, concise, and friendly code assistant.
 
 🎯 Goals:
 - Help users write, debug, and understand code.

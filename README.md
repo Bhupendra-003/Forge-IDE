@@ -1,8 +1,8 @@
-# Devine - AI-Powered Code Editor
+# Forge - AI-Powered Code Editor
 
 <div align="center">
 
-![Devine Logo](public/screenshot-for-readme.png)
+![Forge Logo](public/screenshot-for-readme.png)
 
 **A modern, AI-powered online code editor with multi-language support and intelligent assistance**
 
@@ -15,7 +15,7 @@
 
 ## 🚀 Overview
 
-Devine is a feature-rich, browser-based code editor that combines the power of Monaco Editor with AI assistance to provide an exceptional coding experience. Whether you're learning to code, prototyping ideas, or working on projects, Devine offers a seamless environment with support for multiple programming languages.
+Forge is a feature-rich, browser-based code editor that combines the power of Monaco Editor with AI assistance to provide an exceptional coding experience. Whether you're learning to code, prototyping ideas, or working on projects, Forge offers a seamless environment with support for multiple programming languages.
 
 ## ✨ Key Features
 
@@ -25,7 +25,7 @@ Devine is a feature-rich, browser-based code editor that combines the power of M
 - **Language-Specific Templates**: Pre-configured starter code for each language
 
 ### 🤖 **AI-Powered Assistant**
-- **Devine AI**: Integrated AI assistant for code help, debugging, and explanations
+- **Forge AI**: Integrated AI assistant for code help, debugging, and explanations
 - **Real-time Chat**: Interactive chat interface with markdown support
 - **Code Analysis**: Get insights and suggestions for your code
 - **Streaming Responses**: Real-time AI responses with typing indicators
@@ -98,8 +98,8 @@ Devine is a feature-rich, browser-based code editor that combines the power of M
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/devine.git
-   cd devine
+   git clone https://github.com/yourusername/forge.git
+   cd forge
    ```
 
 2. **Install dependencies**
@@ -139,7 +139,7 @@ Devine is a feature-rich, browser-based code editor that combines the power of M
 ## 📁 Project Structure
 
 ```
-devine/
+forge/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── (root)/            # Main application routes
@@ -166,7 +166,7 @@ devine/
 4. **View Output**: Check results in the output panel
 
 ### Using AI Assistant
-1. **Open AI Panel**: Click "Devine AI" in the sidebar
+1. **Open AI Panel**: Click "Forge AI" in the sidebar
 2. **Ask Questions**: Type your coding questions or paste code for review
 3. **Get Help**: Receive explanations, debugging help, and suggestions
 4. **Copy Code**: Use the copy button on code blocks in AI responses
@@ -213,7 +213,7 @@ We welcome contributions from developers of all skill levels! Here's how you can
 
 ## 🚧 Project Status
 Heads up!
-Devine is currently under **active development**.
+Forge is currently under **active development**.
 New features and improvements are dropping faster than your internet during a Zoom call.
 Contributions, ideas, and bug reports are super welcome while we level this thing up! 🛠️🔥
 ## 📝 License
@@ -232,8 +232,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact & Support
 
 - **Live Demo**: [forgeide.vercel.app](https://forgeide.vercel.app)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/devine/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/devine/discussions)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/forge/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/forge/discussions)
 
 ---
 

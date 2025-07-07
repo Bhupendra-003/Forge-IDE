@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Devine",
-  description: "Devine - Share and run code snippets",
+  title: "Forge",
+  description: "Forge - Share and run code snippets",
 };
 
 export default function RootLayout({

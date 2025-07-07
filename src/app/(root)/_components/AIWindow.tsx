@@ -116,7 +116,7 @@ function AIWindow() {
       <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
         <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
           <Bot size={20} />
-          <p className="text-lg font-sans">Devine AI</p>
+          <p className="text-lg font-sans">Forge AI</p>
         </div>
         <div className="flex items-center gap-2 pr-2">
           <Button

@@ -30,7 +30,7 @@ interface AIMessageState {
 // Initialize with default messages from localStorage if available
 const getInitialMessages = (): Message[] => {
   if (typeof window === 'undefined') {
-    return [{ role: 'ai', content: 'Hello! I\'m Devine AI. How can I help you with your code today?' }];
+    return [{ role: 'ai', content: 'Hello! I\'m Forge AI. How can I help you with your code today?' }];
   }
   
   const savedMessages = localStorage.getItem('ai-chat-history');
@@ -42,7 +42,7 @@ const getInitialMessages = (): Message[] => {
     }
   }
   
-  return [{ role: 'ai', content: 'Hello! I\'m Devine AI. How can I help you with your code today?' }];
+  return [{ role: 'ai', content: 'Hello! I\'m Forge AI. How can I help you with your code today?' }];
 };
 
 export const useAIMessageStore = create<AIMessageState>((set, get) => ({
