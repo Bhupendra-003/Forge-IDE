@@ -1,8 +1,8 @@
-# Forge - AI-Powered Code Editor
+# Forge IDE - AI-Powered Code Editor
 
 <div align="center">
 
-![Forge Logo](public/screenshot-for-readme.png)
+![ForgeIDE Logo](public/logo.png)
 
 **A modern, AI-powered online code editor with multi-language support and intelligent assistance**
 
@@ -207,7 +207,7 @@ We welcome contributions from developers of all skill levels! Here's how you can
 - A backend developer with API expertise
 - A UI/UX designer with great ideas
 - An AI/ML engineer interested in code assistance features
-- A DevOps engineer who can help with deployment and scaling
+
 
 **Let's connect!** Feel free to reach out if you'd like to contribute regularly or collaborate on new features.
 
