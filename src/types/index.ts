@@ -72,7 +72,7 @@ export interface CodeEditorState {
     editor: monaco.editor.IStandaloneCodeEditor | null;
     executionResult: ExecutionResult | null;
     currentFile: string | null;
-    input: String | null;
+    input: string | null;
 
     setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
     getCode: () => string;

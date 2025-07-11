@@ -170,14 +170,14 @@ function OutputPanel() {
 
             {/* Output content */}
             <div className="w-full p-4 relative h-[calc(100%-80px)]">
-                <div className='space-y-3'>
+                <div className='space-y-3 mb-4'>
                     <p className='font-bold'>Input</p>
                     <textarea
-                    className='w-full bg-accent p-3 rounded-lg outline-none'
+                    className='w-full bg-accent max-h-68 p-3 rounded-lg outline-none'
                     spellCheck="false"
                     name="" 
                     id=""
-                    rows={6}
+                    rows={4}
                     onChange={(e)=>handleInput(e.target.value)}
                     >
                     </textarea>
