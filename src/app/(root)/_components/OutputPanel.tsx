@@ -15,7 +15,7 @@ import { useAIMessageStore } from '@/store/useAIMessageStore';
 import useMounted from '@/hooks/useMounted';
 
 function OutputPanel() {
-    const { output, handleInput, error, isRunning, executionResult, language, currentFile } = useCodeEditorStore();
+    const { output, handleInput, error, fontSize, isRunning, executionResult, language, currentFile } = useCodeEditorStore();
     const sendMessage = useAIMessageStore(state => state.sendMessage);
     const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
@@ -173,12 +173,13 @@ function OutputPanel() {
                 <div className='space-y-3 mb-4'>
                     <p className='font-bold text-lg'>Input</p>
                     <textarea
-                    className='w-full bg-accent h-fit scrollbar-custom max-h-68 p-3 rounded-lg outline-none'
+                    className='w-full bg-accent font-mono h-fit scrollbar-custom max-h-68 p-3 rounded-lg outline-none'
                     spellCheck="false"
                     name="" 
                     id=""
                     rows={4}
                     onChange={(e)=>handleInput(e.target.value)}
+                    style={{ fontSize: `${fontSize}px` }}
                     >
                     </textarea>
                 </div>
@@ -186,11 +187,11 @@ function OutputPanel() {
                 {content ? (
                     error ? <>
                     <div className="w-full h-full gap-2">
-                        <pre className="whitespace-pre-wrap text-destructive text-lg">{error}</pre>
+                        <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: `${fontSize}px` }}>{error}</pre>
                     </div>
                     </> : <>
                     <div className="w-full text-lg h-full gap-2">
-                        <pre className="whitespace-pre-wrap text-foreground">{output}</pre>
+                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: `${fontSize}px` }}>{output}</pre>
                     </div>
                     </>
                 ) : (
