@@ -52,7 +52,7 @@ function OutputPanel() {
                         {error ? (
                             <XCircle size={24} color="var(--color-destructive)" />
                         ) : (
-                            <IoMdCheckmarkCircleOutline size={24} color={output ? "var(--color-success)" : "var(--color-foreground)"} />
+                            <IoMdCheckmarkCircleOutline size={24} color={output ? "var(--color-check)" : "var(--color-foreground)"} />
                         )}
                     </div>
                     <p>{">"}</p>
