@@ -15,7 +15,7 @@ import { useAIMessageStore } from '@/store/useAIMessageStore';
 import useMounted from '@/hooks/useMounted';
 
 function OutputPanel() {
-    const { output, error, isRunning, executionResult, language, currentFile } = useCodeEditorStore();
+    const { output, handleInput, error, isRunning, executionResult, language, currentFile } = useCodeEditorStore();
     const sendMessage = useAIMessageStore(state => state.sendMessage);
     const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
@@ -170,6 +170,18 @@ function OutputPanel() {
 
             {/* Output content */}
             <div className="w-full p-4 relative h-[calc(100%-80px)]">
+                <div className='space-y-3'>
+                    <p className='font-bold'>Input</p>
+                    <textarea
+                    className='w-full bg-accent p-3 rounded-lg outline-none'
+                    spellCheck="false"
+                    name="" 
+                    id=""
+                    rows={6}
+                    onChange={(e)=>handleInput(e.target.value)}
+                    >
+                    </textarea>
+                </div>
 
                 {content ? (
                     error ? <>

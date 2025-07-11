@@ -55,7 +55,7 @@ function EditorPanel() {
                                 lineNumbersMinChars: 2,
                                 glyphMargin: false,
                                 automaticLayout: true,
-                                scrollBeyondLastLine: false,
+                                scrollBeyondLastLine: true,
                                 padding: { top: 10, bottom: 0 },
                                 renderWhitespace: "selection",
                                 fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',

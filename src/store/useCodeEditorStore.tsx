@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { CodeEditorState } from "../types/index";
 import * as monaco from "monaco-editor";
 import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
+import { useState } from "react";
+
 
 const getInitialState = () => {
     //if we are on the server, return values
@@ -32,6 +34,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         editor: null as monaco.editor.IStandaloneCodeEditor | null,
         executionResult: null,
         currentFile: typeof window !== 'undefined' ? localStorage.getItem('editor-current-file') : null,
+        input: '',
 
         getCode: () => get().editor?.getValue() || '',
 
@@ -80,6 +83,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
             });
         },
 
+        handleInput: (value: string) => {
+            // setInput(e.target.value) // Remove local state update
+            set({ input: value }); // Update Zustand store state
+        },
+
         resetCode: () => {
             const { language, editor } = get();
             if (editor) {
@@ -106,7 +114,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         },
 
         runCode: async () => {
-            const { language, getCode } = get();
+            const { language, getCode, input } = get();
             const code = getCode();
             if (!code) {
                 set({ error: "Please enter some code" })
@@ -115,6 +123,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
             set({ isRunning: true, error: null, output: "" })
             try {
+                
                 const runtime = LANGUAGE_CONFIG[language].pistonRuntime;
                 const response = await fetch("https://emkc.org/api/v2/piston/execute", {
                     method: "POST",
@@ -127,6 +136,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                         files: [{
                             content: code
                         }],
+                        stdin: input
                     })
                 })
                 const data = await response.json();
