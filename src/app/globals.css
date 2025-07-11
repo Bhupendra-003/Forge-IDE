@@ -149,7 +149,7 @@
   background: var(--color-input);
 }
 .dark .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: var(--color-popover);
+  background-color: var(--color-foreground);
 }
 /* .border{
   @apply border;
