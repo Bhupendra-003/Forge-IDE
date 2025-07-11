@@ -173,7 +173,7 @@ function OutputPanel() {
                 <div className='space-y-3 mb-4'>
                     <p className='font-bold text-lg'>Input</p>
                     <textarea
-                    className='w-full bg-accent font-mono h-fit scrollbar-custom max-h-68 p-3 rounded-lg outline-none'
+                    className='w-full bg-accent font-mono h-fit scrollbar-custom min-h-16 max-h-68 p-3 rounded-lg outline-none'
                     spellCheck="false"
                     name="" 
                     id=""

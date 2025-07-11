@@ -34,15 +34,15 @@ function ClientHeader() {
             </div>
 
             {/* Middle section - Code Controls */}
-            <div className="ml-[25vw] flex items-center gap-3">
-                <RunButton />
+            <div className="ml-[12vw] flex items-center gap-3">
                 <CheckpointButton />
+                <RunButton />
+                <LanguageSelector />
             </div>
 
             {/* Right section */}
             <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-2">
-                    <LanguageSelector />
                     <ThemeSelector />
                 </div>
                 {/* {!isPro && (

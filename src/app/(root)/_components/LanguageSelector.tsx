@@ -18,16 +18,16 @@ function LanguageSelector() {
     return (
         <div>
             <Select value={language} onValueChange={handleLanguageSelect}>
-                <SelectTrigger className="w-[150px] border">
+                <SelectTrigger className="w-36 scale-110 border">
                     <SelectValue placeholder="Language" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="scale-110 w-36">
                     {Object.values(LANGUAGE_CONFIG).map((lang, index) => {
                         return ((
                             <SelectItem
                                 key={index}
                                 value={lang.id}
-                                className="flex items-center justify-between"
+                                className="flex items-center  justify-between"
                                 onClick={() => handleLanguageSelect(lang.id)}
                             >
                                 <div className="flex gap-3 items-center">
