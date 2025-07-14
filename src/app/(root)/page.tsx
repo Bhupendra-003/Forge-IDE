@@ -31,18 +31,18 @@ export default function Page() {
           <SidebarInset className="flex flex-col flex-1">
 
             {/* Main content area */}
-            <div className="flex flex-1 px-2 pb-2">
+            <div className="flex flex-1 px-2 pb-2 overflow-hidden">
               <ResizablePanelGroup direction="horizontal">
                 {/* Left panel with editor and output */}
                 <ResizablePanel
-                  minSize={10}
+                  minSize={20}
                   defaultSize={isAIWindowOpen || isOutputPanelVisible ? 50 : 100}
                   className="rounded-sm"
                 >
                   <ResizablePanelGroup direction="vertical">
                     {/* Editor panel */}
                     <ResizablePanel
-                      minSize={10}
+                      minSize={20}
                       defaultSize={isAIWindowOpen ? 70 : 80}
                       className="rounded-sm bg-muted/50"
                     >
@@ -65,7 +65,7 @@ export default function Page() {
                     {isAIWindowOpen && isOutputPanelVisible && (
                       <>
                         <ResizableHandle className="w-full my-1 bg-black" />
-                        <ResizablePanel minSize={10} defaultSize={30} className="rounded-sm bg-muted/50">
+                        <ResizablePanel minSize={20} defaultSize={30} className="rounded-sm bg-muted/50">
                           <div className="h-full w-full aspect-video">
                             <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
                               <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
@@ -78,7 +78,7 @@ export default function Page() {
                                   variant="ghost"
                                   className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
                                 >
-                                  <RxCross2 size={18} />
+                                  <RxCross2 size={24} />
                                 </Button>
                               </div>
                             </div>
@@ -95,7 +95,7 @@ export default function Page() {
                 {(isAIWindowOpen || isOutputPanelVisible) && (
                   <>
                     <ResizableHandle className="mx-1 w-2 bg-gray-300 dark:bg-background-2 rounded-full" />
-                    <ResizablePanel minSize={10} defaultSize={50} className="rounded-sm bg-muted/50">
+                    <ResizablePanel minSize={30} defaultSize={50} className="rounded-sm bg-muted/50">
                       {isAIWindowOpen ? (
                         // AI Window
                         <div className="h-full w-full aspect-video">
