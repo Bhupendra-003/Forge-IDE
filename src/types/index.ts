@@ -1,6 +1,4 @@
 import * as monaco from "monaco-editor";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Monaco } from "@monaco-editor/react";
 import { Id } from "../../convex/_generated/dataModel";
 
 export interface Theme {
@@ -73,6 +71,18 @@ export interface CodeEditorState {
     executionResult: ExecutionResult | null;
     currentFile: string | null;
     input: string | null;
+    minimap: boolean;
+    scrollBeyondLastLine: boolean;
+    fontFamily: string;
+    fontLigatures: boolean;
+    cursorBlinking: "blink" | "smooth" | "phase" | "expand" | "solid";
+    smoothScrolling: boolean;
+    contextmenu: boolean;
+    lineHeight: number;
+    letterSpacing: number;
+    roundedSelection: boolean;
+    verticalScrollbarSize: number;
+    horizontalScrollbarSize: number;
 
     setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
     getCode: () => string;
@@ -83,6 +93,18 @@ export interface CodeEditorState {
     runCode: () => Promise<void>;
     resetCode: () => void;
     handleInput: (value: string) => void;
+    setMinimap: (minimap: boolean) => void;
+    setScrollBeyondLastLine: (scrollBeyondLastLine: boolean) => void;
+    setFontFamily: (fontFamily: string) => void;
+    setFontLigatures: (fontLigatures: boolean) => void;
+    setCursorBlinking: (cursorBlinking: "blink" | "smooth" | "phase" | "expand" | "solid") => void;
+    setSmoothScrolling: (smoothScrolling: boolean) => void;
+    setContextmenu: (contextmenu: boolean) => void;
+    setLineHeight: (lineHeight: number) => void;
+    setLetterSpacing: (letterSpacing: number) => void;
+    setRoundedSelection: (roundedSelection: boolean) => void;
+    setVerticalScrollbarSize: (size: number) => void;
+    setHorizontalScrollbarSize: (size: number) => void;
 }
 
 export interface Snippet {

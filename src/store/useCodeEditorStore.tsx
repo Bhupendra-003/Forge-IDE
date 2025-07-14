@@ -8,18 +8,55 @@ const getInitialState = () => {
     //if we are on the server, return values
     if (typeof window === 'undefined') {
         return {
-            language: 'javascript',
+            language: 'python',
             fontSize: 22,
             theme: 'vs-dark',
+            minimap: false,
+            scrollBeyondLastLine: true,
+            fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',
+            fontLigatures: true,
+            cursorBlinking: 'smooth' as const,
+            smoothScrolling: true,
+            contextmenu: true,
+            lineHeight: 1.6,
+            letterSpacing: 0.5,
+            roundedSelection: true,
+            verticalScrollbarSize: 16,
+            horizontalScrollbarSize: 16,
         }
     }
-    const savedLanguage = localStorage.getItem('editor-language') || 'javascript';
+    const savedLanguage = localStorage.getItem('editor-language') || 'python';
     const savedFontSize = localStorage.getItem('editor-fontSize') || '22';
     const savedTheme = localStorage.getItem('editor-theme') || 'vs-dark';
+    const savedMinimap = localStorage.getItem('editor-minimap') === 'true';
+    const savedScrollBeyondLastLine = localStorage.getItem('editor-scrollBeyondLastLine') !== 'false';
+    const savedFontFamily = localStorage.getItem('editor-fontFamily') || '"Fira Code", "Cascadia Code", "Consolas", "monospace"';
+    const savedFontLigatures = localStorage.getItem('editor-fontLigatures') !== 'false';
+    const savedCursorBlinking = (localStorage.getItem('editor-cursorBlinking') || 'smooth') as "blink" | "smooth" | "phase" | "expand" | "solid";
+    const savedSmoothScrolling = localStorage.getItem('editor-smoothScrolling') !== 'false';
+    const savedContextmenu = localStorage.getItem('editor-contextmenu') !== 'false';
+    const savedLineHeight = Number(localStorage.getItem('editor-lineHeight')) || 1.6;
+    const savedLetterSpacing = Number(localStorage.getItem('editor-letterSpacing')) || 0.5;
+    const savedRoundedSelection = localStorage.getItem('editor-roundedSelection') !== 'false';
+    const savedVerticalScrollbarSize = Number(localStorage.getItem('editor-verticalScrollbarSize')) || 16;
+    const savedHorizontalScrollbarSize = Number(localStorage.getItem('editor-horizontalScrollbarSize')) || 16;
+
     return {
         language: savedLanguage,
         fontSize: Number(savedFontSize),
         theme: savedTheme,
+        minimap: savedMinimap,
+        scrollBeyondLastLine: savedScrollBeyondLastLine,
+        fontFamily: savedFontFamily,
+        fontLigatures: savedFontLigatures,
+        cursorBlinking: savedCursorBlinking,
+        smoothScrolling: savedSmoothScrolling,
+        contextmenu: savedContextmenu,
+        lineHeight: savedLineHeight,
+        letterSpacing: savedLetterSpacing,
+        roundedSelection: savedRoundedSelection,
+        verticalScrollbarSize: savedVerticalScrollbarSize,
+        horizontalScrollbarSize: savedHorizontalScrollbarSize,
     }
 }
 
@@ -51,7 +88,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         },
 
         setFontSize: (fontSize: number) => {
-            localStorage.setItem("editor-font-size", fontSize.toString());
+            localStorage.setItem("editor-fontSize", fontSize.toString());
             set({ fontSize });
         },
 
@@ -85,6 +122,55 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         handleInput: (value: string) => {
             // setInput(e.target.value) // Remove local state update
             set({ input: value }); // Update Zustand store state
+        },
+
+        setMinimap: (minimap: boolean) => {
+            localStorage.setItem("editor-minimap", minimap.toString());
+            set({ minimap });
+        },
+        setScrollBeyondLastLine: (scrollBeyondLastLine: boolean) => {
+            localStorage.setItem("editor-scrollBeyondLastLine", scrollBeyondLastLine.toString());
+            set({ scrollBeyondLastLine });
+        },
+        setFontFamily: (fontFamily: string) => {
+            localStorage.setItem("editor-fontFamily", fontFamily);
+            set({ fontFamily });
+        },
+        setFontLigatures: (fontLigatures: boolean) => {
+            localStorage.setItem("editor-fontLigatures", fontLigatures.toString());
+            set({ fontLigatures });
+        },
+        setCursorBlinking: (cursorBlinking: "blink" | "smooth" | "phase" | "expand" | "solid") => {
+            localStorage.setItem("editor-cursorBlinking", cursorBlinking);
+            set({ cursorBlinking });
+        },
+        setSmoothScrolling: (smoothScrolling: boolean) => {
+            localStorage.setItem("editor-smoothScrolling", smoothScrolling.toString());
+            set({ smoothScrolling });
+        },
+        setContextmenu: (contextmenu: boolean) => {
+            localStorage.setItem("editor-contextmenu", contextmenu.toString());
+            set({ contextmenu });
+        },
+        setLineHeight: (lineHeight: number) => {
+            localStorage.setItem("editor-lineHeight", lineHeight.toString());
+            set({ lineHeight });
+        },
+        setLetterSpacing: (letterSpacing: number) => {
+            localStorage.setItem("editor-letterSpacing", letterSpacing.toString());
+            set({ letterSpacing });
+        },
+        setRoundedSelection: (roundedSelection: boolean) => {
+            localStorage.setItem("editor-roundedSelection", roundedSelection.toString());
+            set({ roundedSelection });
+        },
+        setVerticalScrollbarSize: (size: number) => {
+            localStorage.setItem("editor-verticalScrollbarSize", size.toString());
+            set({ verticalScrollbarSize: size });
+        },
+        setHorizontalScrollbarSize: (size: number) => {
+            localStorage.setItem("editor-horizontalScrollbarSize", size.toString());
+            set({ horizontalScrollbarSize: size });
         },
 
         resetCode: () => {

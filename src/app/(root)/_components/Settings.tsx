@@ -10,14 +10,41 @@ import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Settings = () => {
-    const { fontSize, setFontSize } = useCodeEditorStore();
+    const {
+        fontSize,
+        setFontSize,
+        minimap,
+        setMinimap,
+        scrollBeyondLastLine,
+        setScrollBeyondLastLine,
+        fontFamily,
+        setFontFamily,
+        fontLigatures,
+        setFontLigatures,
+        cursorBlinking,
+        setCursorBlinking,
+        smoothScrolling,
+        setSmoothScrolling,
+        contextmenu,
+        setContextmenu,
+        lineHeight,
+        setLineHeight,
+        letterSpacing,
+        setLetterSpacing,
+        roundedSelection,
+        setRoundedSelection,
+        verticalScrollbarSize,
+        setVerticalScrollbarSize,
+        horizontalScrollbarSize,
+        setHorizontalScrollbarSize
+    } = useCodeEditorStore();
     return (
         <div className="max-h-[700px] overflow-y-scroll scrollbar-custom">
             <Card>
                 <CardContent className="space-y-6 pt-6">
                     <div className="flex items-center justify-between">
                         <Label>Minimap</Label>
-                        <Switch defaultChecked={false} />
+                        <Switch checked={minimap} onCheckedChange={setMinimap} />
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -44,63 +71,74 @@ const Settings = () => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <Label>Automatic Layout</Label>
-                        <Switch defaultChecked={true} />
-                    </div>
-
-                    <div className="flex items-center justify-between">
                         <Label>Scroll Beyond Last Line</Label>
-                        <Switch defaultChecked={false} />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <Label>Render Whitespace</Label>
-                        <Input defaultValue="selection" className="w-40" />
+                        <Switch checked={scrollBeyondLastLine} onCheckedChange={setScrollBeyondLastLine} />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Font Family</Label>
-                        <Input defaultValue='"Fira Code", "Cascadia Code", "Consolas", "monospace"' />
+                        <Input
+                            value={fontFamily}
+                            onChange={(e) => setFontFamily(e.target.value)}
+                        />
                     </div>
 
                     <div className="flex items-center justify-between">
                         <Label>Font Ligatures</Label>
-                        <Switch defaultChecked={true} />
+                        <Switch checked={fontLigatures} onCheckedChange={setFontLigatures} />
                     </div>
 
                     <div className="flex items-center justify-between">
                         <Label>Cursor Blinking</Label>
-                        <Input defaultValue="smooth" className="w-40" />
+                        <Select value={cursorBlinking} onValueChange={setCursorBlinking}>
+                            <SelectTrigger className="w-40">
+                                <SelectValue placeholder="Cursor Blinking" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="blink">Blink</SelectItem>
+                                <SelectItem value="smooth">Smooth</SelectItem>
+                                <SelectItem value="phase">Phase</SelectItem>
+                                <SelectItem value="expand">Expand</SelectItem>
+                                <SelectItem value="solid">Solid</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     <div className="flex items-center justify-between">
                         <Label>Smooth Scrolling</Label>
-                        <Switch defaultChecked={true} />
+                        <Switch checked={smoothScrolling} onCheckedChange={setSmoothScrolling} />
                     </div>
 
                     <div className="flex items-center justify-between">
                         <Label>Context Menu</Label>
-                        <Switch defaultChecked={true} />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <Label>Render Line Highlight</Label>
-                        <Input defaultValue="all" className="w-40" />
+                        <Switch checked={contextmenu} onCheckedChange={setContextmenu} />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Line Height</Label>
-                        <Input type="number" defaultValue={1.6} className="w-24" step="0.1" />
+                        <Input
+                            type="number"
+                            value={lineHeight}
+                            onChange={(e) => setLineHeight(Number(e.target.value))}
+                            className="w-24"
+                            step="0.1"
+                        />
                     </div>
 
                     <div className="space-y-2">
                         <Label>Letter Spacing</Label>
-                        <Input type="number" defaultValue={0.5} className="w-24" step="0.1" />
+                        <Input
+                            type="number"
+                            value={letterSpacing}
+                            onChange={(e) => setLetterSpacing(Number(e.target.value))}
+                            className="w-24"
+                            step="0.1"
+                        />
                     </div>
 
                     <div className="flex items-center justify-between">
                         <Label>Rounded Selection</Label>
-                        <Switch defaultChecked={true} />
+                        <Switch checked={roundedSelection} onCheckedChange={setRoundedSelection} />
                     </div>
 
                     <Separator />
@@ -110,11 +148,21 @@ const Settings = () => {
                         <div className="flex space-x-4">
                             <div>
                                 <Label className="text-sm">Vertical</Label>
-                                <Input type="number" defaultValue={8} className="w-20" />
+                                <Input
+                                    type="number"
+                                    value={verticalScrollbarSize}
+                                    onChange={(e) => setVerticalScrollbarSize(Number(e.target.value))}
+                                    className="w-20"
+                                />
                             </div>
                             <div>
                                 <Label className="text-sm">Horizontal</Label>
-                                <Input type="number" defaultValue={8} className="w-20" />
+                                <Input
+                                    type="number"
+                                    value={horizontalScrollbarSize}
+                                    onChange={(e) => setHorizontalScrollbarSize(Number(e.target.value))}
+                                    className="w-20"
+                                />
                             </div>
                         </div>
                     </div>

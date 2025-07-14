@@ -9,7 +9,26 @@ import { EditorPanelSkeleton } from "@/components/EditorPanelSkeleton";
 
 function EditorPanel() {
     const clerk = useClerk();
-    const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
+    const {
+        language,
+        theme,
+        fontSize,
+        editor,
+        setFontSize,
+        setEditor,
+        minimap,
+        scrollBeyondLastLine,
+        fontFamily,
+        fontLigatures,
+        cursorBlinking,
+        smoothScrolling,
+        contextmenu,
+        lineHeight,
+        letterSpacing,
+        roundedSelection,
+        verticalScrollbarSize,
+        horizontalScrollbarSize
+    } = useCodeEditorStore();
 
     const mounted = useMounted();
 
@@ -20,20 +39,12 @@ function EditorPanel() {
     }, [language, editor]);
 
     useEffect(() => {
-        const savedFontSize = localStorage.getItem("editor-font-size");
+        const savedFontSize = localStorage.getItem("editor-fontSize");
         if (savedFontSize) setFontSize(parseInt(savedFontSize));
     }, [setFontSize]);
 
     const handleEditorChange = (value: string | undefined) => {
         if (value) localStorage.setItem(`editor-code-${language}`, value);
-    };
-
-    // Font size change handler - used by Settings component
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleFontSizeChange = (newSize: number) => {
-        const size = Math.min(Math.max(newSize, 12), 24);
-        setFontSize(size);
-        localStorage.setItem("editor-font-size", size.toString());
     };
 
     if (!mounted) return null;
@@ -50,26 +61,22 @@ function EditorPanel() {
                             beforeMount={defineMonacoThemes}
                             onMount={(editor) => setEditor(editor)}
                             options={{
-                                minimap: { enabled: false },
+                                minimap: { enabled: minimap },
                                 fontSize,
                                 lineNumbersMinChars: 2,
-                                glyphMargin: false,
-                                automaticLayout: true,
-                                scrollBeyondLastLine: true,
+                                scrollBeyondLastLine,
                                 padding: { top: 10, bottom: 0 },
-                                renderWhitespace: "selection",
-                                fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',
-                                fontLigatures: true,
-                                cursorBlinking: "smooth",
-                                smoothScrolling: true,
-                                contextmenu: true,
-                                renderLineHighlight: "all",
-                                lineHeight: 1.6,
-                                letterSpacing: 0.5,
-                                roundedSelection: true,
+                                fontFamily,
+                                fontLigatures,
+                                cursorBlinking,
+                                smoothScrolling,
+                                contextmenu,
+                                lineHeight,
+                                letterSpacing,
+                                roundedSelection,
                                 scrollbar: {
-                                    verticalScrollbarSize: 8,
-                                    horizontalScrollbarSize: 8,
+                                    verticalScrollbarSize,
+                                    horizontalScrollbarSize,
                                 },
                             }}
                         />
