@@ -40,7 +40,7 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
 
   // Default values shown
   return (
-    <div className="relative group">
+    <div className="relative group scrollbar-custom">
       <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <Button
           onClick={handleCopy}
@@ -111,7 +111,7 @@ function AIWindow() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full max-w-full h-full flex flex-col overflow-clip">
       {/* Header */}
       <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
         <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
@@ -140,7 +140,7 @@ function AIWindow() {
       </div>
 
       {/* Chat area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
+      <div className="flex-1 scrollbar-custom w-full overflow-y-auto p-4 space-y-4 bg-muted/30">
         {messages.map((message: { role: 'user' | 'ai'; content: string }, index: number) => (
           <div
             key={index}
@@ -219,20 +219,21 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="flex-1 font-mono text-lg focus:ring-0 focus:outline-none min-h-[40px] max-h-[200px] p-2 rounded-md border bg-muted/30 resize-none overflow-y-auto"
+            className="flex-1 scrollbar-custom font-mono text-lg focus:ring-0 focus:outline-none min-h-[48px] max-h-[200px] p-2 px-4 rounded-md border bg-muted/30 resize-none overflow-y-auto"
             rows={1}
             disabled={isLoading}
           />
           <Button
             onClick={handleSendMessage}
             size="icon"
-            className="h-10 w-10 rounded-full mt-auto"
+            className="h-12 w-25 rounded-full mt-auto"
             disabled={isLoading || !inputValue.trim()}
           >
-            <Send className="h-5 w-5" />
+            <Send className='scale-125 mr-2' />
+            <p className="text-[.65vw]">Send</p>
           </Button>
         </div>
-      </div>
+      </div>  
     </div>
   );
 }
