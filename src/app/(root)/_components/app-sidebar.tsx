@@ -2,7 +2,7 @@
 import * as React from "react"
 import {
   Sparkles,
-  Settings2,
+  Settings as SettingsIcon,
   Terminal,
   // MessageCircle,
   File
@@ -164,7 +164,7 @@ export function DialogDemo() {
               className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2`}
               variant="ghost"
             >
-              <Settings2 size={isCollapsed ? 18 : 20} />
+              <SettingsIcon size={isCollapsed ? 18 : 20} />
               {!isCollapsed && "Settings"}
             </Button>
           </DialogTrigger>
