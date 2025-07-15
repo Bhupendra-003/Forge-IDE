@@ -26,6 +26,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import Image from 'next/image';
 
 
 function ClientHeader() {
@@ -39,10 +40,12 @@ function ClientHeader() {
             <div className="flex items-center space-x-2">
                 <SidebarTrigger className="-ml-1 scale-160" size="lg" />
                 <div className="relative h-10 w-34 border-l border-zinc-700 pl-2 ml-1 overflow-hidden">
-                    <img
-                        src="logo.png"
+                    <Image
+                        src="/logo.png"
+                        width={500}
+                        height={500}
                         alt="Logo"
-                        className="absolute  top-1/2 left-4/7 -translate-x-1/2 -translate-y-1/2"
+                        className="absolute top-1/2 left-4/7 -translate-x-1/2 -translate-y-1/2"
                     />
                 </div>
 

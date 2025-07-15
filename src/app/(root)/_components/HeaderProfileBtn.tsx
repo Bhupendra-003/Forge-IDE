@@ -1,6 +1,5 @@
 "use client";
 import { SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
-import { User } from "lucide-react";
 import { dark, neobrutalism } from '@clerk/themes';
 import { useEffect, useState } from "react";
 
