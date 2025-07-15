@@ -138,7 +138,8 @@
   width: 6px;
 }
 .scrollbar-custom::-webkit-scrollbar-track {
-  background: var(--color-muted);
+  background: transparent;
+  /* background: var(--color-muted); */
 }
 .scrollbar-custom::-webkit-scrollbar-thumb {
   background-color: var(--color-primary);
@@ -146,10 +147,10 @@
 }
 
 .dark .scrollbar-custom::-webkit-scrollbar-track {
-  background: var(--color-input);
+  background: transparent;
 }
 .dark .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: var(--color-foreground);
+  background-color: var(--color-muted);
 }
 /* .border{
   @apply border;
