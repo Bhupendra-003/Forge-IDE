@@ -14,6 +14,8 @@ function EditorPanel() {
     const {
         language,
         theme,
+        editorTheme,
+        setEditorTheme,
         fontSize,
         fontWeight,
         editor,
@@ -44,6 +46,12 @@ function EditorPanel() {
         if (savedFontSize) setFontSize(parseInt(savedFontSize));
     }, [setFontSize]);
 
+    useEffect(() => {
+        if (theme === 'vs-dark' || theme === 'vs-light') {
+            setEditorTheme(isDarkMode ? 'vs-dark' : 'vs-light');
+        }
+    }, [isDarkMode, theme, setEditorTheme]);
+
     const handleEditorChange = (value: string | undefined) => {
         if (value) localStorage.setItem(`editor-code-${language}`, value);
     };
@@ -58,7 +66,7 @@ function EditorPanel() {
                             height="100%"
                             language={LANGUAGE_CONFIG[language].monacoLanguage}
                             onChange={handleEditorChange}
-                            theme={isDarkMode ? theme : "vs-dark"}
+                            theme={editorTheme}
                             beforeMount={defineMonacoThemes}
                             onMount={(editor) => setEditor(editor)}
                             options={{

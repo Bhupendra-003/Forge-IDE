@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![ForgeIDE Logo](public/logo.png)
+![ForgeIDE Logo](public/BrandImage.png)
 
 **A modern, AI-powered online code editor with multi-language support and intelligent assistance**
 

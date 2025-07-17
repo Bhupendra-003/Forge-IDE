@@ -37,7 +37,7 @@ function ClientHeader() {
     // const isPro = false;
     const {isDarkMode} = useTheme()
     return (
-        <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">
+        <nav className="relative flex items-center px-4 p-2 justify-between bg-background text-foreground">
             {/* Left section */}
             <div className="flex items-center text-foreground">
                 <SidebarTrigger className="-ml-1 scale-160" size="lg" />

@@ -12,6 +12,7 @@ const getInitialState = () => {
             fontSize: 22,
             fontWeight: 500,
             theme: 'vs-dark',
+            editorTheme: 'vs-dark',
             minimap: false,
             scrollBeyondLastLine: true,
             fontFamily: '"Fira Code", "Cascadia Code", "Consolas", "monospace"',
@@ -30,6 +31,7 @@ const getInitialState = () => {
     const savedFontSize = localStorage.getItem('editor-fontSize') || '22';
     const savedFontWeight = localStorage.getItem('editor-fontWeight') || 500;
     const savedTheme = localStorage.getItem('editor-theme') || 'vs-dark';
+    const savedEditorTheme = localStorage.getItem('editor-theme') || 'vs-dark';
     const savedMinimap = localStorage.getItem('editor-minimap') === 'true';
     const savedScrollBeyondLastLine = localStorage.getItem('editor-scrollBeyondLastLine') !== 'false';
     const savedFontFamily = localStorage.getItem('editor-fontFamily') || '"Fira Code", "Cascadia Code", "Consolas", "monospace"';
@@ -46,6 +48,7 @@ const getInitialState = () => {
         fontSize: Number(savedFontSize),
         fontWeight: Number(savedFontWeight),
         theme: savedTheme,
+        editorTheme: savedEditorTheme,
         minimap: savedMinimap,
         scrollBeyondLastLine: savedScrollBeyondLastLine,
         fontFamily: savedFontFamily,
@@ -84,7 +87,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
         setTheme: (theme: string) => {
             localStorage.setItem("editor-theme", theme);
-            set({ theme });
+            set({ theme, editorTheme: theme });
+        },
+
+        setEditorTheme: (editorTheme: string) => {
+            set({ editorTheme });
         },
 
         setFontSize: (fontSize: number) => {

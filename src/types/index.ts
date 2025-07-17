@@ -66,6 +66,7 @@ export interface CodeEditorState {
     isRunning: boolean;
     error: string | null;
     theme: string;
+    editorTheme: string;
     fontSize: number;
     fontWeight: number;
     editor: monaco.editor.IStandaloneCodeEditor | null;
@@ -87,6 +88,7 @@ export interface CodeEditorState {
     getCode: () => string;
     setLanguage: (language: string) => void;
     setTheme: (theme: string) => void;
+    setEditorTheme: (editorTheme: string) => void;
     setFontSize: (fontSize: number) => void;
     setFontWeight: (fontWeight: number) => void;
     setCurrentFile: (fileName: string | null) => void;
