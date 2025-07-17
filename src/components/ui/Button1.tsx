@@ -5,13 +5,9 @@ const Button = ({children}: {children: React.ReactNode}) => {
   return (
     <StyledWrapper>
       <button type="button" className="btn">
-        {children}
+        <strong>{children}</strong>
         <div id="container-stars">
           <div id="stars" />
-        </div>
-        <div id="glow">
-          <div className="circle" />
-          <div className="circle" />
         </div>
       </button>
     </StyledWrapper>
@@ -58,34 +54,11 @@ const StyledWrapper = styled.div`
 
   strong {
     z-index: 2;
-    font-family: "Avalors Personal Use";
     font-size: 12px;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
     color: #ffffff;
-    text-shadow: 0 0 4px white;
   }
 
-  #glow {
-    position: absolute;
-    display: flex;
-    width: 12rem;
-  }
-
-  .circle {
-    width: 100%;
-    height: 30px;
-    filter: blur(2rem);
-    animation: pulse_3011 4s infinite;
-    z-index: -1;
-  }
-
-  .circle:nth-of-type(1) {
-    background: rgba(254, 83, 186, 0.636);
-  }
-
-  .circle:nth-of-type(2) {
-    background: rgba(142, 81, 234, 0.704);
-  }
 
   .btn:hover #container-stars {
     z-index: 1;
@@ -103,9 +76,6 @@ const StyledWrapper = styled.div`
     animation: none;
   }
 
-  .btn:active .circle {
-    background: #fe53bb;
-  }
 
   #stars {
     position: relative;

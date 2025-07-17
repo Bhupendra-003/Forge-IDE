@@ -6,9 +6,11 @@ import { Editor } from "@monaco-editor/react";
 import { useClerk } from "@clerk/nextjs";
 import useMounted from "@/hooks/useMounted";
 import { EditorPanelSkeleton } from "@/components/EditorPanelSkeleton";
+import useTheme from "@/hooks/useTheme";
 
 function EditorPanel() {
     const clerk = useClerk();
+    const {isDarkMode} = useTheme();
     const {
         language,
         theme,
@@ -56,7 +58,7 @@ function EditorPanel() {
                             height="100%"
                             language={LANGUAGE_CONFIG[language].monacoLanguage}
                             onChange={handleEditorChange}
-                            theme={theme}
+                            theme={isDarkMode ? theme : "vs-dark"}
                             beforeMount={defineMonacoThemes}
                             onMount={(editor) => setEditor(editor)}
                             options={{
