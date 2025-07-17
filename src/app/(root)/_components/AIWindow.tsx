@@ -59,7 +59,7 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
           padding: '1rem',
           borderRadius: '0.375rem',
           marginBottom: '1rem',
-          fontSize: '1.2rem',  // Increased font size for code blocks
+          fontSize: '1.0rem',  // Increased font size for code blocks
           lineHeight: '1.6',
         }}
       >
@@ -123,7 +123,7 @@ function AIWindow() {
             onClick={clearChat}
             size="icon"
             variant="ghost"
-            className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+            className="w-6 h-6 flex items-center justify-center hover:bg-muted rounded-full"
             title="Clear chat history"
           >
             <Trash2 size={16} />
@@ -132,7 +132,7 @@ function AIWindow() {
             onClick={closeAIWindow}
             size="icon"
             variant="ghost"
-            className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+            className="w-6 h-6 flex items-center justify-center hover:bg-muted rounded-full"
           >
             <RxCross2 size={18} />
           </Button>
@@ -144,7 +144,7 @@ function AIWindow() {
         {messages.map((message: { role: 'user' | 'ai'; content: string }, index: number) => (
           <div
             key={index}
-            className={`flex ${message.role === 'user' ? 'justify-end' : 'w-full'}`}
+            className={`flex  ${message.role === 'user' ? 'justify-end' : 'w-full'}`}
           >
             {message.role === 'user' ? (
               // User message with avatar
@@ -154,13 +154,13 @@ function AIWindow() {
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
                 <div className="p-3 rounded-lg bg-muted text-primary-foreground">
-                  <p className="text-[1.1rem] whitespace-pre-wrap font-mono">{message.content}</p>
+                  <p className="text-[1.1rem] text-foreground whitespace-pre-wrap font-mono">{message.content}</p>
                 </div>
               </div>
             ) : (
               // AI message - full width, no avatar, with markdown support
               <div className="w-full p-3 rounded-lg bg-transparent">
-                <div className="text-[1.3rem] text-zinc-200 prose prose-sm dark:prose-invert max-w-none font-sans">
+                <div className="text-[1.3rem] text-foreground prose prose-sm dark:prose-invert max-w-none font-sans">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{

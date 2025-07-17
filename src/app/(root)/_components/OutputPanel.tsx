@@ -177,7 +177,7 @@ function OutputPanel() {
                     spellCheck="false"
                     name="" 
                     id=""
-                    rows={4}
+                    rows={2}
                     onChange={(e)=>handleInput(e.target.value)}
                     style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}
                     >
