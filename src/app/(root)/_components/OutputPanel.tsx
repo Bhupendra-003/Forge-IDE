@@ -45,7 +45,6 @@ function OutputPanel() {
     }
     return (
         <div className="w-full h-full rounded-sm">
-
             <div className="w-full h-12 px-2 flex border items-center justify-between">
                 <div className='flex items-center gap-2'>
                     <div className='w-8 h-8 bg-muted rounded-full border flex items-center justify-center '>

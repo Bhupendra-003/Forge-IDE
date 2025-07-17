@@ -1,33 +1,10 @@
 "use client";
 import { SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 import { dark, neobrutalism } from '@clerk/themes';
-import { useEffect, useState } from "react";
+import useTheme from "@/hooks/useTheme";
 
 function HeaderProfileBtn() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    useEffect(() => {
-        // Check initial theme
-        const checkTheme = () => {
-            const stored = localStorage.getItem("theme");
-            const isDark = stored === "dark" || (!stored && document.documentElement.classList.contains("dark"));
-            setIsDarkMode(isDark);
-        };
-
-        checkTheme();
-
-        // Listen for theme changes
-        const observer = new MutationObserver(() => {
-            checkTheme();
-        });
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-
-        return () => observer.disconnect();
-    }, []);
+    const { isDarkMode } = useTheme();
 
     return (
         <>

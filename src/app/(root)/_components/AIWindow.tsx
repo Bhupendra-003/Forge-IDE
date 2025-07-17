@@ -8,8 +8,11 @@ import { Bot, Send, Copy, Check, Trash2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useAIMessageStore } from '@/store/useAIMessageStore';
+import useTheme from "@/hooks/useTheme";
+
+
 // Custom ThinkingDots component for loading animation
 const ThinkingDots = () => {
   const [dots, setDots] = useState('');
@@ -38,6 +41,7 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const { isDarkMode } = useTheme();
   // Default values shown
   return (
     <div className="relative group scrollbar-custom">
@@ -53,13 +57,13 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
       </div>
       <SyntaxHighlighter
         language={language || 'javascript'}
-        style={dracula}
+        style={isDarkMode ? dracula : vs}
         className="!rounded-md !mt-0"
         customStyle={{
           padding: '1rem',
           borderRadius: '0.375rem',
           marginBottom: '1rem',
-          fontSize: '1.0rem',  // Increased font size for code blocks
+          fontSize: "1.2rem",  // Increased font size for code blocks
           lineHeight: '1.6',
         }}
       >
@@ -75,7 +79,7 @@ function AIWindow() {
   const [inputValue, setInputValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
-
+  const { isDarkMode } = useTheme();
   // Use our AI message store
   const messages = useAIMessageStore(state => state.messages);
   const isLoading = useAIMessageStore(state => state.isLoading);
@@ -179,9 +183,9 @@ function AIWindow() {
                         const isInline = !match;
 
                         return isInline ? (
-                          <code className="bg-[#3a2d5f] text-zinc-100 border-1 rounded px-1 py-0.3 font-mono text-[1.3rem]" {...props}>
+                          <code className={`text-foreground border-1 rounded px-1 py-0.3 font-mono text-[1.3rem] ${isDarkMode ? "bg-[#3a2d5f]" : "bg-muted-foreground"}`} {...props}>
                             {children}
-                          </code>
+                          </code> 
                         ) : (
                           <CodeBlock language={language} value={String(children).replace(/\n$/, '')} />
                         );
