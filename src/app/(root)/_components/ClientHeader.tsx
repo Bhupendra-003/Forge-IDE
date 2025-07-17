@@ -37,22 +37,23 @@ function ClientHeader() {
     return (
         <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">
             {/* Left section */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center text-foreground">
                 <SidebarTrigger className="-ml-1 scale-160" size="lg" />
-                <div className="relative h-10 w-34 border-l border-zinc-700 pl-2 ml-1 overflow-hidden">
+                <div className="relative h-10 rounded-lg pl-2 ml-1 overflow-hidden">
                     <Image
-                        src="/logo.png"
-                        width={500}
-                        height={500}
+                        src="/logo-nobg.png"
+                        width={50}
+                        height={50}
                         alt="Logo"
-                        className="absolute top-1/2 left-4/7 -translate-x-1/2 -translate-y-1/2"
+                        className="relative top-1/2 left-[1vw] -translate-x-1/2 -translate-y-1/2"
                     />
                 </div>
-
+                <p className='font-semibold text-2xl font-sans'>Forge</p>
+                <p className='relative ml-1 -top-1 font-semibold text-sm font-sans'>IDE</p>
             </div>
 
             {/* Middle section - Code Controls */}
-            <div className="ml-[12vw] flex items-center gap-3">
+            <div className="ml-[10vw] flex items-center gap-3">
                 <CheckpointButton />
                 <RunButton />
                 <LanguageSelector />

@@ -161,7 +161,7 @@ export function DialogDemo() {
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
             <Button
-              className={`w-full justify-start h-8 flex gap-2 items-center border-none outline-none text-white rounded-md hover:bg-muted p-2`}
+              className={`w-full mb-8 justify-start h-8 flex gap-2 items-center border-none outline-none text-foreground rounded-md hover:bg-muted p-2`}
               variant="ghost"
             >
               <SettingsIcon size={isCollapsed ? 18 : 20} />
