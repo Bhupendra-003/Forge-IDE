@@ -74,6 +74,7 @@ function EditorPanel() {
                                 lineHeight,
                                 letterSpacing,
                                 roundedSelection,
+                                mouseWheelZoom: true,
                             }}
                         />
                     )}
