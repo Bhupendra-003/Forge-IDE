@@ -179,7 +179,7 @@ function OutputPanel() {
                     id=""
                     rows={4}
                     onChange={(e)=>handleInput(e.target.value)}
-                    style={{ fontSize: `${fontSize}px` }}
+                    style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}
                     >
                     </textarea>
                 </div>
@@ -187,11 +187,11 @@ function OutputPanel() {
                 {content ? (
                     error ? <>
                     <div className="w-full h-full gap-2">
-                        <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: `${fontSize}px` }}>{error}</pre>
+                        <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{error}</pre>
                     </div>
                     </> : <>
                     <div className="w-full text-lg h-full gap-2">
-                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: `${fontSize}px` }}>{output}</pre>
+                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{output}</pre>
                     </div>
                     </>
                 ) : (

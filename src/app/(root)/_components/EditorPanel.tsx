@@ -13,6 +13,7 @@ function EditorPanel() {
         language,
         theme,
         fontSize,
+        fontWeight,
         editor,
         setFontSize,
         setEditor,
@@ -26,8 +27,6 @@ function EditorPanel() {
         lineHeight,
         letterSpacing,
         roundedSelection,
-        verticalScrollbarSize,
-        horizontalScrollbarSize
     } = useCodeEditorStore();
 
     const mounted = useMounted();
@@ -63,6 +62,7 @@ function EditorPanel() {
                             options={{
                                 minimap: { enabled: minimap },
                                 fontSize,
+                                fontWeight: fontWeight.toString(),
                                 lineNumbersMinChars: 2,
                                 scrollBeyondLastLine,
                                 padding: { top: 10, bottom: 0 },
@@ -74,10 +74,6 @@ function EditorPanel() {
                                 lineHeight,
                                 letterSpacing,
                                 roundedSelection,
-                                scrollbar: {
-                                    verticalScrollbarSize,
-                                    horizontalScrollbarSize,
-                                },
                             }}
                         />
                     )}

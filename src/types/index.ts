@@ -67,6 +67,7 @@ export interface CodeEditorState {
     error: string | null;
     theme: string;
     fontSize: number;
+    fontWeight: number;
     editor: monaco.editor.IStandaloneCodeEditor | null;
     executionResult: ExecutionResult | null;
     currentFile: string | null;
@@ -81,14 +82,13 @@ export interface CodeEditorState {
     lineHeight: number;
     letterSpacing: number;
     roundedSelection: boolean;
-    verticalScrollbarSize: number;
-    horizontalScrollbarSize: number;
 
     setEditor: (editor: monaco.editor.IStandaloneCodeEditor) => void;
     getCode: () => string;
     setLanguage: (language: string) => void;
     setTheme: (theme: string) => void;
     setFontSize: (fontSize: number) => void;
+    setFontWeight: (fontWeight: number) => void;
     setCurrentFile: (fileName: string | null) => void;
     runCode: () => Promise<void>;
     resetCode: () => void;
@@ -103,8 +103,6 @@ export interface CodeEditorState {
     setLineHeight: (lineHeight: number) => void;
     setLetterSpacing: (letterSpacing: number) => void;
     setRoundedSelection: (roundedSelection: boolean) => void;
-    setVerticalScrollbarSize: (size: number) => void;
-    setHorizontalScrollbarSize: (size: number) => void;
 }
 
 export interface Snippet {

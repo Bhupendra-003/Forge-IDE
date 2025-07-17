@@ -10,6 +10,7 @@ const getInitialState = () => {
         return {
             language: 'python',
             fontSize: 22,
+            fontWeight: 500,
             theme: 'vs-dark',
             minimap: false,
             scrollBeyondLastLine: true,
@@ -27,6 +28,7 @@ const getInitialState = () => {
     }
     const savedLanguage = localStorage.getItem('editor-language') || 'python';
     const savedFontSize = localStorage.getItem('editor-fontSize') || '22';
+    const savedFontWeight = localStorage.getItem('editor-fontWeight') || 500;
     const savedTheme = localStorage.getItem('editor-theme') || 'vs-dark';
     const savedMinimap = localStorage.getItem('editor-minimap') === 'true';
     const savedScrollBeyondLastLine = localStorage.getItem('editor-scrollBeyondLastLine') !== 'false';
@@ -38,12 +40,11 @@ const getInitialState = () => {
     const savedLineHeight = Number(localStorage.getItem('editor-lineHeight')) || 1.6;
     const savedLetterSpacing = Number(localStorage.getItem('editor-letterSpacing')) || 0.5;
     const savedRoundedSelection = localStorage.getItem('editor-roundedSelection') !== 'false';
-    const savedVerticalScrollbarSize = Number(localStorage.getItem('editor-verticalScrollbarSize')) || 16;
-    const savedHorizontalScrollbarSize = Number(localStorage.getItem('editor-horizontalScrollbarSize')) || 16;
 
     return {
         language: savedLanguage,
         fontSize: Number(savedFontSize),
+        fontWeight: Number(savedFontWeight),
         theme: savedTheme,
         minimap: savedMinimap,
         scrollBeyondLastLine: savedScrollBeyondLastLine,
@@ -55,8 +56,7 @@ const getInitialState = () => {
         lineHeight: savedLineHeight,
         letterSpacing: savedLetterSpacing,
         roundedSelection: savedRoundedSelection,
-        verticalScrollbarSize: savedVerticalScrollbarSize,
-        horizontalScrollbarSize: savedHorizontalScrollbarSize,
+
     }
 }
 
@@ -90,6 +90,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         setFontSize: (fontSize: number) => {
             localStorage.setItem("editor-fontSize", fontSize.toString());
             set({ fontSize });
+        },
+        
+        setFontWeight: (fontWeight: number) => {
+            localStorage.setItem("editor-fontWeight", fontWeight.toString());
+            set({ fontWeight });
         },
 
         setCurrentFile: (fileName: string | null) => {
@@ -163,14 +168,6 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         setRoundedSelection: (roundedSelection: boolean) => {
             localStorage.setItem("editor-roundedSelection", roundedSelection.toString());
             set({ roundedSelection });
-        },
-        setVerticalScrollbarSize: (size: number) => {
-            localStorage.setItem("editor-verticalScrollbarSize", size.toString());
-            set({ verticalScrollbarSize: size });
-        },
-        setHorizontalScrollbarSize: (size: number) => {
-            localStorage.setItem("editor-horizontalScrollbarSize", size.toString());
-            set({ horizontalScrollbarSize: size });
         },
 
         resetCode: () => {

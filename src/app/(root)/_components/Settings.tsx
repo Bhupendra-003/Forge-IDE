@@ -4,8 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
-// import { Slider } from "@/components/ui/slider";
-import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -13,6 +12,8 @@ const Settings = () => {
     const {
         fontSize,
         setFontSize,
+        fontWeight,
+        setFontWeight,
         minimap,
         setMinimap,
         scrollBeyondLastLine,
@@ -33,10 +34,6 @@ const Settings = () => {
         setLetterSpacing,
         roundedSelection,
         setRoundedSelection,
-        verticalScrollbarSize,
-        setVerticalScrollbarSize,
-        horizontalScrollbarSize,
-        setHorizontalScrollbarSize
     } = useCodeEditorStore();
     return (
         <div className="max-h-[700px] overflow-y-scroll scrollbar-custom">
@@ -70,13 +67,25 @@ const Settings = () => {
                         </Select>
                     </div>
 
+                    <div className="flex gap-8 items-center justify-between">
+                        <Label className="whitespace-nowrap">Font Weight</Label>
+                        <Slider
+                            value={[fontWeight]}
+                            min={100}
+                            max={900}
+                            step={100}
+                            onValueChange={(value: number[]) => setFontWeight(value[0])}
+                        />
+                        <p>{fontWeight}</p>
+                    </div>
+
                     <div className="flex items-center justify-between">
                         <Label>Scroll Beyond Last Line</Label>
                         <Switch checked={scrollBeyondLastLine} onCheckedChange={setScrollBeyondLastLine} />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>Font Family</Label>
+                    <div className="flex gap-8 items-center justify-between">
+                        <Label className="whitespace-nowrap">Font Family</Label>
                         <Input
                             value={fontFamily}
                             onChange={(e) => setFontFamily(e.target.value)}
@@ -114,8 +123,8 @@ const Settings = () => {
                         <Switch checked={contextmenu} onCheckedChange={setContextmenu} />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>Line Height</Label>
+                    <div className="flex gap-8 items-center justify-between">
+                        <Label className="whitespace-nowrap">Line Height</Label>
                         <Input
                             type="number"
                             value={lineHeight}
@@ -125,8 +134,8 @@ const Settings = () => {
                         />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label>Letter Spacing</Label>
+                    <div className="flex gap-8 items-center justify-between">
+                        <Label className="whitespace-nowrap">Letter Spacing</Label>
                         <Input
                             type="number"
                             value={letterSpacing}
@@ -139,32 +148,6 @@ const Settings = () => {
                     <div className="flex items-center justify-between">
                         <Label>Rounded Selection</Label>
                         <Switch checked={roundedSelection} onCheckedChange={setRoundedSelection} />
-                    </div>
-
-                    <Separator />
-
-                    <div className="space-y-2">
-                        <Label>Scrollbar Sizes</Label>
-                        <div className="flex space-x-4">
-                            <div>
-                                <Label className="text-sm">Vertical</Label>
-                                <Input
-                                    type="number"
-                                    value={verticalScrollbarSize}
-                                    onChange={(e) => setVerticalScrollbarSize(Number(e.target.value))}
-                                    className="w-20"
-                                />
-                            </div>
-                            <div>
-                                <Label className="text-sm">Horizontal</Label>
-                                <Input
-                                    type="number"
-                                    value={horizontalScrollbarSize}
-                                    onChange={(e) => setHorizontalScrollbarSize(Number(e.target.value))}
-                                    className="w-20"
-                                />
-                            </div>
-                        </div>
                     </div>
                 </CardContent>
             </Card>
