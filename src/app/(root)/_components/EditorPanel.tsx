@@ -68,6 +68,7 @@ function EditorPanel() {
                                 padding: { top: 10, bottom: 0 },
                                 fontFamily,
                                 fontLigatures,
+                                automaticLayout: true,
                                 cursorBlinking,
                                 smoothScrolling,
                                 contextmenu,

@@ -13,8 +13,9 @@ import CheckpointButton from './CheckpointButton';
 import { LuSun } from "react-icons/lu";
 import ThemeProvider from './ThemeProvider';
 import { Settings as SettingsIcon } from 'lucide-react';
+import Link from 'next/link';
 import Settings from './Settings';
-
+import { FaGithub } from "react-icons/fa";
 // Dialog Imports
 import { Button } from "@/components/ui/button"
 import {
@@ -27,13 +28,14 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import Image from 'next/image';
+import useTheme from '@/hooks/useTheme';
 
 
 function ClientHeader() {
     // We'll use a simplified version without server-side data
     // In a real app, you would fetch user data client-side or use a context provider
     // const isPro = false;
-
+    const {isDarkMode} = useTheme()
     return (
         <nav className="relative flex items-end px-4 p-2 justify-between bg-background text-foreground">
             {/* Left section */}
@@ -102,12 +104,20 @@ function ClientHeader() {
                         <LuSun size={18} />
                     </div>
                 </ThemeProvider>
-                {/* <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
-                    <LuShare2 size={18} />
+
+                {/* Github Page Button */}
+                <div>
+                    <Button
+                        className="bg-muted hover:bg-muted/50 rounded-full"
+                        variant="ghost"
+                        size={"icon"}
+                        asChild
+                    >
+                        <Link href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
+                            <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" />
+                        </Link>
+                    </Button>   
                 </div>
-                <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
-                    <MoreVertical size={18} />
-                </div> */}
                 <HeaderProfileBtn />
             </div>
         </nav>

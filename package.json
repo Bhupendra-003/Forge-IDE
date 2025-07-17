@@ -44,6 +44,7 @@
     "react-resizable-panels": "^2.1.7",
     "react-syntax-highlighter": "^15.6.1",
     "remark-gfm": "^4.0.1",
+    "styled-components": "^6.1.19",
     "svix": "^1.63.1",
     "tailwind-merge": "^3.2.0",
     "tailwind-scrollbar": "^4.0.2",

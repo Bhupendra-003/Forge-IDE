@@ -2,6 +2,7 @@
 import { SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 import { dark, neobrutalism } from '@clerk/themes';
 import useTheme from "@/hooks/useTheme";
+import Button1 from "@/components/ui/Button1";
 
 function HeaderProfileBtn() {
     const { isDarkMode } = useTheme();
@@ -17,9 +18,9 @@ function HeaderProfileBtn() {
 
             <SignedOut>
                 <SignInButton mode="modal">
-                    <button className="bg-white rounded hover:bg-gray-100 scale-90 text-black py-2 px-4 ">
-                        Sign In
-                    </button>
+                    <div className="scale-90">
+                        <Button1>Sign In</Button1>
+                    </div>
                 </SignInButton>
             </SignedOut>
         </>
