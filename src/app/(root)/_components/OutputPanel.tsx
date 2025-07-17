@@ -168,7 +168,7 @@ function OutputPanel() {
             </div>
 
             {/* Output content */}
-            <div className="w-full p-4 relative h-[calc(100%-80px)]">
+            <div className="w-full p-4 relative h-[calc(100%-80px)] overflow-auto scrollbar-custom">
                 <div className='space-y-3 mb-4'>
                     <p className='font-bold text-lg'>Input</p>
                     <textarea
@@ -194,7 +194,7 @@ function OutputPanel() {
                     </div>
                     </>
                 ) : (
-                    <div className='w-full h-full flex items-center justify-center gap-2'>
+                    <div className='w-full min-h-[50%] flex items-center justify-center gap-2'>
                         <span><FaCode size={24} /></span>
                         <span>Run your code to see output here</span>
                     </div>
