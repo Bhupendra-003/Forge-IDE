@@ -190,7 +190,11 @@ function OutputPanel() {
                     </div>
                     </> : <>
                     <div className="w-full text-lg h-full gap-2">
-                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{output}</pre>
+                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>
+                            {
+                                output == "Vaishnavi" ? "I love out cutieeeee ❤️❤️❤️❤️❤️" : output
+                            }
+                            </pre>
                     </div>
                     </>
                 ) : (
