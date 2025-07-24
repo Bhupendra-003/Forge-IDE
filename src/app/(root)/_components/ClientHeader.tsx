@@ -5,17 +5,16 @@ import React from 'react';
 import { SidebarTrigger } from '../../../components/ui/sidebar';
 // import Link from 'next/link';
 // import { Sparkles } from 'lucide-react';
-import HeaderProfileBtn from './HeaderProfileBtn';
+// import HeaderProfileBtn from './HeaderProfileBtn';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
 import CheckpointButton from './CheckpointButton';
 import { LuSun } from "react-icons/lu";
 import ThemeProvider from './ThemeProvider';
-import { Settings as SettingsIcon } from 'lucide-react';
+import { Settings as SettingsIcon, Star } from 'lucide-react';
 import Link from 'next/link';
 import Settings from './Settings';
-import { FaGithub } from "react-icons/fa";
 // Dialog Imports
 import { Button } from "@/components/ui/button"
 import {
@@ -29,6 +28,7 @@ import {
 } from "@/components/ui/dialog"
 import Image from 'next/image';
 import useTheme from '@/hooks/useTheme';
+import { FaGithub } from 'react-icons/fa';
 
 
 function ClientHeader() {
@@ -108,17 +108,21 @@ function ClientHeader() {
                 {/* Github Page Button */}
                 <div>
                     <Button
-                        className="bg-muted hover:bg-muted/50 rounded-full"
-                        variant="ghost"
+                        className="hover:bg-muted-foreground rounded-full w-32 bg-card"
                         size={"icon"}
                         asChild
                     >
-                        <Link href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
-                            <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" />
+                        <Link className="flex justify-around items-center" href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
+                            {/* <FaGithub color={isDarkMode ? 'black' : 'white'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" /> */}
+                            <Star color={isDarkMode ? 'white' : 'black'} className="text-background scale-130 hover:text-accent/80" />
+                            <p className="text-foreground text-lg mt-0.5">Star</p>
+                            <div className="ml-2">
+                                <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-background scale-160 hover:text-muted-foreground/80" />
+                            </div>
                         </Link>
                     </Button>   
                 </div>
-                <HeaderProfileBtn />
+                {/* <HeaderProfileBtn /> */}
             </div>
         </nav>
     );
