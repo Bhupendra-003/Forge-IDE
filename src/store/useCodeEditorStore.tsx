@@ -206,7 +206,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
             const { language, getCode, input } = get();
             const code = getCode();
             if (!code) {
-                set({ error: "Please enter some code" })
+                set({ error: "Error: No code to run" })
                 return;
             }
 
@@ -271,7 +271,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                 })
             } catch (error) {
                 console.log("Error running code", error)
-                set({ error: "Error running code", executionResult: {code, output: "", error: "Error running code"} })
+                set({ error: "Error: Error running code, Please try again", executionResult: {code, output: "", error: "Error: Error running code, Please try again"} })
             } finally {
                 set({ isRunning: false })
             }

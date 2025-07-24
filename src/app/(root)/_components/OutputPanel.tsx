@@ -183,7 +183,7 @@ function OutputPanel() {
                     </textarea>
                 </div>
 
-                {content ? (
+                {content && (
                     error ? <>
                     <div className="w-full h-full gap-2">
                         <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{error}</pre>
@@ -193,11 +193,6 @@ function OutputPanel() {
                         <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{output}</pre>
                     </div>
                     </>
-                ) : (
-                    <div className='w-full min-h-[50%] flex items-center justify-center gap-2'>
-                        <span><FaCode size={24} /></span>
-                        <span>Run your code to see output here</span>
-                    </div>
                 )}
             </div>
         </div>
