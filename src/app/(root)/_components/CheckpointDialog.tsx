@@ -48,7 +48,7 @@ export function CheckpointDialog({ isOpen, onClose, onSave, initialName = '' }: 
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Create Checkpoint</DialogTitle>
+                    <DialogTitle>Create Save</DialogTitle>
                     <DialogDescription>
                         Save your current code as a checkpoint. You can load, rename, or download it later.
                     </DialogDescription>
@@ -66,6 +66,7 @@ export function CheckpointDialog({ isOpen, onClose, onSave, initialName = '' }: 
                             className="col-span-3 outline-none border-none"
                             placeholder="Enter Save name..."
                             autoFocus
+                            spellCheck="false"
                         />
                     </div>
                 </div>

@@ -122,7 +122,7 @@ function AIWindow() {
     <div className="w-full max-w-full h-full flex flex-col overflow-clip">
       {/* Header */}
       <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-        <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
+        <div className='w-fit h-full rounded-t-md flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
           <Bot size={20} />
           <p className="text-lg font-sans">Forge AI</p>
         </div>
@@ -161,9 +161,7 @@ function AIWindow() {
                   <AvatarImage src="" alt="User" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
-                <div className="p-3 rounded-lg bg-muted text-primary-foreground">
-                  <p className="text-[1.1rem] text-foreground whitespace-pre-wrap font-mono">{message.content}</p>
-                </div>
+                  <p className="bg-muted px-3 py-2 h-fit rounded-lg text-[1.1rem] text-foreground whitespace-pre-wrap">{message.content}</p>
               </div>
             ) : (
               // AI message - full width, no avatar, with markdown support
@@ -227,9 +225,10 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="flex-1 scrollbar-custom font-mono text-lg focus:ring-0 focus:outline-none min-h-[48px] max-h-[200px] p-2 px-4 rounded-md border bg-muted/30 resize-none overflow-y-auto"
+            className="flex-1 scrollbar-custom text-[1.1rem] pl-6 pt-3 focus:ring-0 focus:outline-none min-h-[50px] max-h-[200px] p-2 px-4 rounded-full border bg-muted/30 resize-none overflow-y-auto"
             rows={1}
             disabled={isLoading}
+            spellCheck="false"
           />
           <Button
             onClick={handleSendMessage}

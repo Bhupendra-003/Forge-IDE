@@ -90,7 +90,7 @@ export const useAIMessageStore = create<AIMessageState>((set, get) => ({
     get().abortStreaming();
     
     // Clear messages
-    const newMessages = [{ role: 'ai', content: 'Chat history cleared. How can I help you with your code today?' }];
+    const newMessages = [{ role: 'ai', content: 'How can I help you with your code today?' }];
     set({ messages: newMessages as Message[] });
     localStorage.setItem('ai-chat-history', JSON.stringify(newMessages));
   },

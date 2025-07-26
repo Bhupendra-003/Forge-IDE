@@ -49,8 +49,8 @@ export default function Page() {
                       {/* Editor container */}
                       <div className="h-full w-full aspect-video">
                         <div className="flex gap-2 w-full h-10 border items-center bg-background-2 rounded-sm">
-                          <div className='w-fit h-full flex p-1 pr-8 border-t-2 border-t-primary items-center gap-4 px-3 bg-muted/50'>
-                            <Code size={24} />
+                          <div className='w-fit rounded-t-md h-full flex p-1 pr-8 border-t-2 border-t-primary items-center gap-4 px-3 bg-muted/50'>
+                            <Code size={20} />
                             <p className="text-lg font-sans">Editor</p>
                           </div>
                           <div onClick={resetCode} className="bg-background ml-auto hover:bg-muted  p-2 rounded-sm">
@@ -68,7 +68,7 @@ export default function Page() {
                         <ResizablePanel minSize={10} defaultSize={30} className="rounded-sm bg-muted/50">
                           <div className="h-full w-full aspect-video">
                             <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-                              <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
+                              <div className='w-fit h-full rounded-t-md flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
                                 <p className="text-lg font-sans">Output</p>
                               </div>
                               <div className="flex items-center pr-2">
@@ -106,7 +106,7 @@ export default function Page() {
                         isOutputPanelVisible && (
                           <div className="h-full w-full aspect-video">
                             <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-                              <div className='w-fit h-full flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
+                              <div className='w-fit h-full rounded-t-md flex pt-1 border-t-2 border-t-primary items-center px-3 bg-muted/50'>
                                 <p className="text-lg font-sans">Output</p>
                               </div>
                               <div className="flex items-center pr-2">
