@@ -108,16 +108,16 @@ function ClientHeader() {
                 {/* Github Page Button */}
                 <div>
                     <Button
-                        className="hover:bg-muted-foreground rounded-full w-32 bg-card"
+                        className="hover:bg-sidebar-accent rounded-full w-32 bg-card"
                         size={"icon"}
                         asChild
                     >
                         <Link className="flex justify-around items-center" href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
                             {/* <FaGithub color={isDarkMode ? 'black' : 'white'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" /> */}
-                            <Star color={isDarkMode ? 'white' : 'black'} className="text-background scale-130 hover:text-accent/80" />
-                            <p className="text-foreground text-lg mt-0.5">Star</p>
+                            <Star color={isDarkMode ? 'white' : 'black'} className="text-background scale-100 hover:text-accent/80" />
+                            <p className="text-foreground text-md mt-0.5 ml-1">Star</p>
                             <div className="ml-2">
-                                <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-background scale-160 hover:text-muted-foreground/80" />
+                                <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-background scale-120 hover:text-muted-foreground/80" />
                             </div>
                         </Link>
                     </Button>   
