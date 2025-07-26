@@ -26,7 +26,7 @@ export function CheckpointDialog({ isOpen, onClose, onSave, initialName = '' }: 
         if (isOpen) {
             // Generate default name with timestamp
             const now = new Date();
-            const defaultName = `Checkpoint ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            const defaultName = `${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
             setName(initialName || defaultName);
         }
     }, [isOpen, initialName]);
@@ -63,8 +63,8 @@ export function CheckpointDialog({ isOpen, onClose, onSave, initialName = '' }: 
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             onKeyPress={handleKeyPress}
-                            className="col-span-3"
-                            placeholder="Enter checkpoint name..."
+                            className="col-span-3 outline-none border-none"
+                            placeholder="Enter Save name..."
                             autoFocus
                         />
                     </div>

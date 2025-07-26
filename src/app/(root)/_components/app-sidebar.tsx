@@ -5,7 +5,6 @@ import {
   Settings as SettingsIcon,
   Terminal,
   // MessageCircle,
-  File
 } from "lucide-react"
 
 import {
@@ -89,19 +88,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     navMain: [
       {
-        title: "Files",
-        url: "#",
-        icon: File,
-        onClick: () => { },
-        items: [
-          {
-            title: "New File",
-            language: "javascript",
-            onClick: () => { },
-          }
-        ]
-      },
-      {
         title: "Forge AI",
         url: "#",
         icon: Sparkles,
@@ -161,7 +147,7 @@ export function DialogDemo() {
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
             <Button
-              className={`w-full mb-8 justify-start h-8 flex gap-2 items-center border-none outline-none text-foreground rounded-md hover:bg-muted p-2`}
+              className={`w-full mb-2 justify-start h-8 flex gap-2 items-center border-none outline-none text-foreground rounded-md hover:bg-muted p-2`}
               variant="ghost"
             >
               <SettingsIcon size={isCollapsed ? 18 : 20} />

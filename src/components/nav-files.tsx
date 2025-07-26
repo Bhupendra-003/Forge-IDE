@@ -29,6 +29,7 @@ import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 import { useCheckpointStore } from "@/store/useCheckpointStore"
 import { Checkpoint } from "@/types/index"
 import { Input } from "@/components/ui/input"
+import { Badge } from "./ui/badge"
 
 export function NavFiles({
   files,
@@ -78,7 +79,6 @@ export function NavFiles({
               className="w-full flex items-center gap-2 text-left cursor-pointer"
               title={item.name}
             >
-              <span>{item.emoji}</span>
               {editingId === item.id ? (
                 <Input
                   value={editingName}
@@ -95,6 +95,7 @@ export function NavFiles({
               ) : (
                 <span>{item.name}</span>
               )}
+              <Badge className="bg-accent">{item.language}</Badge>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

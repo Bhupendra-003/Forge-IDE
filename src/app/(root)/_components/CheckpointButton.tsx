@@ -24,10 +24,10 @@ function CheckpointButton() {
 
     return (
         <>
-            <div className="flex items-center h-10 rounded justify-center bg-secondary w-fit">
+            <div className="flex items-center h-10 rounded justify-center bg-card w-fit">
                 <Button
                     onClick={() => setIsDialogOpen(true)}
-                    className="text-foreground font-semibold text-lg flex items-center gap-3 py-2 bg-secondary hover:bg-secondary/80"
+                    className="text-foreground font-semibold text-lg flex items-center gap-3 py-2 bg-card hover:bg-secondary/80"
                     variant="secondary"
                 >
                     {/* Icon wrapper with fixed size */}

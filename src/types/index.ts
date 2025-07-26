@@ -37,13 +37,14 @@ export interface ExecutionResult {
     error: string | null;
 }
 
+import type { ReactElement } from 'react';
 export interface Checkpoint {
     id: string;
     name: string;
     code: string;
     language: string;
     timestamp: number;
-    emoji: string;
+    icon?: ReactElement;
 }
 
 export interface CheckpointState {

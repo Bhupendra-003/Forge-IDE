@@ -29,21 +29,7 @@ const generateId = () => {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
-const getLanguageEmoji = (language: string): string => {
-    const emojiMap: Record<string, string> = {
-        javascript: '🟨',
-        typescript: '🔷',
-        python: '🐍',
-        java: '☕',
-        go: '🐹',
-        rust: '🦀',
-        cpp: '⚡',
-        csharp: '🔵',
-        ruby: '💎',
-        swift: '🍎',
-    };
-    return emojiMap[language] || '📄';
-};
+
 
 export const useCheckpointStore = create<CheckpointState>((set, get) => ({
     checkpoints: [],
@@ -64,7 +50,6 @@ export const useCheckpointStore = create<CheckpointState>((set, get) => ({
             code,
             language,
             timestamp: Date.now(),
-            emoji: getLanguageEmoji(language),
         };
 
         const updatedCheckpoints = [...get().checkpoints, newCheckpoint];
@@ -114,6 +99,7 @@ export const useCheckpointStore = create<CheckpointState>((set, get) => ({
 
         const extension = fileExtensions[checkpoint.language] || 'txt';
         const fileName = `${checkpoint.name}.${extension}`;
+        
         
         const blob = new Blob([checkpoint.code], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
