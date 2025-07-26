@@ -32,8 +32,10 @@ const ThinkingDots = () => {
 };
 
 // Code block component with copy button
-const CodeBlock = ({ language, value }: { language: string, value: string }) => {
+// Memoized to prevent unnecessary re-renders when typing in the input field
+const CodeBlock = React.memo(({ language, value }: { language: string, value: string }) => {
   const [copied, setCopied] = useState(false);
+  const { isDarkMode } = useTheme();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(value);
@@ -41,7 +43,6 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const { isDarkMode } = useTheme();
   // Default values shown
   return (
     <div className="relative group scrollbar-custom">
@@ -71,7 +72,10 @@ const CodeBlock = ({ language, value }: { language: string, value: string }) => 
       </SyntaxHighlighter>
     </div>
   );
-};
+});
+
+// Add display name for debugging purposes
+CodeBlock.displayName = 'CodeBlock';
 
 
 function AIWindow() {
