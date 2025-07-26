@@ -27,7 +27,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import Image from 'next/image';
-import useTheme from '@/hooks/useTheme';
 import { FaGithub } from 'react-icons/fa';
 
 
@@ -35,7 +34,6 @@ function ClientHeader() {
     // We'll use a simplified version without server-side data
     // In a real app, you would fetch user data client-side or use a context provider
     // const isPro = false;
-    const {isDarkMode} = useTheme()
     return (
         <nav className="relative flex items-center px-4 p-2 justify-between bg-background text-foreground">
             {/* Left section */}
@@ -86,19 +84,6 @@ function ClientHeader() {
                     </Dialog>
                     <ThemeSelector />
                 </div>
-                {/* {!isPro && (
-                    <Link
-                        href="/pricing"
-                        className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-purple-500/20 hover:border-purple-500/40 bg-gradient-to-r from-purple-500/10
-                to-purple-500/10 hover:from-purple-500/20 hover:to-purple-500/20
-                transition-all duration-300"
-                    >
-                        <Sparkles className="w-4 h-4 text-purple-500 hover:text-purple-300" />
-                        <span className="text-sm font-medium text-purple-500/90 ">
-                            Pro
-                        </span>
-                    </Link>
-                )} */}
                 <ThemeProvider>
                     <div className="p-2 bg-muted hover:bg-muted/50 rounded-full">
                         <LuSun size={18} />
@@ -108,16 +93,16 @@ function ClientHeader() {
                 {/* Github Page Button */}
                 <div>
                     <Button
-                        className="hover:bg-sidebar-accent rounded-full w-32 bg-card"
+                        className="hover:bg-sidebar-accent bg-card rounded-full w-32"
                         size={"icon"}
                         asChild
                     >
                         <Link className="flex justify-around items-center" href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
                             {/* <FaGithub color={isDarkMode ? 'black' : 'white'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" /> */}
-                            <Star color={isDarkMode ? 'white' : 'black'} className="text-background scale-100 hover:text-accent/80" />
+                            <Star className="text-foreground scale-100 hover:text-accent/80" />
                             <p className="text-foreground text-md mt-0.5 ml-1">Star</p>
                             <div className="ml-2">
-                                <FaGithub color={isDarkMode ? 'white' : 'black'} className="text-background scale-120 hover:text-muted-foreground/80" />
+                                <FaGithub className="text-foreground scale-120 hover:text-muted-foreground/80" />
                             </div>
                         </Link>
                     </Button>   
