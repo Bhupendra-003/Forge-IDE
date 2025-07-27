@@ -19,9 +19,10 @@ function OutputPanel() {
     const sendMessage = useAIMessageStore(state => state.sendMessage);
     const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
-    const content = error || output;
     const prevExecutionResultRef = useRef(executionResult);
     const mounted = useMounted();
+    const content = error || output;
+    const fontSizeValue = mounted ? `${fontSize}px` : undefined; // Hydration-safe font size
 
     // Update time when execution result changes (code is run)
     useEffect(() => {
@@ -178,7 +179,7 @@ function OutputPanel() {
                     id=""
                     rows={2}
                     onChange={(e)=>handleInput(e.target.value)}
-                    style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}
+                    style={{ fontSize: fontSizeValue }}
                     >
                     </textarea>
                 </div>
@@ -186,11 +187,11 @@ function OutputPanel() {
                 {content && (
                     error ? <>
                     <div className="w-full h-full gap-2">
-                        <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{error}</pre>
+                        <pre className={`whitespace-pre-wrap text-destructive`} style={{ fontSize: fontSizeValue }}>{error}</pre>
                     </div>
                     </> : <>
                     <div className="w-full text-lg h-full gap-2">
-                        <pre className={`whitespace-pre-wrap text-foreground `} style={{ fontSize: mounted ? `${fontSize}px` : '22px' }}>{output}</pre>
+                        <pre className={`whitespace-pre-wrap text-foreground`} style={{ fontSize: fontSizeValue }}>{output}</pre>
                     </div>
                     </>
                 )}

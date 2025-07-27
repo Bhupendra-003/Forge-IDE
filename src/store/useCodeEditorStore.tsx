@@ -225,7 +225,9 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                         files: [{
                             content: code
                         }],
-                        stdin: input
+                        stdin: input,
+                        compile_timeout: 3000,
+                        run_timeout: 2000   
                     })
                 })
                 const data = await response.json();
@@ -246,8 +248,10 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                 }
 
                 //Runtime error
-                if (data.run && data.run.code != 0) {
-                    const error = data.run.stderr || data.run.output;
+                // Check for timeout first
+                if (data.run && data.run.signal === "SIGKILL") {
+                    const error = "Process terminated: Time or memory limit exceeded"
+
                     set({
                         error,
                         executionResult: {
@@ -255,11 +259,23 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                             output: error,
                             error
                         }
-                    })
+                    });
                     return;
                 }
-
-                //Execution success
+                // Check for generic errors
+                if (data.run && data.run.stderr) {
+                    const error = data.run.stderr;
+                    set({
+                        error,
+                        executionResult: {
+                            code,
+                            output: error,
+                            error
+                        }
+                    });
+                    return;
+                }
+                // Execution success
                 const output = data.run.stdout;
                 set({
                     output: output.trim(),
@@ -268,7 +284,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
                         output: output.trim(),
                         error: null
                     }
-                })
+                });
             } catch (error) {
                 console.log("Error running code", error)
                 set({ error: "Error: Error running code, Please try again", executionResult: {code, output: "", error: "Error: Error running code, Please try again"} })
