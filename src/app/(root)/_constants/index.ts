@@ -124,14 +124,14 @@ class Program {
 
 
 export const THEMES: Theme[] = [
-    { id: "vs-dark", label: "VS Dark", color: "#1e1e1e" },
-    { id: "vs-light", label: "VS Light", color: "#ffffff" },
-    { id: "github-dark", label: "GitHub Dark", color: "#0d1117" },
-    { id: "monokai", label: "Monokai", color: "#272822" },
-    { id: "solarized-dark", label: "Solarized Dark", color: "#002b36" },
-    { id: "andromeda", label: "Andromeda", color: "#262335" },
-    { id: "dracula", label: "Dracula", color: "#282a36" },
-    { id: "nord", label: "Nord", color: "#2e3440" },
+    { id: "vs-dark", label: "VS Dark", color: "#1e1e1e", light: false },
+    { id: "vs-light", label: "VS Light", color: "#ffffff", light: true },
+    { id: "github-dark", label: "GitHub Dark", color: "#0d1117", light: false },
+    { id: "monokai", label: "Monokai", color: "#272822", light: false },
+    { id: "solarized-dark", label: "Solarized Dark", color: "#002b36", light: false },
+    { id: "andromeda", label: "Andromeda", color: "#262335", light: false },
+    { id: "dracula", label: "Dracula", color: "#282a36", light: false },
+    { id: "nord", label: "Nord", color: "#2e3440", light: false },
 ];
 
 export const THEME_DEFINITONS = {
