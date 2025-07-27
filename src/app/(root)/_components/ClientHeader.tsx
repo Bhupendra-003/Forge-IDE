@@ -16,7 +16,6 @@ import { Settings as SettingsIcon, Star } from 'lucide-react';
 import Link from 'next/link';
 import Settings from './Settings';
 // Dialog Imports
-import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -64,7 +63,9 @@ function ClientHeader() {
                     <Dialog>
                         <form>
                             <DialogTrigger asChild>
-                                <Button className='p-2 bg-muted hover:bg-muted/50 rounded-full' variant="ghost" size={"icon"}><SettingsIcon className='scale-130' strokeWidth={1.35} /></Button>
+                                <div className='p-2 bg-muted hover:bg-muted/50 rounded-full cursor-pointer inline-flex items-center justify-center'>
+                                    <SettingsIcon size={20} strokeWidth={1.35} />
+                                </div>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[900px] bg-popover">
                                 <DialogHeader>
@@ -92,25 +93,18 @@ function ClientHeader() {
 
                 {/* Github Page Button */}
                 <div>
-                    <Button
-                        className="hover:bg-sidebar-accent bg-card rounded-full w-32"
-                        size={"icon"}
-                        asChild
-                    >
-                        <Link className="flex justify-around items-center" href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
-                            {/* <FaGithub color={isDarkMode ? 'black' : 'white'} className="text-muted-foreground scale-180 hover:text-muted-foreground/80" /> */}
-                            <Star className="text-foreground scale-100 hover:text-accent/80" />
-                            <p className="text-foreground text-md mt-0.5 ml-1">Star</p>
-                            <div className="ml-2">
-                                <FaGithub className="text-foreground scale-120 hover:text-muted-foreground/80" />
-                            </div>
-                        </Link>
-                    </Button>   
+                    <Link className="flex justify-around items-center hover:bg-sidebar-accent bg-card rounded-full w-32 h-9 px-4 py-2 cursor-pointer" href="https://github.com/Bhupendra-003/Forge-IDE" target="_blank">
+                        <Star size={18} strokeWidth={1.60} className="text-foreground hover:text-accent/80" />
+                        <p className="text-foreground text-md mt-0.5 ml-1">Star</p>
+                        <div className="ml-2">
+                            <FaGithub size={18} className="text-foreground hover:text-muted-foreground/80" />
+                        </div>
+                    </Link>
                 </div>
-                {/* <HeaderProfileBtn /> */}
             </div>
         </nav>
     );
 }
 
 export default ClientHeader;
+    
