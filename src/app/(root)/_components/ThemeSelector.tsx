@@ -15,7 +15,11 @@ const THEME_ICONS: Record<string, string> = {
     "vs-light" : "#f3f3f3",
     "github-dark" : "#24292e",
     "monokai" : "#3e3d32",
-    "solarized-dark" : "#002b36"
+    "solarized-dark" : "#6C850A",
+    "andromeda" : "#F66061",
+    "dracula" : "#854C74",
+    "nord" : "#637A92",
+
 }
 
 function ThemeSelector() {
