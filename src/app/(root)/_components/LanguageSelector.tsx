@@ -28,7 +28,7 @@ function LanguageSelector() {
                                 key={index}
                                 value={lang.id}
                                 className="flex items-center  justify-between"
-                                onClick={() => handleLanguageSelect(lang.id)}
+
                             >
                                 <div className="flex gap-3 items-center">
                                     <div className="w-5 h-5 object-contain overflow-hidden">
