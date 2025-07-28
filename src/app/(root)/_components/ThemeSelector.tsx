@@ -26,7 +26,7 @@ const THEME_ICONS: Record<string, string> = {
 function ThemeSelector() {
     const { isDarkMode } = useTheme();
     const { theme, setTheme } = useCodeEditorStore();
-    
+
     const handleSelectChange = (themeId: string) => {
         setTheme(themeId);
         console.log("Theme changed to: " + themeId);
@@ -42,6 +42,17 @@ function ThemeSelector() {
     // Ensure the current theme is valid for the current mode
     const isCurrentThemeValid = filteredThemes.some(t => t.id === theme);
     const displayTheme = isCurrentThemeValid ? theme : (isDarkMode ? "vs-dark" : "vs-light");
+
+    // Auto-switch theme when dark/light mode changes, but only if using default themes
+    React.useEffect(() => {
+        const isUsingDefaultTheme = theme === "vs-dark" || theme === "vs-light";
+        if (isUsingDefaultTheme) {
+            const newTheme = isDarkMode ? "vs-dark" : "vs-light";
+            if (theme !== newTheme) {
+                setTheme(newTheme);
+            }
+        }
+    }, [isDarkMode, theme, setTheme]);
     return (
         <div>
             <Select value={displayTheme} onValueChange={handleSelectChange}>
