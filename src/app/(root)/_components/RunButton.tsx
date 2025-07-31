@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import { Squircle } from 'ldrs/react'
 import { FaPlay } from "react-icons/fa";
 import 'ldrs/react/Squircle.css'
@@ -17,16 +16,14 @@ function RunButton() {
         await runCode();
     };
     return (
-        <div className="flex items-center h-10 rounded justify-center bg-primary w-fit">
-            <Button
-                onClick={handleRun}
-                className="text-white font-semibold text-lg flex items-center gap-3 py-2"
-            >
+        <div className="flex cursor-default p-4 gap-2 font-bold items-center h-10 rounded-full active:bg-[#6c05f7] transition duration-100 ease-in-out justify-center bg-primary w-fit"
+            onClick={handleRun}
+        >
                 {/* Icon wrapper with fixed size */}
-                <div className="w-2 mr-1 flex items-center justify-center">
+                <div className="mr-2 flex items-center justify-center">
                     {isRunning ? (
                         <Squircle
-                            size="16"
+                            size="20"
                             stroke="3"
                             strokeLength="0.18"
                             bgOpacity="0.2"
@@ -34,11 +31,10 @@ function RunButton() {
                             color="white"
                         />
                     ) : (
-                        <FaPlay size={30} />
+                        <FaPlay size={20} className='' />
                     )}
                 </div>
                 <p>Run Code</p>
-            </Button>
         </div>
     )
 }
