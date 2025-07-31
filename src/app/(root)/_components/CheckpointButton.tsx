@@ -29,8 +29,8 @@ function CheckpointButton() {
                     className="text-foreground font-semibold text-lg flex items-center gap-3 py-2 bg-card hover:bg-secondary/80 cursor-pointer rounded-md px-4"
                 >
                     {/* Icon wrapper with fixed size */}
-                    <div className="w-2 mr-1 flex items-center justify-center">
-                        <Bookmark size={16} />
+                    <div className="flex items-center justify-center">
+                        <Bookmark size={20}/>
                     </div>
                     <p>Create Checkpoint</p>
                 </div>
