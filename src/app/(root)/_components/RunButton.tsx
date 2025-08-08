@@ -20,7 +20,7 @@ function RunButton() {
             onClick={handleRun}
         >
                 {/* Icon wrapper with fixed size */}
-                <div className="mr-2 flex items-center justify-center">
+                <div className="flex items-center justify-center">
                     {isRunning ? (
                         <Squircle
                             size="20"
@@ -34,7 +34,7 @@ function RunButton() {
                         <FaPlay size={20} className='' />
                     )}
                 </div>
-                <p>Run Code</p>
+                <p className='hidden lg:block'>Run Code</p>
         </div>
     )
 }

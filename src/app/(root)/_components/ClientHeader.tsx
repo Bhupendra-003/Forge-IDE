@@ -61,7 +61,7 @@ function ClientHeader() {
             <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-2">
                     <Dialog>
-                        <form>
+                        <form className=' hidden lg:block '>
                             <DialogTrigger asChild>
                                 <div className='p-2 bg-muted hover:bg-muted/50 rounded-full cursor-pointer inline-flex items-center justify-center'>
                                     <SettingsIcon size={20} strokeWidth={1.35} />
