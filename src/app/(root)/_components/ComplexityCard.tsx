@@ -1,11 +1,11 @@
 import React from 'react'
 
-function page() {
+const ComplexityCard = () => {
     return (
         <div>
-            This is Pricing Page
+            
         </div>
     )
 }
 
-export default page
+export default ComplexityCard

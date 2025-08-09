@@ -12,6 +12,12 @@ import { FaCode } from "react-icons/fa";
 import 'ldrs/react/Ring.css';
 import { useAIMessageStore } from '@/store/useAIMessageStore';
 import useMounted from '@/hooks/useMounted';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import ComplexityCard from '@/app/(root)/_components/ComplexityCard';
 
 // Constants for language icons and file extensions
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
@@ -101,6 +107,8 @@ function OutputPanel() {
         <div className="w-full h-full rounded-sm">
             <div className="w-full h-12 px-2 flex border items-center justify-between">
                 <div className='flex items-center gap-2'>
+
+                    {/* Success or Error Icon */}
                     <div className='w-8 h-8 bg-muted rounded-full border flex items-center justify-center'>
                         {error ? (
                             <XCircle size={24} color="var(--color-destructive)" />
@@ -112,6 +120,8 @@ function OutputPanel() {
                         )}
                     </div>
                     <p>{">"}</p>
+
+                    {/* File Name */}
                     <div className='flex items-center gap-2'>
                         {mounted ? (
                             <>
@@ -127,6 +137,20 @@ function OutputPanel() {
                             </>
                         )}
                     </div>
+
+                    {/* Complexity Analysis Button */}
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <button className="text-lg font-sans text-gradient cursor-pointer glow">
+                                Complexity
+                            </button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px] bg-popover">
+                            <ComplexityCard />
+                        </DialogContent>
+                    </Dialog>
+
+                    {/* Running Icon */}
                     <div className="ml-2 mt-2">
                         {isRunning && (
                             <Ring
@@ -139,8 +163,11 @@ function OutputPanel() {
                         )}
                     </div>
                 </div>
+
+                
                 <div className='flex items-center gap-2'>
                     {content && (
+                        // Copy Button
                         <button
                             onClick={handleCopy}
                             className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg transition-all">
@@ -157,6 +184,7 @@ function OutputPanel() {
                             )}
                         </button>
                     )}
+                    {/* Ask AI Button */}
                     <button
                         onClick={handleAIAssist}
                         disabled={!content}

@@ -157,3 +157,24 @@
   border-color: var(--color-border  );
   border-width: 1px;
 } */
+
+.text-gradient {
+  background: -webkit-linear-gradient( 135deg, #7251e9, #ff02ab, #7251e9, #c091ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow {
+  -webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 0px var(--color-primary);
+  }
+  to {
+    text-shadow: 0 0 0px var(--color-sky-500);
+  }
+}
