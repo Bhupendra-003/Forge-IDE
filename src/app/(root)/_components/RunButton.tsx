@@ -16,7 +16,7 @@ function RunButton() {
         await runCode();
     };
     return (
-        <div className="flex cursor-default p-4 gap-2 font-bold items-center h-10 rounded-full active:bg-[#6c05f7] transition duration-100 ease-in-out justify-center bg-primary w-fit"
+        <div className="flex cursor-default p-4 gap-2 font-bold items-center h-10 rounded-full active:bg-primary transition duration-100 ease-in-out justify-center bg-primary w-fit"
             onClick={handleRun}
         >
                 {/* Icon wrapper with fixed size */}
@@ -31,10 +31,10 @@ function RunButton() {
                             color="white"
                         />
                     ) : (
-                        <FaPlay size={20} className='' />
+                        <FaPlay size={16} color='white' />
                     )}
                 </div>
-                <p className='hidden lg:block'>Run Code</p>
+                <p className='hidden text-white lg:block text-nowrap'>Run Code</p>
         </div>
     )
 }
