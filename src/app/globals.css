@@ -175,6 +175,6 @@
     text-shadow: 0 0 0px var(--color-primary);
   }
   to {
-    text-shadow: 0 0 0px var(--color-sky-500);
+    text-shadow: 0 0 0px var(--color-red-400);
   }
 }

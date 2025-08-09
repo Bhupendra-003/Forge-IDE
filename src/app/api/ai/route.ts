@@ -77,7 +77,7 @@ export async function POST(request: Request) {
 
     // Get the model
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash-lite",
       safetySettings,
       generationConfig,
     });

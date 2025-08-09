@@ -18,6 +18,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import ComplexityCard from '@/app/(root)/_components/ComplexityCard';
+import { DialogTitle } from '@radix-ui/react-dialog';
 
 // Constants for language icons and file extensions
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
@@ -145,6 +146,7 @@ function OutputPanel() {
                                 Complexity
                             </button>
                         </DialogTrigger>
+                        <DialogTitle className='hidden'>Time Complexity</DialogTitle>
                         <DialogContent className="sm:max-w-[425px] bg-popover">
                             <ComplexityCard />
                         </DialogContent>
