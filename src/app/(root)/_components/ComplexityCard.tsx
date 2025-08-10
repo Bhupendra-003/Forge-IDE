@@ -135,6 +135,7 @@ const ComplexityCard = () => {
     return (
         <div className="relative">
             <div className="flex flex-col items-center">
+                <h1 className="text-xl mb-6">Time Complexity</h1>
                 {/* Display full complexity from AI */}
                 <p className="text-center z-10 text-3xl font-mono font-bold mb-4">
                     {result.complexity}
