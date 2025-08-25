@@ -170,14 +170,14 @@ function AIWindow() {
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
-                      p: ({ ...props }) => <p className="mb-4 " {...props} />,
+                      p: ({ ...props }) => <p className="mb-4 text-[1.1rem] " {...props} />,
                       h1: ({ ...props }) => <h1 className="text-2xl font-bold mb-4 mt-6" {...props} />,
                       h2: ({ ...props }) => <h2 className="text-xl font-bold mb-3 mt-5" {...props} />,
                       h3: ({ ...props }) => <h3 className="text-lg font-bold mb-2 mt-4" {...props} />,
-                      h4: ({ ...props }) => <h4 className="font-bold mb-2 mt-3" {...props} />,
+                      h4: ({ ...props }) => <h4 className="font-bold  mb-2 mt-3" {...props} />,
                       ul: ({ ...props }) => <ul className="list-disc pl-6 mb-4 space-y-2" {...props} />,
                       ol: ({ ...props }) => <ol className="list-decimal pl-6 mb-4 space-y-2" {...props} />,
-                      li: ({ ...props }) => <li className="mb-1" {...props} />,
+                      li: ({ ...props }) => <li className="mb-1 text-[1.1rem]" {...props} />,
                       blockquote: ({ ...props }) => <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4" {...props} />,
                       code: ({ className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || '');
@@ -185,7 +185,7 @@ function AIWindow() {
                         const isInline = !match;
 
                         return isInline ? (
-                          <code className={`text-foreground border-1 rounded px-1 py-0.3 font-mono text-[1.3rem] ${isDarkMode ? "bg-[#3a2d5f]" : "bg-muted-foreground"}`} {...props}>
+                          <code className={`text-foreground border-1 rounded px-1 py-0.3 font-medium font-mono text-[1.1rem] ${isDarkMode ? "bg-zinc-800" : "bg-muted-foreground"}`} {...props}>
                             {children}
                           </code> 
                         ) : (
@@ -217,7 +217,7 @@ function AIWindow() {
       </div>
 
       {/* Input area */}
-      <div className="p-4 border-t bg-background">
+      <div className="p-1 bg-transparent">
         <div className="flex items-center gap-2">
           <textarea
             ref={textareaRef}
@@ -225,7 +225,7 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="flex-1 scrollbar-custom text-[1.1rem] pl-6 pt-3 focus:ring-0 focus:outline-none min-h-[50px] max-h-[200px] p-2 px-4 rounded-full border bg-muted/30 resize-none overflow-y-auto"
+            className="flex-1 scrollbar-custom text-[1.1rem] pl-6 pt-3 focus:ring-0 focus:outline-none min-h-[50px] max-h-[200px] p-2 px-4 rounded-[25px] border bg-muted/30 resize-none overflow-y-auto"
             rows={1}
             disabled={isLoading}
             spellCheck="false"
