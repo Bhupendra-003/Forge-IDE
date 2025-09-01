@@ -50,7 +50,7 @@ export default function Page() {
                       <div className="h-full w-full aspect-video">
                         <div className="flex gap-2 w-full h-11 border items-center bg-background-2 rounded-sm">
                           <div className='w-fit rounded-t-md h-full flex p-1 pr-8 items-center gap-4 px-3'>
-                            <Braces size={20} />    
+                            <Braces size={18} />    
                             <p className="text-lg font-sans">Editor</p>
                           </div>
                           <Button variant="ghost" title="Reset code" onClick={resetCode} size="icon" className="ml-auto p-1 rounded-sm hover:bg-muted transition-colors duration-300 ease-in-out"

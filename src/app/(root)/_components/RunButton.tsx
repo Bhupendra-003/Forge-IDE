@@ -23,7 +23,7 @@ function RunButton() {
                 <div className="flex items-center justify-center">
                     {isRunning ? (
                         <Squircle
-                            size="20"
+                            size="18"
                             stroke="3"
                             strokeLength="0.18"
                             bgOpacity="0.2"
