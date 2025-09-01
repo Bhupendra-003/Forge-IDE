@@ -86,6 +86,10 @@ function EditorPanel() {
                                 letterSpacing,
                                 roundedSelection,
                                 mouseWheelZoom: true,
+                                scrollbar: {
+                                    verticalScrollbarSize: 0,
+                                    horizontalScrollbarSize: 0,
+                                },
                             }}
                         />
                     )}
