@@ -73,7 +73,7 @@ function EditorPanel() {
                                 minimap: { enabled: minimap },
                                 fontSize,
                                 fontWeight: fontWeight.toString(),
-                                lineNumbersMinChars: 2,
+                                lineNumbersMinChars: 3,
                                 scrollBeyondLastLine,
                                 padding: { top: 10, bottom: 0 },
                                 fontFamily,
