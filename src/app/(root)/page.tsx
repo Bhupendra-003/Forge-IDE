@@ -94,7 +94,7 @@ export default function Page() {
                 {/* Right panel - AI Window or Output panel depending on state */}
                 {(isAIWindowOpen || isOutputPanelVisible) && (
                   <>
-                    <ResizableHandle className="mx-1 w-2 bg-gray-300 dark:bg-background-2 rounded-full" />
+                    <ResizableHandle className="mx-1 w-0 bg-gray-300 dark:bg-background-2 rounded-full" />
                     <ResizablePanel minSize={30} defaultSize={40} className="rounded-sm bg-muted/50">
                       {isAIWindowOpen ? (
                         // AI Window
