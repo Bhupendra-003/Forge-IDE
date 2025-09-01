@@ -140,7 +140,8 @@ function AIWindow() {
             onClick={closeAIWindow}
             size="icon"
             variant="ghost"
-            className="w-6 h-6 flex items-center justify-center hover:bg-muted rounded-full"
+            title="Close AI window"
+            className="w-6 h-6 flex hover:scale-120 hover:rotate-90 transition-transform duration-300 ease-out items-center justify-center rounded-full"
           >
             <RxCross2 size={18} />
           </Button>

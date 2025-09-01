@@ -14,7 +14,7 @@ import { RxCross2 } from "react-icons/rx"
 import { useAIWindowStore } from "@/store/useAIWindowStore"
 import { useOutputPanelStore } from "@/store/useOutputPanelStore"
 import { Button } from "@/components/ui/button"
-import { Code, RotateCcw } from "lucide-react"
+import { RotateCcwSquare, Braces } from "lucide-react"
 import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 
 export default function Page() {
@@ -48,14 +48,15 @@ export default function Page() {
                     >
                       {/* Editor container */}
                       <div className="h-full w-full aspect-video">
-                        <div className="flex gap-2 w-full h-10 border items-center bg-background-2 rounded-sm">
-                          <div className='w-fit rounded-t-md h-full flex p-1 pr-8 border-t-2 border-t-primary items-center gap-4 px-3 bg-muted/50'>
-                            <Code size={20} />
+                        <div className="flex gap-2 w-full h-11 border items-center bg-background-2 rounded-sm">
+                          <div className='w-fit rounded-t-md h-full flex p-1 pr-8 items-center gap-4 px-3'>
+                            <Braces size={20} />    
                             <p className="text-lg font-sans">Editor</p>
                           </div>
-                          <div onClick={resetCode} className="bg-background ml-auto hover:bg-muted  p-2 rounded-sm">
-                            <RotateCcw  size={20} />
-                          </div>
+                          <Button variant="ghost" title="Reset code" onClick={resetCode} size="icon" className="ml-auto p-1 rounded-sm hover:bg-muted transition-colors duration-300 ease-in-out"
+                          >
+                            <RotateCcwSquare size={20} />
+                          </Button>
                         </div>
                         <EditorPanel />
                       </div>
@@ -76,9 +77,13 @@ export default function Page() {
                                   onClick={closeOutputPanel}
                                   size="icon"
                                   variant="ghost"
-                                  className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+                                  title="Close output panel"
+                                  className="w-6 h-6 flex hover:scale-120 hover:rotate-90 transition-transform duration-300 ease-out items-center justify-center rounded-full"
                                 >
-                                  <RxCross2 size={24} />
+                                  <RxCross2
+                                    size={24}
+                                  />
+
                                 </Button>
                               </div>
                             </div>
@@ -114,7 +119,8 @@ export default function Page() {
                                   onClick={closeOutputPanel}
                                   size="icon"
                                   variant="ghost"
-                                  className="w-6 h-6 flex items-center justify-center hover:bg-input rounded-full"
+                                  title="Close output panel"
+                                  className="w-6 h-6 flex hover:scale-120 hover:rotate-90 transition-transform duration-300 ease-out items-center justify-center rounded-full"
                                 >
                                   <RxCross2 size={18} />
                                 </Button>
