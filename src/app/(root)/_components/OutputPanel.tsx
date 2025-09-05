@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/dialog"
 import ComplexityCard from '@/app/(root)/_components/ComplexityCard';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import { OutputPanelSkeleton } from '@/components/EditorPanelSkeleton';
+import { useClerk } from "@clerk/nextjs";
 
 // Constants for language icons and file extensions
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
@@ -67,7 +69,7 @@ function OutputPanel() {
     const content = error || output;
     const fontSizeValue = mounted ? `${fontSize}px` : undefined;
     const showSuccessIcon = !error && output;
-
+    const clerk = useClerk();
     // Memoize the file name to prevent recalculation
     const fileName = useMemo(() =>
         currentFile || FILE_EXTENSIONS[language] || 'main.txt',
@@ -166,7 +168,7 @@ function OutputPanel() {
                     </div>
                 </div>
 
-                
+
                 <div className='flex items-center gap-2'>
                     {content && (
                         // Copy Button
@@ -200,31 +202,33 @@ function OutputPanel() {
                 </div>
             </div>
 
-            {/* Output content */}
-            <div className="w-full p-4 relative h-[calc(100%-80px)] overflow-auto scrollbar-custom">
-                <div className='space-y-3 mb-4'>
-                    <p className='font-bold text-lg'>Input</p>
-                    <textarea
-                        className='w-full bg-accent font-mono h-fit scrollbar-custom min-h-16 max-h-68 p-3 rounded-lg outline-none'
-                        spellCheck="false"
-                        name=""
-                        id=""
-                        rows={2}
-                        onChange={(e) => handleInput(e.target.value)}
-                        style={{ fontSize: fontSizeValue }}
-                    >
-                    </textarea>
-                </div>
-
-                {content && (
-                    <div className={`w-full h-full gap-2 ${error ? 'text-destructive' : 'text-foreground'}`}>
-                        <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
-                            {content}
-                        </pre>
+            {!clerk.loaded ? (
+                <OutputPanelSkeleton />
+            ) : (
+                <div className="w-full p-4 relative h-[calc(100%-80px)] overflow-auto scrollbar-custom">
+                    <div className="space-y-3 mb-4">
+                        <p className="font-bold text-lg">Input</p>
+                        <textarea
+                            className="w-full bg-accent font-mono scrollbar-custom min-h-16 max-h-68 p-3 rounded-lg outline-none"
+                            spellCheck="false"
+                            rows={2}
+                            onChange={(e) => handleInput(e.target.value)}
+                            style={{ fontSize: fontSizeValue }}
+                        />
                     </div>
-                )}
-            </div>
-        </div>
+
+                    {content && (
+                        <div className={`w-full h-full ${error ? "text-destructive" : "text-foreground"}`}>
+                            <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
+                                {content}
+                            </pre>
+                        </div>
+                    )}
+                </div>
+            )}
+
+
+        </div >
     )
 }
 
