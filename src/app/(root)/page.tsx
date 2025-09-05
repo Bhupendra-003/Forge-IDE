@@ -17,6 +17,7 @@ import { RotateCcwSquare, Braces } from "lucide-react"
 import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 import { useEffect, useState } from "react"
 import BrandLoading from "./_components/BrandLoading";
+import LanguageSelector from "./_components/LanguageSelector"
 
 export default function Page() {
   const { isOpen: isAIWindowOpen } = useAIWindowStore();
@@ -70,15 +71,18 @@ export default function Page() {
                             <Braces size={18} />
                             <p className="text-lg font-sans">Editor</p>
                           </div>
-                          <Button
-                            variant="ghost"
-                            title="Reset code"
-                            onClick={resetCode}
-                            size="icon"
-                            className="ml-auto p-1 rounded-sm hover:bg-muted transition-colors duration-300 ease-in-out"
-                          >
-                            <RotateCcwSquare size={20} />
-                          </Button>
+                          <div className="flex ml-auto justify-between">
+                            <LanguageSelector />
+                            <Button
+                              variant="ghost"
+                              title="Reset code"
+                              onClick={resetCode}
+                              size="icon"
+                              className="ml-auto p-1 rounded-sm hover:bg-muted transition-colors duration-300 ease-in-out"
+                            >
+                              <RotateCcwSquare size={20} />
+                            </Button>
+                          </div>
                         </div>
                         <EditorPanel />
                       </div>

@@ -18,7 +18,7 @@ function LanguageSelector() {
     return (
         <div className="mx-2">
             <Select value={language} onValueChange={handleLanguageSelect}>
-                <SelectTrigger className="md:w-40 w-fit scale-110 border">
+                <SelectTrigger className="w-fit md:scale-110 border">
                     <SelectValue placeholder="Language" />
                 </SelectTrigger>
                 <SelectContent className="scale-110 md:w-36">

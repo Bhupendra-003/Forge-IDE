@@ -42,8 +42,7 @@ function ClientHeader() {
             {/* Left section for mobile */}
             <div className="flex md:hidden items-center text-foreground">
                 <SidebarTrigger
-                    className="-ml-1"
-                    size="lg"
+                    className="-ml-1 scale-125"
                 />
                 <div className="relative h-9 w-10 rounded-lg overflow-hidden ml-1">
                     <Image
@@ -59,8 +58,7 @@ function ClientHeader() {
             {/* Left Sectiopon for Desktop */}
             <div className="hidden md:flex items-center text-foreground">
                 <SidebarTrigger
-                    className="-ml-1"
-                    size="lg"
+                    className="-ml-1 scale-125"
                 />
                 <div className="relative h-9 w-10 rounded-lg overflow-hidden ml-1">
                     <Image
@@ -79,7 +77,7 @@ function ClientHeader() {
             <div className="flex items-center gap-2">
                 <CheckpointButton />
                 <RunButton />
-                <LanguageSelector />
+                <div className='hidden md:block'><LanguageSelector /></div>
             </div>
             {/* Right section */}
             <div className="flex items-center gap-2">

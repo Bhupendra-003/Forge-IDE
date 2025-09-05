@@ -34,7 +34,7 @@ function RunButton() {
                         <FaPlay size={16} color='white' />
                     )}
                 </div>
-                <p className='hidden text-white lg:block text-nowrap'>Run Code</p>
+                <p className='text-white block text-nowrap'>Run</p>
         </div>
     )
 }
