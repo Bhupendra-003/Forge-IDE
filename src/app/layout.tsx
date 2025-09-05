@@ -13,6 +13,10 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Forge",
   description: "Forge - Share and run code snippets",
+  viewport: {
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({
