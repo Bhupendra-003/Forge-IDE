@@ -72,7 +72,7 @@ export default function Page() {
                             <p className="text-lg font-sans">Editor</p>
                           </div>
                           <div className="flex ml-auto justify-between">
-                            <LanguageSelector />
+                            <div className="md:hidden"><LanguageSelector /></div>
                             <Button
                               variant="ghost"
                               title="Reset code"
