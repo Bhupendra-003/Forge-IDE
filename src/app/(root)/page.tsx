@@ -31,11 +31,11 @@ export default function Page() {
       </div>
 
       {/* Main Content */}
-      <div className={`transition-opacity duration-300 ${
+      <div className={`flex flex-col h-screen transition-opacity duration-300 ${
         isLoading ? 'opacity-0' : 'opacity-100'
       }`}>
         <ClientHeader />
-        <div className="flex-1 flex flex-col gap-[.4rem] lg:flex-row overflow-hidden h-[calc(100vh-4rem)]">
+        <div className="flex-1 flex flex-col gap-[.4rem] lg:flex-row overflow-hidden">
           <div className="lg:w-2/3 w-full h-full overflow-auto">
             <EditorPanel />
           </div>
