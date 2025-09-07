@@ -18,31 +18,33 @@ export default function Page() {
   if (isLoading) return <BrandLoading />
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col h-screen">
       {/* Main Header */}
       <ClientHeader />
 
       {/* Main Content */}
-      <div className="flex flex-col lg:flex-row gap-1 flex-1 h-full">
-        <div className="lg:w-1/2 w-full lg:h-full h-1/2">
+      <div className="flex-1 flex flex-col gap-1 lg:flex-row overflow-hidden">
+        <div className="lg:w-1/2 w-full h-full overflow-auto">
           <EditorPanel />
         </div>
 
-        <div className="lg:w-1/2 w-full lg:h-full h-1/2 mt-10 lg:mt-0">
-          {/* <OutputPanel /> */}
-
-          <Tabs defaultValue="Output" className="w-full h-full">
-            <TabsList className="bg-background">
-              <TabsTrigger className="p-4" value="Output">Ouput</TabsTrigger>
+        <div className="lg:w-1/2 w-full h-full border-l border-border">
+          <Tabs defaultValue="Output" className="h-full flex flex-col">
+            <TabsList className="bg-background flex-shrink-0">
+              <TabsTrigger className="p-4" value="Output">Output</TabsTrigger>
               <TabsTrigger className="p-4" value="AI">Forge AI</TabsTrigger>
             </TabsList>
-            <TabsContent className="w-full h-full" value="Output"><OutputPanel /></TabsContent>
-            <TabsContent className="w-full h-full" value="AI"><AIWindow /></TabsContent>
+            <TabsContent value="Output" className="flex-1 overflow-auto">
+              <OutputPanel />
+            </TabsContent>
+            <TabsContent value="AI" className="flex-1 overflow-auto">
+              <AIWindow />
+            </TabsContent>
           </Tabs>
         </div>
       </div>
-
     </div>
+
   )
 
 }

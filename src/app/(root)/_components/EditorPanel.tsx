@@ -66,9 +66,9 @@ function EditorPanel() {
     if (!mounted) return null;
 
     return (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full flex flex-col overflow-hidden">
             {/* Editor Header  */}
-            <div className="h-11 w-full bg-background-2 flex items-center justify-between px-3">
+            <div className="h-11 w-full bg-background-2 flex items-center justify-between px-3 flex-shrink-0">
                 <div className="flex items-center gap-4">
                     <Braces size={18} />
                     <p className="text-lg font-sans">Editor</p>
@@ -87,10 +87,11 @@ function EditorPanel() {
                 </div>
             </div>
 
-            <div className="h-full">
+            <div className="flex-1 overflow-hidden">
                 {clerk.loaded && (
                     <Editor
                         height="100%"
+                        className="h-full"
                         language={LANGUAGE_CONFIG[language].monacoLanguage}
                         onChange={handleEditorChange}
                         theme={editorTheme}

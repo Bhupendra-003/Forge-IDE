@@ -116,12 +116,12 @@ function AIWindow() {
   };
 
   return (
-    <div className="relative w-full max-w-full h-full flex flex-col overflow-clip">
+    <div className="relative w-full h-full flex flex-col overflow-hidden">
 
-        <Trash2 className='absolute hover:text-red-500 transition-all top-4 right-4 cursor-pointer' onClick={clearChat} size={18} />
+      <Trash2 className='absolute hover:text-red-500 transition-all top-4 right-4 cursor-pointer' onClick={clearChat} size={18} />
 
       {/* Chat area */}
-      <div className="flex-1 scrollbar-custom w-full overflow-y-auto p-4 space-y-4 bg-muted/30">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30 scrollbar-custom">
         {messages.map((message: { role: 'user' | 'ai'; content: string }, index: number) => (
           <div
             key={index}
@@ -190,7 +190,7 @@ function AIWindow() {
       </div>
 
       {/* Input area */}
-      <div className="p-1 bg-transparent">
+      <div className="p-1 bg-muted/30 w-full flex-shrink-0">
         <div className="flex items-center gap-2">
           <textarea
             ref={textareaRef}
@@ -198,7 +198,7 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="flex-1 scrollbar-custom text-[1.1rem] pl-6 pt-3 focus:ring-0 focus:outline-none min-h-[50px] max-h-[200px] p-2 px-4 rounded-[25px] border bg-muted/30 resize-none overflow-y-auto"
+            className="w-full text-[1.1rem] px-4 py-2 resize-none scrollbar-custom rounded-full outline-none border"
             rows={1}
             disabled={isLoading}
             spellCheck="false"
