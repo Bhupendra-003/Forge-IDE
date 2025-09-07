@@ -190,7 +190,7 @@ function AIWindow() {
       </div>
 
       {/* Input area */}
-      <div className="p-1 bg-muted/30 w-full flex-shrink-0">
+      <div className="p-3 bg-muted/30 w-full flex-shrink-0 border-t">
         <div className="flex items-center gap-2">
           <textarea
             ref={textareaRef}
@@ -198,7 +198,7 @@ function AIWindow() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask your AI about your code..."
-            className="w-full text-[1.1rem] px-4 py-2 resize-none scrollbar-custom rounded-full outline-none border"
+            className="w-full text-[1.1rem] px-4 py-3 resize-none scrollbar-custom rounded-2xl outline-none border min-h-14 max-h-[200px]"
             rows={1}
             disabled={isLoading}
             spellCheck="false"
@@ -206,11 +206,11 @@ function AIWindow() {
           <Button
             onClick={handleSendMessage}
             size="icon"
-            className="h-12 w-25 rounded-full mt-auto"
+            className="h-12 w-12 md:w-24 flex gap-2 rounded-full mt-auto"
             disabled={isLoading || !inputValue.trim()}
           >
-            <Send className='scale-125 mr-2' />
-            <p className="text-[.65vw]">Send</p>
+            <Send size={20} />
+            <p className="hidden md:block text-[.70vw]">Send</p>
           </Button>
         </div>
       </div>  
