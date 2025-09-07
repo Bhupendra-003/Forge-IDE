@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/convexClientProvider";
+import PreventZoom from "@/components/PreventZoom";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   viewport: {
     initialScale: 1,
     maximumScale: 1,
+    userScalable: false,
+    width: 'device-width',
   },
 };
 
@@ -30,7 +33,10 @@ export default function RootLayout({
         <body
           className={`${poppins.variable} antialiased min-h-screen max-w-full flex flex-col`}
         >
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <ConvexClientProvider>
+            <PreventZoom />
+            {children}
+          </ConvexClientProvider>
         </body>
       </html>
     </ClerkProvider>
