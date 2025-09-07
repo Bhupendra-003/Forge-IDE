@@ -4,7 +4,6 @@ import EditorPanel from "./_components/EditorPanel"
 import { useEffect, useState } from "react"
 import BrandLoading from "./_components/BrandLoading"
 import OutputPanel from "./_components/OutputPanel"
-import Tabs from "./_components/Tabs"
 
 export default function Page() {
 
@@ -27,13 +26,11 @@ export default function Page() {
           <EditorPanel />
         </div>
 
-        <div className="lg:w-1/2 w-full lg:h-full h-1/2 mt-10">
+        <div className="lg:w-1/2 w-full lg:h-full h-1/2 mt-10 lg:mt-0">
           <OutputPanel />
         </div>
       </div>
 
-      {/* Tabs */}
-      <Tabs />
     </div>
   )
 

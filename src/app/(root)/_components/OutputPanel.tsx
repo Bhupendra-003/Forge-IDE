@@ -6,9 +6,10 @@ import { IoSparklesSharp, IoLogoPython, IoLogoJavascript } from 'react-icons/io5
 import { SiTypescript, SiGo, SiRust, SiCplusplus, SiRuby, SiSwift } from "react-icons/si";
 import { RiJavaLine } from "react-icons/ri";
 import { TbBrandCSharp } from "react-icons/tb";
-import { CheckCircle, Copy, XCircle } from "lucide-react";
+import { XCircle } from "lucide-react";
 import { Ring } from 'ldrs/react';
 import { FaCode } from "react-icons/fa";
+import { CopyButton } from "@/components/ui/shadcn-io/copy-button";
 import 'ldrs/react/Ring.css';
 import { useAIMessageStore } from '@/store/useAIMessageStore';
 import useMounted from '@/hooks/useMounted';
@@ -63,7 +64,6 @@ function OutputPanel() {
     } = useCodeEditorStore();
 
     const sendMessage = useAIMessageStore(state => state.sendMessage);
-    const [isCopied, setIsCopied] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
     const mounted = useMounted();
     const content = error || output;
@@ -90,14 +90,6 @@ function OutputPanel() {
         }
     }, [executionResult]);
 
-    const handleCopy = useCallback(() => {
-        if (!content) return;
-        navigator.clipboard.writeText(content);
-        setIsCopied(true);
-        const timer = setTimeout(() => setIsCopied(false), 2000);
-        return () => clearTimeout(timer);
-    }, [content]);
-
     const handleAIAssist = useCallback(() => {
         if (!content) return;
         const instruction = error
@@ -121,19 +113,21 @@ function OutputPanel() {
                             />
                         )}
                     </div>
-                    <p>{">"}</p>
-                    <div className="flex items-center gap-2">
-                        {mounted ? (
-                            <>
-                                {LANGUAGE_ICONS[language] || LANGUAGE_ICONS.default}
-                                <p className="text-lg font-sans">{fileName}</p>
-                            </>
-                        ) : (
-                            <>
-                                <FaCode size={24} />
-                                <p className="text-lg font-sans">Code</p>
-                            </>
-                        )}
+                    <div className='md:flex hidden'>
+                        <p className='mr-4'>{">"}</p>
+                        <div className="flex items-center gap-2">
+                            {mounted ? (
+                                <>
+                                    {LANGUAGE_ICONS[language] || LANGUAGE_ICONS.default}
+                                    <p className="text-lg font-sans">{fileName}</p>
+                                </>
+                            ) : (
+                                <>
+                                    <FaCode size={24} />
+                                    <p className="text-lg font-sans">Code</p>
+                                </>
+                            )}
+                        </div>
                     </div>
 
                     <Dialog>
@@ -157,22 +151,11 @@ function OutputPanel() {
 
                 <div className="flex items-center gap-2">
                     {content && (
-                        <button
-                            onClick={handleCopy}
-                            className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg transition-all"
-                        >
-                            {isCopied ? (
-                                <>
-                                    <CheckCircle className="w-3.5 h-3.5" />
-                                    Copied!
-                                </>
-                            ) : (
-                                <>
-                                    <Copy className="w-3.5 h-3.5" />
-                                    Copy
-                                </>
-                            )}
-                        </button>
+                        <CopyButton
+                            content={content || ""}
+                            onCopy={() => console.log("Link copied!")}
+                            variant="ghost"
+                        />
                     )}
 
                     <button
@@ -184,9 +167,11 @@ function OutputPanel() {
                         <p className="text-lg hidden md:block font-sans">Ask AI</p>
                     </button>
 
-                    {mounted && currentTime && (
-                        <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
-                    )}
+                    <div className='md:flex hidden'>
+                        {mounted && currentTime && (
+                            <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
+                        )}
+                    </div>
                 </div>
             </div>
 

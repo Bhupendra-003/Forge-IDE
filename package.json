@@ -35,6 +35,7 @@
     "ldrs": "^1.1.6",
     "lucide-react": "^0.488.0",
     "monaco-editor": "^0.52.2",
+    "motion": "^12.23.12",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
