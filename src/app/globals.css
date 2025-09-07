@@ -138,22 +138,54 @@ body {
     @apply bg-background text-foreground;
   }
 }
-/* styles/globals.css */
+/* Global scrollbar styles */
+/* Apply to all scrollable elements */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-muted) transparent;
+}
+
+/* Webkit scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-muted);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--color-muted);
+}
+
+/* Keep the custom class for specific overrides */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-muted) transparent;
+}
+
 .scrollbar-custom::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
+
 .scrollbar-custom::-webkit-scrollbar-track {
   background: transparent;
-  /* background: var(--color-muted); */
 }
+
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
+  background-color: var(--color-popover-foreground);
   border-radius: 9999px;
 }
 
-.dark .scrollbar-custom::-webkit-scrollbar-track {
-  background: transparent;
-}
 .dark .scrollbar-custom::-webkit-scrollbar-thumb {
   background-color: var(--color-muted);
 }

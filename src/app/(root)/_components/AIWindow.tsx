@@ -170,8 +170,6 @@ function AIWindow() {
                     {message.content}
                   </ReactMarkdown>
                 </div>
-                <p className="font-mono">
-                </p>
               </div>
             )}
           </div>
