@@ -107,12 +107,11 @@ function OutputPanel() {
         sendMessage(content, instruction);
     }, [content, error, language, sendMessage]);
     return (
-        <div className="w-full h-full rounded-sm">
+        <div className="flex flex-col h-full rounded-sm">
+            {/* Header */}
             <div className="w-full h-12 px-2 flex border items-center justify-between">
-                <div className='flex items-center gap-2'>
-
-                    {/* Success or Error Icon */}
-                    <div className='w-8 h-8 bg-muted rounded-full border flex items-center justify-center'>
+                <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-muted rounded-full border flex items-center justify-center">
                         {error ? (
                             <XCircle size={24} color="var(--color-destructive)" />
                         ) : (
@@ -124,14 +123,11 @@ function OutputPanel() {
                     </div>
                     <p>{">"}</p>
 
-                    {/* File Name */}
-                    <div className='flex items-center gap-2'>
+                    <div className="flex items-center gap-2">
                         {mounted ? (
                             <>
                                 {LANGUAGE_ICONS[language] || LANGUAGE_ICONS.default}
-                                <p className="text-lg font-sans">
-                                    {fileName}
-                                </p>
+                                <p className="text-lg font-sans">{fileName}</p>
                             </>
                         ) : (
                             <>
@@ -141,40 +137,31 @@ function OutputPanel() {
                         )}
                     </div>
 
-                    {/* Complexity Analysis Button */}
                     <Dialog>
                         <DialogTrigger asChild>
                             <button className="text-lg font-sans text-gradient cursor-pointer glow">
                                 Complexity
                             </button>
                         </DialogTrigger>
-                        <DialogTitle className='hidden'>Time Complexity</DialogTitle>
+                        <DialogTitle className="hidden">Time Complexity</DialogTitle>
                         <DialogContent className="sm:max-w-[425px] bg-popover">
                             <ComplexityCard />
                         </DialogContent>
                     </Dialog>
 
-                    {/* Running Icon */}
                     <div className="ml-2 mt-2">
                         {isRunning && (
-                            <Ring
-                                size="20"
-                                stroke="3"
-                                bgOpacity="0"
-                                speed="2"
-                                color="var(--foreground)"
-                            />
+                            <Ring size="20" stroke="3" bgOpacity="0" speed="2" color="var(--foreground)" />
                         )}
                     </div>
                 </div>
 
-
-                <div className='flex items-center gap-2'>
+                <div className="flex items-center gap-2">
                     {content && (
-                        // Copy Button
                         <button
                             onClick={handleCopy}
-                            className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg transition-all">
+                            className="flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg transition-all"
+                        >
                             {isCopied ? (
                                 <>
                                     <CheckCircle className="w-3.5 h-3.5" />
@@ -188,11 +175,10 @@ function OutputPanel() {
                             )}
                         </button>
                     )}
-                    {/* Ask AI Button */}
                     <button
                         onClick={handleAIAssist}
                         disabled={!content}
-                        className='flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed'
+                        className="flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
                     </button>
@@ -202,10 +188,11 @@ function OutputPanel() {
                 </div>
             </div>
 
+            {/* Scrollable content */}
             {!clerk.loaded ? (
                 <OutputPanelSkeleton />
             ) : (
-                <div className="w-full p-4 relative h-[calc(100%-80px)] overflow-auto scrollbar-custom">
+                <div className="flex-1 p-4 overflow-auto scrollbar-custom">
                     <div className="space-y-3 mb-4">
                         <p className="font-bold text-lg">Input</p>
                         <textarea
@@ -218,7 +205,7 @@ function OutputPanel() {
                     </div>
 
                     {content && (
-                        <div className={`w-full h-full ${error ? "text-destructive" : "text-foreground"}`}>
+                        <div className={`w-full ${error ? "text-destructive" : "text-foreground"}`}>
                             <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
                                 {content}
                             </pre>
@@ -226,10 +213,9 @@ function OutputPanel() {
                     )}
                 </div>
             )}
+        </div>
+    );
 
-
-        </div >
-    )
 }
 
 export default OutputPanel

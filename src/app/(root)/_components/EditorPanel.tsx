@@ -8,10 +8,14 @@ import useMounted from "@/hooks/useMounted";
 import { EditorPanelSkeleton } from "@/components/EditorPanelSkeleton";
 import useTheme from "@/hooks/useTheme";
 import { motion, AnimatePresence } from "framer-motion";
+import { Braces, RotateCcwSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import LanguageSelector from "./LanguageSelector";
 
 function EditorPanel() {
     const clerk = useClerk();
     const { isDarkMode } = useTheme();
+    const { resetCode } = useCodeEditorStore();
     const [isLoading, setIsLoading] = useState(true);
 
     const {
@@ -62,8 +66,28 @@ function EditorPanel() {
     if (!mounted) return null;
 
     return (
-        <div className="relative h-full">
-            <div className="overflow-hidden h-full">
+        <div className="relative w-full h-full">
+            {/* Editor Header  */}
+            <div className="h-11 w-full bg-background-2 flex items-center justify-between px-3">
+                <div className="flex items-center gap-4">
+                    <Braces size={18} />
+                    <p className="text-lg font-sans">Editor</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <div className="md:hidden"><LanguageSelector /></div>
+                    <Button
+                        variant="ghost"
+                        title="Reset code"
+                        onClick={resetCode}
+                        size="icon"
+                    >
+                        <RotateCcwSquare size={20} />
+                    </Button>
+                </div>
+            </div>
+
+            <div className="h-full">
                 {clerk.loaded && (
                     <Editor
                         height="100%"

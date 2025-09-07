@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { SidebarTrigger } from '../../../components/ui/sidebar';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
@@ -41,9 +40,6 @@ function ClientHeader() {
         )}>
             {/* Left section for mobile */}
             <div className="flex md:hidden items-center text-foreground">
-                <SidebarTrigger
-                    className="-ml-1 scale-125"
-                />
                 <div className="relative h-9 w-10 rounded-lg overflow-hidden ml-1">
                     <Image
                         src="/logo-nobg.png"
@@ -55,11 +51,8 @@ function ClientHeader() {
                 </div>
             </div>
 
-            {/* Left Sectiopon for Desktop */}
+            {/* Left Section for Desktop */}
             <div className="hidden md:flex items-center text-foreground">
-                <SidebarTrigger
-                    className="-ml-1 scale-125"
-                />
                 <div className="relative h-9 w-10 rounded-lg overflow-hidden ml-1">
                     <Image
                         src="/logo-nobg.png"
@@ -127,7 +120,7 @@ function ClientHeader() {
                     href="https://github.com/Bhupendra-003/Forge-IDE"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden md:flex items-center gap-1.5 bg-card hover:bg-sidebar-accent rounded-full h-9 px-3.5 py-2 cursor-pointer transition-all duration-200 hover:scale-102 active:scale-98"
+                    className="hidden md:flex items-center gap-1.5 bg-card hover:bg-accent/50 rounded-full h-9 px-3.5 py-2 cursor-pointer transition-all duration-200 hover:scale-102 active:scale-98"
                 >
                     <Star size={16} strokeWidth={1.8} className="text-foreground" />
                     <span className="text-sm font-medium ml-0.5">Star</span>
