@@ -20,8 +20,6 @@ import {
 } from "@/components/ui/dialog"
 import ComplexityCard from '@/app/(root)/_components/ComplexityCard';
 import { DialogTitle } from '@radix-ui/react-dialog';
-import { OutputPanelSkeleton } from '@/components/EditorPanelSkeleton';
-import { useClerk } from "@clerk/nextjs";
 
 // Constants for language icons and file extensions
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
@@ -73,7 +71,6 @@ function OutputPanel({ onAskAI }: OutputPanelProps) {
     const content = error || output;
     const fontSizeValue = mounted ? `${fontSize}px` : undefined;
     const showSuccessIcon = !error && output;
-    const clerk = useClerk();
     // Memoize the file name to prevent recalculation
     const fileName = useMemo(() =>
         currentFile || FILE_EXTENSIONS[language] || 'main.txt',
@@ -184,33 +181,31 @@ function OutputPanel({ onAskAI }: OutputPanelProps) {
 
             {/* Scrollable content */}
             <div className="flex-1 flex flex-col bg-card p-4 overflow-auto scrollbar-custom min-h-0">
-                {!clerk.loaded ? (
-                    <OutputPanelSkeleton />
-                ) : (
-                    <>
-                        <div className="space-y-3 mb-4">
-                            <p className="font-bold text-lg">Input</p>
-                            <textarea
-                                className="w-full bg-popover font-mono scrollbar-custom min-h-[6rem] max-h-68 p-3 rounded-lg outline-none"
-                                spellCheck="false"
-                                rows={2}
-                                onChange={(e) => handleInput(e.target.value)}
-                                style={{ fontSize: fontSizeValue }}
-                            />
-                        </div>
 
-                        {content && (
-                            <div className={`w-full ${error ? "text-destructive" : "text-foreground"} flex-1`}>
-                                <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
-                                    {content}
-                                </pre>
-                                <div className='h-12'>
-                                    {/* end exposer */}
-                                </div>
+                <>
+                    <div className="space-y-3 mb-4">
+                        <p className="font-bold text-lg">Input</p>
+                        <textarea
+                            className="w-full bg-popover font-mono scrollbar-custom min-h-[6rem] max-h-68 p-3 rounded-lg outline-none"
+                            spellCheck="false"
+                            rows={2}
+                            onChange={(e) => handleInput(e.target.value)}
+                            style={{ fontSize: fontSizeValue }}
+                        />
+                    </div>
+
+                    {content && (
+                        <div className={`w-full ${error ? "text-destructive" : "text-foreground"} flex-1`}>
+                            <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
+                                {content}
+                            </pre>
+                            <div className='h-12'>
+                                {/* end exposer */}
                             </div>
-                        )}
-                    </>
-                )}
+                        </div>
+                    )}
+                </>
+
             </div>
         </div>
 
