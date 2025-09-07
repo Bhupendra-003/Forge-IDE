@@ -109,7 +109,7 @@ function OutputPanel() {
     return (
         <div className="flex flex-col h-full rounded-sm">
             {/* Header */}
-            <div className="w-full h-12 px-2 flex items-center justify-between border">
+            <div className="w-full h-12 px-2 bg-background-2 flex items-center justify-between border">
                 <div className="flex items-center gap-4">
                     <div className="w-8 h-8 bg-muted rounded-full border flex items-center justify-center">
                         {error ? (
@@ -178,10 +178,10 @@ function OutputPanel() {
                     <button
                         onClick={handleAIAssist}
                         disabled={!content}
-                        className="flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex text-nowrap md:bg-muted flex-shrink-0 p-2 scale-90 md:  hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <IoSparklesSharp size={20} />
-                        <p className="text-lg font-sans">Ask AI</p>
+                        <p className="text-lg hidden md:block font-sans">Ask AI</p>
                     </button>
 
                     {mounted && currentTime && (

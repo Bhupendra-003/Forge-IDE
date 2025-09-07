@@ -24,6 +24,7 @@ body {
   --radius: 0.5rem;
 
   --background: oklch(0.95 0.01 285);       /* Slightly off pure white for subtle contrast */
+  --background-2: oklch(0.90 0.01 285);
   --foreground: oklch(0.15 0.01 285);
 
   --card: oklch(0.98 0.02 280);           /* Slight variation from background */
@@ -59,7 +60,7 @@ body {
 }
 
 @theme inline {
-  --color-background-2: var(--background);
+  --color-background-2: var(--background-2);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -102,7 +103,7 @@ body {
 
 .dark {
   --background: oklch(0.15 0.02 285);
-  --background-2: oklch(0.12 0.005 280);
+  --background-2: oklch(0.17 0.020 280);
   --foreground: oklch(0.98 0.01 0);
   --card: oklch(0.20 0.02 285);
   --card-foreground: oklch(0.98 0.01 0);

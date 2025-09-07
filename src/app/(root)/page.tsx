@@ -4,6 +4,7 @@ import EditorPanel from "./_components/EditorPanel"
 import { useEffect, useState } from "react"
 import BrandLoading from "./_components/BrandLoading"
 import OutputPanel from "./_components/OutputPanel"
+import Tabs from "./_components/Tabs"
 
 export default function Page() {
 
@@ -16,21 +17,23 @@ export default function Page() {
   if (isLoading) return <BrandLoading />
 
   return (
-    <div className="relative [--header-height:calc(--spacing(14))] h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
       {/* Main Header */}
       <ClientHeader />
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row gap-1 flex-1 h-full">
-        <div className="flex-1 min-h-[300px] max-w-[50vw]">
+      <div className="flex flex-col lg:flex-row gap-1 flex-1 h-full">
+        <div className="lg:w-1/2 w-full lg:h-full h-1/2">
           <EditorPanel />
         </div>
 
-        <div className="flex-1 min-h-[300px]">
+        <div className="lg:w-1/2 w-full lg:h-full h-1/2 mt-10">
           <OutputPanel />
         </div>
       </div>
 
+      {/* Tabs */}
+      <Tabs />
     </div>
   )
 
