@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { useAIWindowStore } from '@/store/useAIWindowStore';
-import { RxCross2 } from "react-icons/rx";
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Bot, Send, Copy, Check, Trash2 } from 'lucide-react';
+import { Send, Copy, Check, Trash2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -79,7 +77,6 @@ CodeBlock.displayName = 'CodeBlock';
 
 
 function AIWindow() {
-  const { closeAIWindow } = useAIWindowStore();
   const [inputValue, setInputValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -119,34 +116,9 @@ function AIWindow() {
   };
 
   return (
-    <div className="w-full max-w-full h-full flex flex-col overflow-clip">
-      {/* Header */}
-      <div className="w-full h-10 flex bg-background-2 border border-b-0 items-center justify-between">
-        <div className='w-fit h-full rounded-t-md flex pt-1 border-t-2 border-t-primary items-center gap-2 px-3 bg-muted/50'>
-          <Bot size={20} />
-          <p className="text-lg font-sans">Forge AI</p>
-        </div>
-        <div className="flex items-center gap-2 pr-2">
-          <Button
-            onClick={clearChat}
-            size="icon"
-            variant="ghost"
-            className="w-6 h-6 flex items-center justify-center hover:bg-muted rounded-full"
-            title="Clear chat history"
-          >
-            <Trash2 size={16} />
-          </Button>
-          <Button
-            onClick={closeAIWindow}
-            size="icon"
-            variant="ghost"
-            title="Close AI window"
-            className="w-6 h-6 flex hover:scale-120 hover:rotate-90 transition-transform duration-300 ease-out items-center justify-center rounded-full"
-          >
-            <RxCross2 size={18} />
-          </Button>
-        </div>
-      </div>
+    <div className="relative w-full max-w-full h-full flex flex-col overflow-clip">
+
+        <Trash2 className='absolute hover:text-red-500 transition-all top-4 right-4 cursor-pointer' onClick={clearChat} size={18} />
 
       {/* Chat area */}
       <div className="flex-1 scrollbar-custom w-full overflow-y-auto p-4 space-y-4 bg-muted/30">

@@ -4,6 +4,8 @@ import EditorPanel from "./_components/EditorPanel"
 import { useEffect, useState } from "react"
 import BrandLoading from "./_components/BrandLoading"
 import OutputPanel from "./_components/OutputPanel"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import AIWindow from "./_components/AIWindow"
 
 export default function Page() {
 
@@ -27,7 +29,16 @@ export default function Page() {
         </div>
 
         <div className="lg:w-1/2 w-full lg:h-full h-1/2 mt-10 lg:mt-0">
-          <OutputPanel />
+          {/* <OutputPanel /> */}
+
+          <Tabs defaultValue="Output" className="w-full h-full">
+            <TabsList className="bg-background">
+              <TabsTrigger className="p-4" value="Output">Ouput</TabsTrigger>
+              <TabsTrigger className="p-4" value="AI">Forge AI</TabsTrigger>
+            </TabsList>
+            <TabsContent className="w-full h-full" value="Output"><OutputPanel /></TabsContent>
+            <TabsContent className="w-full h-full" value="AI"><AIWindow /></TabsContent>
+          </Tabs>
         </div>
       </div>
 
