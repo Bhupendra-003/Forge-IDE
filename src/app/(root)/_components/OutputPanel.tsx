@@ -109,8 +109,8 @@ function OutputPanel() {
     return (
         <div className="flex flex-col h-full rounded-sm">
             {/* Header */}
-            <div className="w-full h-12 px-2 flex border items-center justify-between">
-                <div className="flex items-center gap-2">
+            <div className="w-full h-12 px-2 flex items-center justify-between border">
+                <div className="flex items-center gap-4">
                     <div className="w-8 h-8 bg-muted rounded-full border flex items-center justify-center">
                         {error ? (
                             <XCircle size={24} color="var(--color-destructive)" />
@@ -122,7 +122,6 @@ function OutputPanel() {
                         )}
                     </div>
                     <p>{">"}</p>
-
                     <div className="flex items-center gap-2">
                         {mounted ? (
                             <>
@@ -149,7 +148,7 @@ function OutputPanel() {
                         </DialogContent>
                     </Dialog>
 
-                    <div className="ml-2 mt-2">
+                    <div className="ml-2 flex items-center">
                         {isRunning && (
                             <Ring size="20" stroke="3" bgOpacity="0" speed="2" color="var(--foreground)" />
                         )}
@@ -175,13 +174,16 @@ function OutputPanel() {
                             )}
                         </button>
                     )}
+
                     <button
                         onClick={handleAIAssist}
                         disabled={!content}
                         className="flex bg-muted flex-shrink-0 p-2 scale-90 hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <IoSparklesSharp size={20} /> <p className="text-lg font-sans">Ask AI</p>
+                        <IoSparklesSharp size={20} />
+                        <p className="text-lg font-sans">Ask AI</p>
                     </button>
+
                     {mounted && currentTime && (
                         <p className="text-foreground flex-shrink-0 font-sans text-sm">{currentTime}</p>
                     )}
@@ -189,31 +191,37 @@ function OutputPanel() {
             </div>
 
             {/* Scrollable content */}
-            {!clerk.loaded ? (
-                <OutputPanelSkeleton />
-            ) : (
-                <div className="flex-1 p-4 overflow-auto scrollbar-custom">
-                    <div className="space-y-3 mb-4">
-                        <p className="font-bold text-lg">Input</p>
-                        <textarea
-                            className="w-full bg-accent font-mono scrollbar-custom min-h-16 max-h-68 p-3 rounded-lg outline-none"
-                            spellCheck="false"
-                            rows={2}
-                            onChange={(e) => handleInput(e.target.value)}
-                            style={{ fontSize: fontSizeValue }}
-                        />
-                    </div>
-
-                    {content && (
-                        <div className={`w-full ${error ? "text-destructive" : "text-foreground"}`}>
-                            <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
-                                {content}
-                            </pre>
+            <div className="flex-1 flex flex-col bg-card p-4 overflow-auto scrollbar-custom min-h-0">
+                {!clerk.loaded ? (
+                    <OutputPanelSkeleton />
+                ) : (
+                    <>
+                        <div className="space-y-3 mb-4">
+                            <p className="font-bold text-lg">Input</p>
+                            <textarea
+                                className="w-full bg-popover font-mono scrollbar-custom min-h-[6rem] max-h-68 p-3 rounded-lg outline-none"
+                                spellCheck="false"
+                                rows={2}
+                                onChange={(e) => handleInput(e.target.value)}
+                                style={{ fontSize: fontSizeValue }}
+                            />
                         </div>
-                    )}
-                </div>
-            )}
+
+                        {content && (
+                            <div className={`w-full ${error ? "text-destructive" : "text-foreground"} flex-1`}>
+                                <pre className="whitespace-pre-wrap" style={{ fontSize: fontSizeValue }}>
+                                    {content}
+                                </pre>
+                                <div className='h-12'>
+                                    {/* end exposer */}
+                                </div>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
         </div>
+
     );
 
 }

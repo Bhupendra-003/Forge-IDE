@@ -113,7 +113,9 @@ function ClientHeader() {
                 <Link
                     href="https://github.com/Bhupendra-003/Forge-IDE"
                     target="_blank"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                    className='md:hidden'
+                >
                     <FaGithub size={16} className="text-foreground" />
                 </Link>
                 <Link
