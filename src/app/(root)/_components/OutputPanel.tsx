@@ -51,7 +51,11 @@ const FILE_EXTENSIONS: Record<string, string> = {
     swift: 'main.swift'
 };
 
-function OutputPanel() {
+interface OutputPanelProps {
+    onAskAI?: () => void;
+}
+
+function OutputPanel({ onAskAI }: OutputPanelProps) {
     const {
         output,
         handleInput,
@@ -159,7 +163,10 @@ function OutputPanel() {
                     )}
 
                     <button
-                        onClick={handleAIAssist}
+                        onClick={() => {
+                            handleAIAssist();
+                            onAskAI?.();
+                        }}
                         disabled={!content}
                         className="flex text-nowrap md:bg-muted flex-shrink-0 p-2 scale-90 md:  hover:bg-muted/50 rounded-md h-full w-fit items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >

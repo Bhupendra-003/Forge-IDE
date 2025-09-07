@@ -118,7 +118,7 @@ function AIWindow() {
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden">
 
-      <Trash2 className='absolute hover:text-red-500 transition-all top-4 right-4 cursor-pointer' onClick={clearChat} size={18} />
+      <div className='rounded-full p-2 backdrop-blur-sm absolute z-50 hover:text-red-500 transition-all top-4 right-4 cursor-pointer'><Trash2 onClick={clearChat} size={18} /></div>
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30 scrollbar-custom">

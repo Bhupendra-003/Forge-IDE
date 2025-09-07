@@ -8,8 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AIWindow from "./_components/AIWindow"
 
 export default function Page() {
-
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('Output');
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000);
@@ -23,19 +23,19 @@ export default function Page() {
       <ClientHeader />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col gap-1 lg:flex-row overflow-hidden">
-        <div className="lg:w-1/2 w-full h-full overflow-auto">
+      <div className="flex-1 flex flex-col gap-[.4rem] lg:flex-row overflow-hidden">
+        <div className="lg:w-2/3 w-full h-full overflow-auto">
           <EditorPanel />
         </div>
 
-        <div className="lg:w-1/2 w-full h-full border-l border-border">
-          <Tabs defaultValue="Output" className="h-full flex flex-col">
+        <div className="lg:w-1/3 w-full h-full border-l border-border">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
             <TabsList className="bg-background flex-shrink-0">
               <TabsTrigger className="p-4" value="Output">Output</TabsTrigger>
               <TabsTrigger className="p-4" value="AI">Forge AI</TabsTrigger>
             </TabsList>
             <TabsContent value="Output" className="flex-1 overflow-auto">
-              <OutputPanel />
+              <OutputPanel onAskAI={() => setActiveTab('AI')} />
             </TabsContent>
             <TabsContent value="AI" className="flex-1 overflow-auto">
               <AIWindow />
