@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
-import CheckpointButton from './CheckpointButton';
+// import CheckpointButton from './CheckpointButton';
 import { LuSun } from "react-icons/lu";
 import ThemeProvider from './ThemeProvider';
 import { Settings as SettingsIcon, Star } from 'lucide-react';
@@ -68,7 +68,7 @@ function ClientHeader() {
 
             {/* Middle section - Code Controls */}
             <div className="flex items-center gap-2">
-                <CheckpointButton />
+                {/* <CheckpointButton /> */}
                 <RunButton />
                 <div className='hidden md:block'><LanguageSelector /></div>
             </div>
