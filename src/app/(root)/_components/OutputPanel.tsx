@@ -186,6 +186,7 @@ function OutputPanel({ onAskAI }: OutputPanelProps) {
                     <div className="space-y-3 mb-4">
                         <p className="font-bold text-lg">Input</p>
                         <textarea
+                            id='input-text-area'
                             className="w-full bg-popover border-2 font-mono scrollbar-custom min-h-[6rem] max-h-68 p-3 rounded-lg outline-none"
                             spellCheck="false"
                             rows={2}

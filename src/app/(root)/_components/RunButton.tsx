@@ -16,7 +16,7 @@ function RunButton() {
         await runCode();
     };
     return (
-        <div className="flex cursor-default p-4 gap-2 font-bold items-center h-10 rounded-full active:bg-primary transition duration-100 ease-in-out justify-center bg-primary w-fit"
+        <div id="run-button" className="flex cursor-default p-4 gap-2 font-bold items-center h-10 rounded-full active:bg-primary transition duration-100 ease-in-out justify-center bg-primary w-fit"
             onClick={handleRun}
         >
                 {/* Icon wrapper with fixed size */}
