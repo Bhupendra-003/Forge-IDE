@@ -4,9 +4,8 @@ import ThemeSelector from './ThemeSelector';
 import LanguageSelector from './LanguageSelector';
 import RunButton from './RunButton';
 // import CheckpointButton from './CheckpointButton';
-import { LuSun } from "react-icons/lu";
 import ThemeProvider from './ThemeProvider';
-import { Settings as SettingsIcon, Star } from 'lucide-react';
+import { Settings as SettingsIcon, Star, Sun, Github } from 'lucide-react';
 import Link from 'next/link';
 import Settings from './Settings';
 import {
@@ -19,7 +18,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from 'next/image';
-import { FaGithub } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 
 function ClientHeader() {
@@ -105,7 +103,7 @@ function ClientHeader() {
 
                 <ThemeProvider>
                     <button className="p-2 hover:bg-muted/80 rounded-full">
-                        <LuSun size={16} />
+                        <Sun size={16} />
                     </button>
                 </ThemeProvider>
 
@@ -116,7 +114,7 @@ function ClientHeader() {
                     rel="noopener noreferrer"
                     className='md:hidden'
                 >
-                    <FaGithub size={16} className="text-foreground" />
+                    <Github size={16} className="text-foreground" />
                 </Link>
                 <Link
                     href="https://github.com/Bhupendra-003/Forge-IDE"
@@ -127,11 +125,10 @@ function ClientHeader() {
                     <Star size={16} strokeWidth={1.8} className="text-foreground" />
                     <span className="text-sm font-medium ml-0.5">Star</span>
                     <div className="w-px h-4 bg-border mx-1.5" />
-                    <FaGithub size={16} className="text-foreground" />
+                    <Github size={16} className="text-foreground" />
                 </Link>
             </div>
         </nav>
     );
 }
-
 export default React.memo(ClientHeader);

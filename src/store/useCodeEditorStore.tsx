@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { CodeEditorState } from "../types/index";
-import * as monaco from "monaco-editor";
+import type * as monaco from "monaco-editor";
 import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 
 

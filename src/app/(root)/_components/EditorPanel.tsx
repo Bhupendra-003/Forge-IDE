@@ -1,8 +1,8 @@
 "use client";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
-import { Editor } from "@monaco-editor/react";
+import dynamic from "next/dynamic";
 import useMounted from "@/hooks/useMounted";
 import useTheme from "@/hooks/useTheme";
 import { Braces, RotateCcwSquare } from "lucide-react";
@@ -10,9 +10,16 @@ import { Button } from "@/components/ui/button";
 import LanguageSelector from "./LanguageSelector";
 import BrandLoading from "./BrandLoading";
 
+// Client-only dynamic import to avoid bundling Monaco on the server and reduce initial JS
+const MonacoEditor = dynamic(() => import("@monaco-editor/react").then(m => m.Editor), {
+    ssr: false,
+    loading: () => <BrandLoading />,
+});
+
 function EditorPanel() {
     const { isDarkMode } = useTheme();
     const { resetCode } = useCodeEditorStore();
+    const [deferred, setDeferred] = useState(false);
 
     const {
         language,
@@ -37,6 +44,32 @@ function EditorPanel() {
     } = useCodeEditorStore();
 
     const mounted = useMounted();
+
+    // Defer heavy editor until the main thread is idle
+    useEffect(() => {
+        if (!mounted) return;
+        let canceled = false;
+        const onIdle = () => !canceled && setDeferred(true);
+        // Prefer requestIdleCallback when available
+        const w = window as Window & {
+            requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+            cancelIdleCallback?: (id: number) => void;
+        };
+        if (typeof w.requestIdleCallback === "function") {
+            const id = w.requestIdleCallback(onIdle, { timeout: 1200 });
+            return () => {
+                canceled = true;
+                if (typeof w.cancelIdleCallback === "function") {
+                    w.cancelIdleCallback(id);
+                }
+            };
+        }
+        const t = window.setTimeout(onIdle, 600);
+        return () => {
+            canceled = true;
+            window.clearTimeout(t);
+        };
+    }, [mounted]);
 
     useEffect(() => {
         const savedCode = localStorage.getItem(`editor-code-${language}`);
@@ -84,14 +117,14 @@ function EditorPanel() {
             </div>
 
             <div className="flex-1 overflow-hidden">
-                <Editor
+                {deferred && (
+                <MonacoEditor
                     height="100%"
                     className="h-full"
                     language={LANGUAGE_CONFIG[language].monacoLanguage}
                     onChange={handleEditorChange}
                     theme={editorTheme}
-                    // loading={null}
-                    loading={<BrandLoading />}
+                    // component-level loading handled by dynamic import
                     beforeMount={defineMonacoThemes}
                     onMount={(editor) => {
                         setEditor(editor);
@@ -119,9 +152,11 @@ function EditorPanel() {
                         },
                     }}
                 />
+                )}
             </div>
         </div>
     );
 }
 
 export default EditorPanel;
+
