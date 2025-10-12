@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     // Get the generative model
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Define the prompt for complexity analysis
     const prompt = `Analyze the following code and determine its time complexity. 
