@@ -4,7 +4,6 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/components/providers/convexClientProvider";
 import PreventZoom from "@/components/PreventZoom";
-import { Analytics } from "@vercel/analytics/next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,7 +36,6 @@ export default function RootLayout({
           <ConvexClientProvider>
             <PreventZoom />
             {children}
-            <Analytics />
           </ConvexClientProvider>
         </body>
       </html>
