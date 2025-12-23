@@ -119,14 +119,14 @@ function ClientHeader() {
                 </ThemeProvider>
 
                 {/* Github Page Button */}
-                <Link
-                    href="https://github.com/Bhupendra-003/Forge-IDE"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="md:hidden">
-                    <Github size={16} className="text-foreground" />
-                </Link>
-                <Link
+                        {/* <Link
+                            href="https://github.com/Bhupendra-003/Forge-IDE"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="md:hidden">
+                            <Github size={16} className="text-foreground" />
+                        </Link> */}
+                {/* <Link
                     href="https://github.com/Bhupendra-003/Forge-IDE"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -139,7 +139,7 @@ function ClientHeader() {
                     <span className="text-sm font-medium ml-0.5">Star</span>
                     <div className="w-px h-4 bg-border mx-1.5" />
                     <Github size={16} className="text-foreground" />
-                </Link>
+                </Link> */}
             </div>
         </nav>
     );
