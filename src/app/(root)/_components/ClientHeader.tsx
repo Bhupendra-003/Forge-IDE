@@ -6,8 +6,7 @@ import RunButton from "./RunButton";
 // import CheckpointButton from './CheckpointButton';
 import ThemeProvider from "./ThemeProvider";
 import Stopwatch from "./Stopwatch";
-import { Settings as SettingsIcon, Star, Sun, Github } from "lucide-react";
-import Link from "next/link";
+import { Settings as SettingsIcon, Sun } from "lucide-react";
 import Settings from "./Settings";
 import {
     Dialog,
